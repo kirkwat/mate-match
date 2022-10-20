@@ -1,0 +1,80 @@
+* {
+    box-sizing: border-box;
+}
+
+main > section:not(.active){
+    display: none;
+}
+
+.editProfile {
+    padding: 10px 20px;
+    float: right;
+}
+
+.profilePic {
+    position: absolute;
+    top:20%;
+    left:45%;
+}
+
+
+.uploadPhoto {
+    position: absolute;
+    top:35%;
+    left:45%;
+
+}
+
+.nameClass {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
+
+.locationClass {
+    position: absolute;
+    top:45%;
+    left: 40%;
+}
+
+.bioClass {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+}
+
+.genderClass {
+    position: absolute;
+    top: 55%;
+    left: 40%;
+}
+
+.ageClass {
+    position: absolute;
+    top: 60%;
+    left: 40%;
+}
+
+.lifestyleClass {
+    position: absolute;
+    top: 65%;
+    left: 40%;
+}
+
+.propertyClass {
+    position: absolute;
+    top: 70%;
+    left: 40%;
+}
+
+.roommateClass {
+    position: absolute;
+    top: 75%;
+    left: 40%;
+}
+
+.saveProfileButton {
+    position: absolute;
+    top: 80%;
+    left: 40%;
+}

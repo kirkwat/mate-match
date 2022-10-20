@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel = "stylesheet" href = "./src/index.css" />
+
+        <script>var app;</script>
+        <script src = "views/admin.js"></script>
+        <script src = "views/homeloggedin.js"></script>
+        <script src = "views/homenotloggedin.js"></script>
+        <script src = "views/login.js"></script>
+        <script src = "views/profile.js"></script>
+        <script src = "views/search.js"></script>
+        <script src = "App.js"></script>
+        <script src = "viewer.js"></script>
+
+
+    </head>
+
+    <body class = "container">
+        <header>
+            <h1>Find Your Roommate</h1>
+        </header>
+        <main>
+            <section id = "homeView_notlogged">
+
+            </section>
+            <section id = "homeView_logged">
+                
+            </section>
+            <section id = "profileView">
+                <div>
+                    <button type = "button" class = "editProfile">Edit Profile</button>
+                </div>
+                <div>
+                    <img class = "profilePic" src = "https://via.placeholder.com/150" alt = "Profile pic">
+                </div>
+                <button type = "button" class = "uploadPhoto">upload photo</button>
+                <div class="nameClass">
+                    <label for="profileName">Name</label>
+                    <input type = "text" name = "profileName" id = "profileName"/>
+                </div>
+                <div class = "locationClass">
+                    <label for = "location">Location</label>
+                    <input type = "text" name = "profileLocation" id = "profileLocation"/>
+                </div>
+                <div class = "bioClass">
+                    <label for = "bio">Bio</label>
+                    <textarea name = "profileBio" id = "profileBio">
+
+                    </textarea>
+                </div>
+                <div class = "genderClass">
+                    <label for = "gender">Gender</label>
+                    <select type="text" id="profileGender" name="profileGender">
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
+                <div class = "ageClass">
+                    <label for = "age">Age</label>
+                    <input type = "text" name = "profileAge" id = "profileAge" />
+                </div>
+                <div class = "lifestyleClass">
+                    <label for = "lifestylePreference">Lifestyle Preference</label>
+                    <label> <input type="radio" id="Smoke-free" name="Smoke-free" />Smoke-free</label>
+                    <label> <input type="radio" id="Partying" name="Partying" />Partying</label>
+                    <label> <input type="radio" id="Quiet" name="Quiet" />Quiet</label>
+                </div>
+                <div class = "propertyClass">
+                    <label for = "propertyPreference">Property Preference</label>
+                    <label> <input type="radio" id="House" name="House" />House</label>
+                    <label> <input type="radio" id="Apartment" name="Apartment" />Apartment</label>
+                    <label> <input type="radio" id="Condo" name="Condo" />Condo</label>
+                </div>
+                <div class = "roommateClass">
+                    <label for = "roommateNumber">Number of Roommates</label>
+                    <select type="text" id="roommateNumber" name="roommateNumber">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                </div>
+                <div>
+                    <button type = "button" class = "saveProfileButton">Save</button>
+                </div>
+
+            </section>
+            <section id = "loginView">
+
+            </section>
+            <section id = "adminView">
+                
+            </section>
+            
+            <section id = "searchView">
+                
+            </section>
+        </main>
+    </body>
+</html>
