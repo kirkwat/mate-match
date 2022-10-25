@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
         <link rel = "stylesheet" href = "index.css" />
 
         <script>var app;</script>
@@ -9,6 +13,7 @@
         <script src = "views/homenotloggedin.js"></script>
         <script src = "views/login.js"></script>
         <script src = "views/profile.js"></script>
+        <script src = "views/editProfile.js"></script>
         <script src = "views/search.js"></script>
         <script src = "App.js"></script>
         <script src = "viewer.js"></script>
@@ -16,7 +21,7 @@
 
     </head>
 
-    <body class = "container">
+    <body onload="app.profileView.load()">
         <header>
             <h1>Find Your Roommate</h1>
         </header>
@@ -27,14 +32,51 @@
             <section id = "homeView_logged">
                 
             </section>
-            <section id = "profileView">
-                <div>
-                    <button type = "button" class = "editProfile">Edit Profile</button>
+
+            <section id="profileView">
+                <button type = "button" class = "editProfile" onclick="app.profileViewEdit.load()">Edit Profile</button>
+                <img class = "profilePic" src = "https://via.placeholder.com/150" alt = "Profile pic">
+                <div class="nameClass">
+                    <label for="profileName">Name</label>
+                    <p>Test</p>
                 </div>
-                <div>
-                    <img class = "profilePic" src = "https://via.placeholder.com/150" alt = "Profile pic">
+                <div class = "locationClass">
+                    <label for = "location">Location</label>
+                    <p>Test</p>
                 </div>
-                <button type = "button" class = "uploadPhoto">upload photo</button>
+                <div class = "bioClass">
+                    <label for = "bio">Bio</label>
+                    <p>Test</p>
+                </div>
+                <div class = "genderClass">
+                    <label for = "gender">Gender</label>
+                    <p>Test</p>
+                </div>
+                <div class = "ageClass">
+                    <label for = "age">Age</label>
+                    <p>Test</p>
+                </div>
+                <div class = "lifestyleClass">
+                    <label for = "lifestylePreference">Lifestyle Preference</label>
+                    <p>Test</p>
+                </div>
+                <div class = "propertyClass">
+                    <label for = "propertyPreference">Property Preference</label>
+                    <p>Test</p>
+                </div>
+                <div class = "roommateClass">
+                    <label for = "roommateNumber">Number of Roommates</label>
+                    <p>Test</p>
+                </div>
+
+
+            </section>
+
+            <section id = "profileViewEdit">
+                <button type = "button" class = "done" onclick="app.profileView.load()">Done</button>
+                <img class = "profilePic" src = "https://via.placeholder.com/150" alt = "Profile pic">
+                <button type = "button" class = "uploadPhoto">Upload Photo</button>
+
                 <div class="nameClass">
                     <label for="profileName">Name</label>
                     <input type = "text" name = "profileName" id = "profileName"/>
@@ -45,9 +87,7 @@
                 </div>
                 <div class = "bioClass">
                     <label for = "bio">Bio</label>
-                    <textarea name = "profileBio" id = "profileBio">
-
-                    </textarea>
+                    <textarea name = "profileBio" id = "profileBio" rows="10"></textarea>
                 </div>
                 <div class = "genderClass">
                     <label for = "gender">Gender</label>
@@ -58,7 +98,7 @@
                 </div>
                 <div class = "ageClass">
                     <label for = "age">Age</label>
-                    <input type = "text" name = "profileAge" id = "profileAge" />
+                    <input type = "number" name = "profileAge" id = "profileAge" min="18"/>
                 </div>
                 <div class = "lifestyleClass">
                     <label for = "lifestylePreference">Lifestyle Preference</label>
@@ -74,14 +114,7 @@
                 </div>
                 <div class = "roommateClass">
                     <label for = "roommateNumber">Number of Roommates</label>
-                    <select type="text" id="roommateNumber" name="roommateNumber">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                </div>
-                <div>
-                    <button type = "button" class = "saveProfileButton">Save</button>
+                    <input type="number" id="roommateNumber" name="roommateNumber" min="1"/>
                 </div>
 
             </section>

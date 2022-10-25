@@ -1,80 +1,100 @@
 * {
     box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+    max-width: 100%;
 }
 
 main > section:not(.active){
     display: none;
 }
 
-.editProfile {
+h1 {
+    margin-bottom: 5%;
+}
+
+p {
+    color: rgb(153, 153, 158);
+}
+
+button {
+    border-width: 0px;
+    border-radius: 0.7rem;
+    text-align: center;
+    background-color: rgb(208, 215, 247);
+    padding: 0.5%;
+}
+
+button:hover {
+    background-color: rgb(225, 225, 227);
+}
+
+.editProfile, .done {
     padding: 10px 20px;
     float: right;
 }
 
 .profilePic {
-    position: absolute;
-    top:20%;
-    left:45%;
+    display: inline-block;
+    margin-left: 46%;
 }
 
 
 .uploadPhoto {
-    position: absolute;
-    top:35%;
-    left:45%;
-
+    display: inline-block;
 }
 
 .nameClass {
-    position: absolute;
-    top: 40%;
-    left: 40%;
+    margin-left: 42%;
+    margin-top: 3%;
 }
 
 .locationClass {
-    position: absolute;
-    top:45%;
-    left: 40%;
+    margin-left: 42%;
+    margin-top: 2%;
 }
 
 .bioClass {
-    position: absolute;
-    top: 50%;
-    left: 40%;
+    margin-left: 42%;
+    margin-top: 2%;
 }
 
 .genderClass {
-    position: absolute;
-    top: 55%;
-    left: 40%;
+    margin-left: 42%;
+    margin-top: 2%;
 }
 
 .ageClass {
-    position: absolute;
-    top: 60%;
-    left: 40%;
+    margin-left: 42%;
+    margin-top: 2%;
 }
 
 .lifestyleClass {
-    position: absolute;
-    top: 65%;
-    left: 40%;
+    margin-left: 42%;
+    margin-top: 2%;
 }
 
 .propertyClass {
-    position: absolute;
-    top: 70%;
-    left: 40%;
+    margin-left: 42%;
+    margin-top: 2%;
 }
 
 .roommateClass {
-    position: absolute;
-    top: 75%;
-    left: 40%;
+    margin-left: 42%;
+    margin-top: 2%;
 }
 
 .saveProfileButton {
-    position: absolute;
-    top: 80%;
-    left: 40%;
+    margin-left: 42%;
+    margin-top: 2%;
+}
+
+#profileBio {
+    display: block;
+    width: 40%;
+    padding: 0.7%;
+    font-size: 12pt;
+}
+
+#profileAge, #roommateNumber {
+    width: 5%;
 }
