@@ -78,7 +78,7 @@ button:hover {
     margin-top: 2%;
 }
 
-.roommateClass {
+.roomateClass {
     margin-left: 42%;
     margin-top: 2%;
 }
@@ -95,6 +95,6 @@ button:hover {
     font-size: 12pt;
 }
 
-#profileAge, #roommateNumber {
+#profileAge, #roomateNumber {
     width: 5%;
 }
