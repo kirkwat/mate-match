@@ -6,12 +6,6 @@ const DBConnection = mysql.createConnection({
     host: 'localhost',
    	user: 'root',
    	password: 'password',
-   	/* connect to RDS
-   		host: 'database-1.ctb5gx4u8bly.us-east-1.rds.amazonaws.com',
-    	port: 3306,
-    	user: 'admin',
-    	password: '!dBgU1Gr0uP3!',
-    */
     insecureAuth: true,
 });
 DBConnection.connect((err) => {
