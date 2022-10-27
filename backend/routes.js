@@ -72,26 +72,35 @@ module.exports = function routes(app, logger) {
   });
 
   // POST /multplynumber
-  app.post('/multplynumber', (req, res) => {
+  app.post('/insertinto', (req, res) => {
     console.log(req.body.product);
     // obtain a connection from our pool of connections
-    pool.getConnection(function (err, connection){
+    pool.getConnection(async function (err, connection){
       if(err){
         // if there is an issue obtaining a connection, release the connection instance and log the error
         logger.error('Problem obtaining MySQL connection',err)
         res.status(400).send('Problem obtaining MySQL connection'); 
       } else {
         // if there is no issue obtaining a connection, execute query and release connection
-        connection.query('INSERT INTO `db`.`test_table` (`value`) VALUES(\'' + req.body.product + '\')', function (err, rows, fields) {
-          connection.release();
-          if (err) {
-            // if there is an error with the query, log the error
-            logger.error("Problem inserting into test table: \n", err);
-            res.status(400).send('Problem inserting into table'); 
-          } else {
-            res.status(200).send(`added ${req.body.product} to the table!`);
-          }
-        });
+        try {
+          await DBQuery('INSERT INTO mainData.\'' + req.body.table + '\' VALUES (\'' + req.body.insert + '\')');
+          res.status(200).send('Success -> INSERT INTO mainData.\'' + req.body.table + '\' VALUES (\'' + req.body.insert + '\')');
+        } catch(err)
+        {
+          logger.error("Problem inserting into \"" + req.body.table + "\" table");
+          res.status(400).send('Problem inserting into \'' + req.body.table + '\' table');
+        }
+        
+        // connection.query('INSERT INTO `db`.`test_table` (`value`) VALUES(\'' + req.body.product + '\')', function (err, rows, fields) {
+        //   connection.release();
+        //   if (err) {
+        //     // if there is an error with the query, log the error
+        //     logger.error("Problem inserting into test table: \n", err);
+        //     res.status(400).send('Problem inserting into table'); 
+        //   } else {
+        //     res.status(200).send(`added ${req.body.product} to the table!`);
+        //   }
+        // });
       }
     });
   });
