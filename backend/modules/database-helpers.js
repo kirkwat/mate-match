@@ -1,9 +1,8 @@
 const mysql = require('mysql');
 const util = require('util');
-const pool = require('./pool');
 const pool = require('./db.js');
 
-const DBQuery = util.promisify(pool.query).bind(DBConnection);
+const DBQuery = util.promisify(pool.query).bind(pool);
 
 pool.getConnection(err, connection => {
     if(err) {
