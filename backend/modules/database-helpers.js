@@ -32,10 +32,15 @@ const constructDB = async () => {
     try {
         const userCheck = 'CREATE TABLE IF NOT EXISTS mainData.user (\
             id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,\
-            firstName VARCHAR(30) NOTNULL,\
+            firstName VARCHAR(30) NOT NULL,\
             lastName VARCHAR(30),\
+            age INTEGER NOT NULL,\
             desiredRoommates INTEGER,\
-            city VARCHAR(30) NOT NULL)';
+            city VARCHAR(30) NOT NULL,\
+            bio VARCHAR(300),\
+            gender VARCHAR(7),\
+            CONSTRAINT chkGender CHECK (gender IN (\'male\', \'female\')),\
+            CONSTRAINT checkAge CHECK (age > 0 and age < 100))';
         const preferenceCheck = 'CREATE TABLE IF NOT EXISTS mainData.prefferences (\
             id INTEGER NOT NULL PRIMARY KEY,\
             housingPref JSON,\
