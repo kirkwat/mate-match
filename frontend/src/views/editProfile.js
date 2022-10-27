@@ -39,7 +39,7 @@
             for (var i = 0; i < choices.length; i++) {
                 choices[i].checked = 0;    
             }
-        }
+        },
     }
 
 })(app || (app = {}));
