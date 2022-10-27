@@ -44,6 +44,7 @@ const constructDB = async () => {
             lifestylePref JSON)';
         await DBQuery(DBCheck);
         await DBQuery(userCheck);
+        await DBQuery(preferenceCheck);
     } catch(err) {
         console.error('Failed to find or create tables');
     }
