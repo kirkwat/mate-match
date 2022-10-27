@@ -28,21 +28,9 @@ module.exports = function routes(app, logger) {
           } else {
             // if there is no error with the query, execute the next query and do not release the connection yet
             try {
-              const userCheck = 'CREATE TABLE IF NOT EXISTS mainData.user (\
-                id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,\
-                firstName VARCHAR(30) NOTNULL,\
-                lastName VARCHAR(30),\
-                desiredRoommates INTEGER,\
-                city VARCHAR(30) NOT NULL)';
-              const preferenceCheck = 'CREATE TABLE IF NOT EXISTS mainData.prefferences (\
-                id INTEGER NOT NULL PRIMARY KEY,\
-                housingPref JSON,\
-                lifestylePref JSON)';
-              await Promise.all(
-                  DBQuery(userCheck),
-                  DBQuery(preferenceCheck)
-              );
-
+              constructDB()
+              connection.release()
+              res.status(200).send('created user and prefference table');
             } catch(err) {
               connection.release()
               logger.error("Problem creating the tables user and prefferences in parallel: ", err);

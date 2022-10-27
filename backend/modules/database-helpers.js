@@ -30,24 +30,26 @@ const constructDB = async () => {
     }
 
     try {
-        const DBCheck = 'USE mainData';
-        const userCheck = 'CREATE TABLE IF NOT EXISTS user (\
+        const userCheck = 'CREATE TABLE IF NOT EXISTS mainData.user (\
             id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,\
             firstName VARCHAR(30) NOTNULL,\
             lastName VARCHAR(30),\
             desiredRoommates INTEGER,\
             city VARCHAR(30) NOT NULL)';
-        const preferenceCheck = 'CREATE TABLE IF NOT EXISTS prefferences (\
+        const preferenceCheck = 'CREATE TABLE IF NOT EXISTS mainData.prefferences (\
             id INTEGER NOT NULL PRIMARY KEY,\
             housingPref JSON,\
             lifestylePref JSON)';
-        await DBQuery(DBCheck);
-        await DBQuery(userCheck);
-        await DBQuery(preferenceCheck);
+        await Promise.all(
+            [
+              DBQuery(userCheck),
+              DBQuery(preferenceCheck)
+            ]
+          );
     } catch(err) {
         console.error('Failed to find or create tables');
     }
        // We return two things: a function that lets us run queries, and another to
        // disconnect from the DB at the end of a route
 };
-module.exports = DBQuery;
+module.exports = DBQuery, constructDB;
