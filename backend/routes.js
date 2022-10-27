@@ -9,9 +9,9 @@ module.exports = function routes(app, logger) {
   });
 
   // POST /reset
-  app.post('/reset', (req, res) = async () => {
+  app.post('/reset', (req, res) => {
     // obtain a connection from our pool of connections
-    pool.getConnection(function (err, connection){
+    pool.getConnection(async function (err, connection){
       if (err){
         console.log(connection);
         // if there is an issue obtaining a connection, release the connection instance and log the error
