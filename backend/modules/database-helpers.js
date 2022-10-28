@@ -1,12 +1,12 @@
 const mysql = require('mysql');
 const util = require('util');
-const pool = require('./db.js');
+const pool = require('../db.js');
 
 const DBQuery = util.promisify(pool.query).bind(pool);
 
-pool.getConnection(err, connection => {
+const DBConnection = pool.getConnection( async (err, connection) => {
     if(err) {
-        connection.release();
+        //await connection.release();
         console.error('DB connection issue', err);
         return;
     }
