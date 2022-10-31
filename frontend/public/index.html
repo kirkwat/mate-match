@@ -22,13 +22,17 @@
 
     </head>
 
-    <body onload="app.homeView_logged.load()">
+    <body onload="app.loginView.load()">
         <header>
             <h1>Find Your Roommate</h1>
         </header>
         <main>
             <section id = "homeView_notlogged">
 
+            </section>
+
+            <section id = "menuView">
+                <button type = "button" onclick="app.profileView.load()">profile</button>
             </section>
             <section id = "homeView_logged">
                 <h2 id="homeViewHeading"></h2>
@@ -39,7 +43,7 @@
                         <option>Option 2</option>
                     </select>
 
-                    <button type = "button" class = "menuButton">Menu</button>
+                    <button type = "button" class = "menuButton" >Menu</button>
                     <div class="profileCardContainer">
                         <template class="profileCardTemp">
                             <div class="profileCardDiv">
@@ -141,23 +145,39 @@
 
             </section>
             <section id = "loginView">
-                <label for="logginUser">Username</label>
-                <input type = "text" name = "logginUser" id = "logginUser"/>
-
-                <label for="logginPassword">Password</label>
-                <input type = "password" name = "profileName" id = "profileName"/>
+                <h1 class = "loginh1">Sign In</h1>
+                <div class = "loginUsername">
+                    <label for="logginUser">Username</label>
+                    <input type = "text" name = "logginUser" id = "logginUser"/>
+                </div>
+                
+                <div class = "loginPassword">
+                    <label for="logginPassword">Password</label>
+                    <input type = "password" name = "profileName" id = "profileName"/>
+                </div>
 
                 <button type = "button" class = "logginButton">Login</button>
+
+                <button type = "button" class = "loginin_signup_button" onclick="app.signupView.load()">Sign Up</button>
+                <button type = "button" onclick="app.homeView_logged.load()">homeView</button>
             </section>
+
             <section id = "signupView">
-                <label for="signupUser">Username</label>
-                <input type = "text" name = "signupUser" id = "signupUser"/>
+                <h1 class = "signuph1">Sign Up</h1>
+                <div class = "signupUsername">
+                    <label for="signupUser">Username</label>
+                    <input type = "text" name = "signupUser" id = "signupUser"/>
+                </div>
 
-                <label for="signupPassword">Password</label>
-                <input type = "password" name = "signupName" id = "signupName"/>
-
-                <label for="confirmPassword">Confirm Password</label>
-                <input type = "password" name = "confirmName" id = "confirmName"/>
+                <div class = "signupPassword">
+                    <label for="signupPassword">Password</label>
+                    <input type = "password" name = "signupName" id = "signupName"/>
+                </div>
+                
+                <div class = "confirmPassword">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type = "password" name = "confirmName" id = "confirmName"/>
+                </div>
 
                 <button type = "button" class = "signupButton">Sign up</button>
 

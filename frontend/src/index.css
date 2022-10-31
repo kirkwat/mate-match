@@ -157,3 +157,81 @@ button:hover {
     margin-right: 1%;
     font-size: 20pt;
 }
+
+.loginh1 {
+    position: absolute;
+    left: 48%;
+    margin-top: 4%;
+}
+
+.loginUsername {
+    position: absolute;
+    left: 44%;
+    margin-top: 7%;
+}
+
+.loginPassword {
+    position: absolute;
+    left: 44%;
+    margin-top: 12%;
+}
+
+.logginButton {
+    position: absolute;
+    left: 46%;
+    margin-top: 17%;
+    cursor: pointer;
+}
+
+.loginin_signup_button {
+    position: absolute;
+    left: 51%;
+    margin-top: 17%;
+    cursor: pointer;
+}
+
+#loginView input {
+    width: 100%;
+    padding: 5px;
+    border-color: black;
+    border: 1%;
+}
+
+.signuph1 {
+    position: absolute;
+    left: 48%;
+    margin-top: 4%;
+}
+
+.signupUsername {
+    position: absolute;
+    left: 44%;
+    margin-top: 7%;
+}
+
+.signupPassword {
+    position: absolute;
+    left: 44%;
+    margin-top: 11%;
+}
+
+.confirmPassword {
+    position: absolute;
+    left: 44%;
+    margin-top: 15%;
+}
+
+.signupButton {
+    position: absolute;
+    left:48%;
+    padding: 1% 2%;
+    margin-top: 20%;
+    cursor: pointer;
+}
+
+#signupView input {
+    width: 100%;
+    padding: 5px;
+    border-color: black;
+    border: 1%;
+}
