@@ -9,10 +9,10 @@ main > section:not(.active){
 }
 
 h1 {
-    margin-bottom: 5%;
+    margin-bottom: 3%;
 }
 
-p {
+#profileView > p {
     color: rgb(153, 153, 158);
 }
 
@@ -97,4 +97,63 @@ button:hover {
 
 #profileAge, #roomateNumber {
     width: 5%;
+}
+
+
+.profileCardDiv {
+    position:relative;
+    width:50%;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    margin-top: 2%;
+    padding: 1%;
+}
+
+.profileCardDiv > img, .profileCardDiv > h2, .profileCardDiv > p {
+    display: inline-block;
+}
+
+
+#profileCardName {
+    position:absolute;
+    top:1%;
+    padding-left:2%;
+    font-size: 20pt;
+}
+
+#profileCardLocation {
+    position: absolute;
+    left:40%;
+    top:10%;
+    font-size: 14pt;
+}
+
+#profileCardGender {
+    position: absolute;
+    left:40%;
+    top:30%;
+    font-size: 14pt;
+}
+
+#profileCardAge {
+    position: absolute;
+    left:40%;
+    top:50%;
+    font-size: 14pt;
+}
+
+.reportButton {
+    float: right;
+    clear: right;
+    padding: 1.5%;
+}
+
+.menuButton {
+    position:absolute; 
+    top: 0; 
+    right: 0;
+    margin-top: 1%;
+    margin-right: 1%;
+    font-size: 20pt;
 }

@@ -21,7 +21,7 @@
 
     </head>
 
-    <body onload="app.profileView.load()">
+    <body onload="app.homeView_logged.load()">
         <header>
             <h1>Find Your Roommate</h1>
         </header>
@@ -30,7 +30,27 @@
 
             </section>
             <section id = "homeView_logged">
-                
+                <h2 id="homeViewHeading"></h2>
+                <label for = "filter">Sort By</label>
+                    <select type="text" id="sortBy" name="sortBy">
+                        <option></option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                    </select>
+
+                    <button type = "button" class = "menuButton">Menu</button>
+                    <div class="profileCardContainer">
+                        <template class="profileCardTemp">
+                            <div class="profileCardDiv">
+                                <img src="https://via.placeholder.com/100" alt="Profile pic"/>
+                                <p id="profileCardName"></p>
+                                <p id="profileCardLocation"></p>
+                                <p id="profileCardGender"></p>
+                                <p id="profileCardAge"></p>
+                                <button type = "button" class = "reportButton">Report</button>
+                            </div>
+                        </template>
+                    </div>
             </section>
 
             <section id="profileView">
