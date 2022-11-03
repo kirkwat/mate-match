@@ -1,8 +1,8 @@
 const mysql = require('mysql');
 const util = require('util');
-const pool = require('./db.js');
+const pool = require('../db.js');
 
-const DBConnection = pool.getConnection((err, connection) => {
+const DBConnection = pool;/*.getConnection((err, connection) => {
     if(err) {
         connection.release();
         console.error('DB connection issue', err);
@@ -10,7 +10,16 @@ const DBConnection = pool.getConnection((err, connection) => {
     }
     connectionSuccessHandler();
     constructDB();
-});
+});*/
+DBConnection.getConnection((err,connection) => {
+    if (err) {
+        console.error('There was a problem connecting to the DB', err);
+        return;
+    }
+    connectionSuccessHandler();
+    constructDB();
+ });
+
 
 const connectionSuccessHandler = () => {
     console.log('Successful DB connection');
@@ -18,16 +27,17 @@ const connectionSuccessHandler = () => {
 
 const constructDB = async () => {
     try {
-        DBConfirmConnect = util.promisify(pool.query).bind(DBConnection);
-        await DBConfirmConnect();
+        //DBConfirmConnect = util.promisify(pool.query).bind(DBConnection);
+        //await DBConfirmConnect();
 
-        const find = await DBQuery('CREATE DATABASE IF NOT EXISTS mainData');
-        console.log('Successfully found or create user table');
+        const find = await DBQuery('CREATE DATABASE IF NOT EXISTS mainData;');
+        console.log('Successfully found or create user mainData');
     } catch(err) {
         console.log('Failed to find or create user table');
     }
 
     try {
+        // const useDatabaseQuery = `USE mainData`;
         const userCheck = 'CREATE TABLE IF NOT EXISTS mainData.user (\
             id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,\
             firstName VARCHAR(30) NOT NULL,\
@@ -49,6 +59,7 @@ const constructDB = async () => {
               DBQuery(preferenceCheck)
             ]
           );
+        console.log('Successfully created or found tables in the DB');
     } catch(err) {
         console.error('Failed to find or create tables');
     }

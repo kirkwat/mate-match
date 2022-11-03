@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors');
 const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
-// const mysqlConnect = require('./db');
+const mysqlConnect = require('./db');
 const routes = require('./routes');
 
 // set up some configs for express.
