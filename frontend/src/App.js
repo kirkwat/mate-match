@@ -21,6 +21,8 @@
         new Profile("Joe", "Austin", "This is another test", "Male", 19, "Smoke-free", "Condo", 3)
     ]
 
+    var toggled = false;
+
     app.home = {
         getProfiles() {
             return profiles;
@@ -44,9 +46,20 @@
             button1.className = "menuHidden";
             button2.className = "menuHidden";
             button3.className = "menuHidden";
+        },
+
+        toggleMenu() {
+            console.log(toggled);
+            if (toggled) {
+                this.setMenuHidden();
+                toggled = false;
+            }
+
+            else {
+                this.setMenuActive();
+                toggled = true;
+            }
         }
-
-
     }
 
 

@@ -237,39 +237,32 @@ button:hover {
     font-size: 20pt; 
 }
 
-.menuContainer {
-    position:absolute;
-    top: 20; 
-    right: 0;
-    margin-top: 1%;
-    margin-right: 1%;
-
-}
 
 .menuContainer > .menuHidden{
     display: none;
 }
 
+#menuProfile, #menuLogin, #menuSignup {
+    background-color: rgb(208, 215, 247);
+    font-size: 20pt;
+
+}
+
 #menuProfile {
-    position:relative;
-    top: 5; 
-    right: 0;
-    margin-top: 1%;
-    margin-right: 1%;
+    position:absolute;
+    top: 8%; 
+    right: 1%;
 }
 
 #menuLogin {
-    position:relative;
-    top: 100; 
-    right: 0;
-    margin-top: 1%;
-    margin-right: 1%;
+    position:absolute;
+    top: 12%; 
+    right: 1%;
 }
 
 #menuSignup {
-    position:relative; 
-    top: 200; 
-    right: 0;
-    margin-top: 1%;
-    margin-right: 1%;
+    position:absolute; 
+    top: 16.5%; 
+    right: 1%;
+
 }
