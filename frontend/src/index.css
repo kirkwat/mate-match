@@ -266,3 +266,16 @@ button:hover {
     right: 1%;
 
 }
+
+#menuProfile:hover {
+    background-color: rgb(225, 225, 227);
+}
+
+#menuLogin:hover {
+    background-color: rgb(225, 225, 227);
+}
+
+#menuSignup:hover {
+    background-color: rgb(225, 225, 227);
+}
+
