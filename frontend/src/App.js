@@ -24,7 +24,29 @@
     app.home = {
         getProfiles() {
             return profiles;
+        },
+
+        setMenuActive() {
+            var button1 = document.querySelector("#menuProfile");
+            var button2 = document.querySelector("#menuLogin");
+            var button3 = document.querySelector("#menuSignup");
+
+            button1.className = "menuActive";
+            button2.className = "menuActive";
+            button3.className = "menuActive";
+        },
+
+        setMenuHidden() {
+            var button1 = document.querySelector("#menuProfile");
+            var button2 = document.querySelector("#menuLogin");
+            var button3 = document.querySelector("#menuSignup");
+
+            button1.className = "menuHidden";
+            button2.className = "menuHidden";
+            button3.className = "menuHidden";
         }
+
+
     }
 
 

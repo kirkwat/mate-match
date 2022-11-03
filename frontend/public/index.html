@@ -22,7 +22,7 @@
 
     </head>
 
-    <body onload="app.loginView.load()">
+    <body onload="app.homeView_logged.load()">
         <header>
             <h1>Find Your Roommate</h1>
         </header>
@@ -31,9 +31,6 @@
 
             </section>
 
-            <section id = "menuView">
-                <button type = "button" onclick="app.profileView.load()">profile</button>
-            </section>
             <section id = "homeView_logged">
                 <h2 id="homeViewHeading"></h2>
                 <label for = "filter">Sort By</label>
@@ -43,7 +40,13 @@
                         <option>Option 2</option>
                     </select>
 
-                    <button type = "button" class = "menuButton" >Menu</button>
+                    <button type = "button" class = "menuButton" onclick="app.home.setMenuActive()">Menu</button>
+                    <div class="menuContainer">
+                    <button type = "button" class = "menuHidden" id="menuProfile" onclick="app.profileView.load()">Sample profile</button>
+                    <button type = "button" class = "menuHidden" id="menuLogin" onclick="app.loginView.load()">Log in</button>
+                    <button type = "button" class = "menuHidden" id="menuSignup" onclick="app.signupView.load()">Sign up</button>
+                    </div>
+
                     <div class="profileCardContainer">
                         <template class="profileCardTemp">
                             <div class="profileCardDiv">
@@ -153,13 +156,13 @@
                 
                 <div class = "loginPassword">
                     <label for="logginPassword">Password</label>
-                    <input type = "password" name = "profileName" id = "profileName"/>
+                    <input type = "password" name = "logginPassword" id = "logginPassword"/>
                 </div>
 
                 <button type = "button" class = "logginButton">Login</button>
 
                 <button type = "button" class = "loginin_signup_button" onclick="app.signupView.load()">Sign Up</button>
-                <button type = "button" onclick="app.homeView_logged.load()">homeView</button>
+                <button type = "button" onclick="app.homeView_logged.load()">Home</button>
             </section>
 
             <section id = "signupView">
@@ -180,6 +183,7 @@
                 </div>
 
                 <button type = "button" class = "signupButton">Sign up</button>
+                <button type = "button" onclick="app.homeView_logged.load()">Home</button>
 
             </section>
             <section id = "adminView">

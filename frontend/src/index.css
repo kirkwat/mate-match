@@ -31,6 +31,7 @@ button:hover {
 .editProfile, .done {
     padding: 10px 20px;
     float: right;
+    clear: right;
 }
 
 .profilePic {
@@ -149,15 +150,6 @@ button:hover {
     padding: 1.5%;
 }
 
-.menuButton {
-    position:absolute; 
-    top: 0; 
-    right: 0;
-    margin-top: 1%;
-    margin-right: 1%;
-    font-size: 20pt;
-}
-
 .loginh1 {
     position: absolute;
     left: 48%;
@@ -234,4 +226,50 @@ button:hover {
     padding: 5px;
     border-color: black;
     border: 1%;
+}
+
+.menuButton {
+    position:absolute; 
+    top: 0; 
+    right: 0;
+    margin-top: 1%;
+    margin-right: 1%;
+    font-size: 20pt; 
+}
+
+.menuContainer {
+    position:absolute;
+    top: 20; 
+    right: 0;
+    margin-top: 1%;
+    margin-right: 1%;
+
+}
+
+.menuContainer > .menuHidden{
+    display: none;
+}
+
+#menuProfile {
+    position:relative;
+    top: 5; 
+    right: 0;
+    margin-top: 1%;
+    margin-right: 1%;
+}
+
+#menuLogin {
+    position:relative;
+    top: 100; 
+    right: 0;
+    margin-top: 1%;
+    margin-right: 1%;
+}
+
+#menuSignup {
+    position:relative; 
+    top: 200; 
+    right: 0;
+    margin-top: 1%;
+    margin-right: 1%;
 }

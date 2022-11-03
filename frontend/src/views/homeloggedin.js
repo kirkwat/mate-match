@@ -3,6 +3,7 @@
    
     app.homeView_logged = {
         load() {
+            app.home.setMenuHidden();
             if (!isLoaded) {
                 var heading = document.getElementById("homeViewHeading");
                 var profileList = app.home.getProfiles();
