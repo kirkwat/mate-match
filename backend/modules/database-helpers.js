@@ -1,12 +1,10 @@
 const mysql = require('mysql');
 const util = require('util');
-const pool = require('../db.js');
+const pool = require('./db.js');
 
-const DBQuery = util.promisify(pool.query).bind(pool);
-
-const DBConnection = pool.getConnection( async (err, connection) => {
+const DBConnection = pool.getConnection((err, connection) => {
     if(err) {
-        //await connection.release();
+        connection.release();
         console.error('DB connection issue', err);
         return;
     }
@@ -20,7 +18,7 @@ const connectionSuccessHandler = () => {
 
 const constructDB = async () => {
     try {
-        DBConfirmConnect = util.promisify(pool.connectToDatabase).bind(DBConnection);
+        DBConfirmConnect = util.promisify(pool.query).bind(DBConnection);
         await DBConfirmConnect();
 
         const find = await DBQuery('CREATE DATABASE IF NOT EXISTS mainData');
@@ -57,4 +55,7 @@ const constructDB = async () => {
        // We return two things: a function that lets us run queries, and another to
        // disconnect from the DB at the end of a route
 };
+
+const DBQuery = util.promisify(DBConnection.query).bind(DBConnection);
+
 module.exports = DBQuery, constructDB;
