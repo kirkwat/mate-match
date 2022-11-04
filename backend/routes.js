@@ -71,8 +71,8 @@ module.exports = function routes(app, logger) {
       } else {
         // if there is no issue obtaining a connection, execute query and release connection
         try {
-          await DBQuery('INSERT INTO mainData.\'' + req.body.table + '\' VALUES (\'' + req.body.insert + '\')');
-          res.status(200).send('Success -> INSERT INTO mainData.\'' + req.body.table + '\' VALUES (\'' + req.body.insert + '\')');
+          await DBQuery('INSERT INTO mainData.\'' + req.body.table + '\' VALUES (\'' + req.body.values + '\')');
+          res.status(200).send('Success -> INSERT INTO mainData.\'' + req.body.table + '\' VALUES (\'' + req.body.values + '\')');
         } catch(err)
         {
           logger.error("Problem inserting into \"" + req.body.table + "\" table");
@@ -93,7 +93,7 @@ module.exports = function routes(app, logger) {
     });
   });
 
-  // GET /checkdb
+  // GET /checkdb used to be /values, now returns values based on table and param. Can return multiple values or one user based on ID field
   app.get('/values', (req, res) => {
     // obtain a connection from our pool of connections
     pool.getConnection(function (err, connection){
@@ -103,7 +103,8 @@ module.exports = function routes(app, logger) {
         res.status(400).send('Problem obtaining MySQL connection'); 
       } else {
         // if there is no issue obtaining a connection, execute query and release connection
-        connection.query('SELECT value FROM `db`.`test_table`', function (err, rows, fields) {
+        // connection.query('SELECT value FROM `db`.`test_table`', function (err, rows, fields) {
+          connection.query('SELECT * FROM mainData.\'' + req.body.table + '\' WHERE \'' + req.body.param + '\' = \'' + req.body.ID + '\'', function (err, rows, fields) {
           connection.release();
           if (err) {
             logger.error("Error while fetching values: \n", err);
