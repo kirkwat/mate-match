@@ -147,5 +147,39 @@ module.exports = function routes(app, logger) {
     });
   });
 
-  app.get('/login')
+  app.get('/login', (req,res) => {
+    pool.getConnection(async function (err, connection){
+      if(err){
+        // if there is an issue obtaining a connection, release the connection instance and log the error
+        logger.error('Problem obtaining MySQL connection',err)
+        res.status(400).send('Problem obtaining MySQL connection'); 
+      } else {
+        connection.query('SELECT password FROM mainData.user WHERE email = \'' + req.body.email + '\'', function (err, rows, fields) {
+          connection.release();
+          if (err) {
+            logger.error("Error while fetching value: \n", err);
+            res.status(400).json({
+              "data": [],
+              "error": "Error obtaining values"
+            })
+          } else {
+            /*bcrypt.compare(req.body.password, rows.password, function(err, res) {
+              if (err){
+              }
+              if (res) {
+                res.status(200).send("login successful");
+                // Send JWT
+              } else {
+                res.status(200).send('passwords do not match');
+              }
+            });
+            console.log("password: " + rows["password"]);
+            res.status(200).json({
+              rows
+            })*/
+          }
+        });
+      }
+  });
+  });
 }
