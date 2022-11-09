@@ -39,12 +39,13 @@ const constructDB = async () => {
     try {
         // const useDatabaseQuery = `USE mainData`;
         const userCheck = 'CREATE TABLE IF NOT EXISTS mainData.user (\
-            id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,\
-            firstName VARCHAR(30) NOT NULL,\
+            email VARCHAR(30) NOT NULL PRIMARY KEY,\
+            password VARCHAR(255),\
+            firstName VARCHAR(30),\
             lastName VARCHAR(30),\
-            age INTEGER NOT NULL,\
+            age INTEGER,\
             desiredRoommates INTEGER,\
-            city VARCHAR(30) NOT NULL,\
+            city VARCHAR(30),\
             bio VARCHAR(300),\
             gender VARCHAR(7),\
             CONSTRAINT chkGender CHECK (gender IN (\'male\', \'female\')),\

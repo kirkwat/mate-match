@@ -1,6 +1,8 @@
 const pool = require('./db')
 const DBQuery = require ('./modules/database-helpers.js');
 const util = require('util');
+bcrypt = require('bcrypt');
+saltRounds = 10;
 
 module.exports = function routes(app, logger) {
   // GET /
@@ -121,4 +123,29 @@ module.exports = function routes(app, logger) {
       }
     });
   });
+  
+  app.post('/createuser', (req,res) =>{
+    console.log(req.body.product);
+    const hash = bcrypt.hashSync(req.body.password, saltRounds);
+    // obtain a connection from our pool of connections
+    pool.getConnection(async function (err, connection){
+      if(err){
+        // if there is an issue obtaining a connection, release the connection instance and log the error
+        logger.error('Problem obtaining MySQL connection',err)
+        res.status(400).send('Problem obtaining MySQL connection'); 
+      } else {
+        // if there is no issue obtaining a connection, execute query and release connection
+        try {
+          await DBQuery('INSERT INTO mainData.user (email, password) VALUES (\'' + req.body.email + '\',\'' + hash + '\');');
+          res.status(200).send('Success -> INSERT INTO mainData.user (email, password) VALUES (\'' + req.body.email + '\',' + hash + '\')');
+        } catch(err)
+        {
+          logger.error("Problem inserting into user table");
+          res.status(400).send('Problem inserting into user table');
+        }
+      }
+    });
+  });
+
+  app.get('/login')
 }

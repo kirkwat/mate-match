@@ -1,6 +1,6 @@
 //docker start mysql-container
 //docker exec -it mysql-container bash
-//mysql --user=root --password=password
+//mysql --user=root --password
 mysql = require('mysql');
 const DBConnection = mysql.createConnection({
     host: 'localhost',
