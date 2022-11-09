@@ -8,9 +8,9 @@ main > section:not(.active){
     display: none;
 }
 
-h1 {
+/* h1 {
     margin-bottom: 3%;
-}
+} */
 
 #profileView > p {
     color: rgb(153, 153, 158);
@@ -228,7 +228,7 @@ button:hover {
     border: 1%;
 }
 
-.menuButton {
+#menuButton {
     position:absolute; 
     top: 0; 
     right: 0;
