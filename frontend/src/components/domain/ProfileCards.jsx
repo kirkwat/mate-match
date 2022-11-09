@@ -4,7 +4,7 @@ export const ProfileCards = ({profiles}) =>
 <div className="profileCardContainer">
     {
     profiles.map((profile, index) =>
-        <div className="card mt-4 pt-3 border border-2 border-dark" style={{width: "75%"}}>
+        <div className="card mt-4 pt-3 border border-2 border-dark" style={{width: "75%"}} key={index}>
             <div className="row">
                 <div className="col-sm-3 ms-3" style={{marginRight: "-5%"}}>
                     <img className="img-thumbnail" src="https://via.placeholder.com/100" alt="Profile pic"/>
