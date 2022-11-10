@@ -16,13 +16,13 @@ main > section:not(.active){
     color: rgb(153, 153, 158);
 }
 
-button {
+/* button {
     border-width: 0px;
     border-radius: 0.7rem;
     text-align: center;
     background-color: rgb(208, 215, 247);
     padding: 0.5%;
-}
+} */
 
 button:hover {
     background-color: rgb(225, 225, 227);
