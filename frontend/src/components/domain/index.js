@@ -5,3 +5,4 @@ export * from "./HomepageNotLogged";
 export * from "./LoginPage";
 export * from "./SignupPage";
 export * from "./ProfileCards";
+export * from "./HomepageNotLogged";
