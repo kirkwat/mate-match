@@ -29,26 +29,28 @@ export const SignupPage = () => {
             <h1 className = "">Sign Up</h1>
         </div>
 
-        <CredentialsField
-            label={"Username"}
-            value = {username}
-            setValue = {x => setUsername(x)}
+        <div className="d-flex align-items-center justify-content-center">
+            <CredentialsField
+                label={"Username"}
+                value = {username}
+                setValue = {x => setUsername(x)}
+            />
+        </div>
+        <div className="d-flex align-items-center justify-content-center">
+            <CredentialsField
+                label={"Password"}
+                value = {password}
+                setValue = {x => setPassword(x)}
+            />  
+        </div>
+        <div className="d-flex align-items-center justify-content-center">
+            <CredentialsField
+                label={"Confirm password"}
+                value = {confirmPassword}
+                setValue = {x => setConfirmPassword(x)}
+            />
+        </div>
         
-        />
-
-        <CredentialsField
-            label={"Password"}
-            value = {password}
-            setValue = {x => setPassword(x)}
-        
-        />  
-
-        <CredentialsField
-            label={"Confirm password"}
-            value = {confirmPassword}
-            setValue = {x => setConfirmPassword(x)}
-        />
-
         <div className = "d-flex align-items-center justify-content-center mb-3">
             <button type = "button" className = "btn btn-primary">Sign up</button>
         </div>
