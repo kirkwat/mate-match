@@ -8,6 +8,15 @@ export const SignupPage = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     //Add functionality to store username/passwword to db
+
+    if (false) { //If username is already taken
+        return <>I
+            <p className="d-flex align-items-center justify-content-center mb-3">Username already taken</p>
+            <div className = "d-flex align-items-center justify-content-center mb-3">
+                <button type = "button" className = "btn btn-primary">Back</button>
+            </div>
+        </>;
+    }
     
     
     return <>
