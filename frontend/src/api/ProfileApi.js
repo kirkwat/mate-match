@@ -7,8 +7,8 @@ const apiConfig = {
     }
 };
 
-export const getProfileByUserName = (profileUserName) => new Promise((resolve, reject) => {
-    axios.get(`${apiEndPoint}/${profileUserName}`, apiConfig)
+export const getProfileById = (profileId) => new Promise((resolve, reject) => {
+    axios.get(`${apiEndPoint}/${profileId}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);

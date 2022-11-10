@@ -1,3 +1,3 @@
-import { ProfileDetails } from "./domain";
+import { ProfileEditor } from "./domain";
 
-export const App = () => <ProfileDetails/>;
+export const App = () => <ProfileEditor/>;

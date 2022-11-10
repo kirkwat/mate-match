@@ -1,5 +1,4 @@
-export * from "./ViewProfile";
-export * from './profileEditor';
+export * from "./Profile";
 export * from "./HomepageLogged";
 export * from "./HomepageNotLogged";
 export * from "./LoginPage";
