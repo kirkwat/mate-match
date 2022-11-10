@@ -1,3 +1,3 @@
-import { HomepageLogged, ProfileDetails, SignupPage, LoginPage, HomepageNotLogged } from "./domain";
+import { HomepageLogged, ProfileDetails, ProfileEditor, SignupPage, LoginPage, HomepageNotLogged } from "./domain";
 
-export const App = () => <HomepageNotLogged/>;
+export const App = () => <HomepageLogged/>;
