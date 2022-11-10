@@ -1,5 +1,5 @@
 export const TextAreaField = ({ label, value, setValue }) => <>
-    <div className="form-group mb-3">
+    <div className="form-group fw-bold mb-3">
         <label htmlFor="value">{ label }</label>
         <textarea name="value"
             id="value"

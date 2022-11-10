@@ -1,24 +1,26 @@
+//TODO update button to show Send Request or Edit Profile depending on situation
+//TODO make changes with api
+
 import { useState, useEffect } from "react";
-import { getProfileByUserName } from "../../../api";
+import { getProfileById } from "../../../api";
 import { RoommateList } from './RoommateList';
 
 export const ProfileDetails = () => {
     //DELETE - this is just an example until api is working
     const roomies = [
-        {name: "Robert Derl", gender: "(He/Him)", city: "DFW", age: 26, paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-        {name: "Dan Robins", gender: "(He/Him)", city: "Dallas", age: 24, paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
+        {name: "Robert Derl", gender: "male", city: "DFW", age: 26, paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
+        {name: "Dan Robins", gender: "male", city: "Dallas", age: 24, paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
     ];
-
 
     const [ profile, setProfile ] = useState(undefined);
     //TODO update for on click
     useEffect(() => {
-        //getProfileByUserName(1).then(x => setProfile(x));
+        //getProfileById(1).then(x => setProfile(x));
     }, []);
 
-    if(!profile) {
-        return <>Error loading profile...</>;
-    }
+    //if(!profile) {
+    //    return <>Error loading profile...</>;
+    //}
 
     return <>
         <div className="container py-4">

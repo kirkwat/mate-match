@@ -10,8 +10,6 @@ export const RoommateList = ({ roommates }) => {
         </>
     }
 
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-
     return <>
         <h3>Roommates
             <span className="text-secondary"> ({roommates.length})</span>
@@ -22,7 +20,7 @@ export const RoommateList = ({ roommates }) => {
                     <div key={index} className="card mb-3">
                         <div className="card-header fs-4">
                             {roommate.name}
-                            <span className="fs-5"> {roommate.gender}</span>
+                            <span className="fs-5"> {roommate.gender === "male"?"(He/Him)":"(She/Her)"}</span>
                         </div>
                         <div className="card-body">
                             <p className="card-text text-secondary float-end">
