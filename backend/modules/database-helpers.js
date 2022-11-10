@@ -50,10 +50,20 @@ const constructDB = async () => {
             gender VARCHAR(7),\
             CONSTRAINT chkGender CHECK (gender IN (\'male\', \'female\')),\
             CONSTRAINT checkAge CHECK (age > 0 and age < 100))';
-        const preferenceCheck = 'CREATE TABLE IF NOT EXISTS mainData.prefferences (\
+        const preferenceCheck = 'CREATE TABLE IF NOT EXISTS mainData.preferences (\
             id INTEGER NOT NULL PRIMARY KEY,\
-            housingPref JSON,\
-            lifestylePref JSON)';
+            apartment BOOLEAN NOT NULL,\
+            house BOOLEAN NOT NULL,\
+            condo BOOLEAN NOT NULL,\
+            nightPerson BOOLEAN NOT NULL,\
+            morningPerson BOOLEAN NOT NULL,\
+            extrovert BOOLEAN NOT NULL,\
+            introvert BOOLEAN NOT NULL,\
+            smoker BOOLEAN NOT NULL,\
+            bringFriendsOver BOOLEAN NOT NULL,\
+            loud BOOLEAN NOT NULL,\
+            shareFood BOOLEAN NOT NULL,\
+            messy BOOLEAN NOT NULL)'; //housing preferences
         await Promise.all(
             [
               DBQuery(userCheck),
