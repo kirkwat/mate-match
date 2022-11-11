@@ -2,7 +2,7 @@
 //TODO make changes with api
 
 import { useState, useEffect } from "react";
-import { getProfileById } from "../../../api";
+import { getProfile, Health } from "../../../api";
 import { RoommateList } from './RoommateList';
 
 export const ProfileDetails = () => {
@@ -12,12 +12,14 @@ export const ProfileDetails = () => {
         {name: "Dan Robins", gender: "male", city: "Dallas", age: 24, paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
     ];
 
+    const [ profiles, setProfiles ] = useState(undefined);
     const [ profile, setProfile ] = useState(undefined);
     //TODO update for on click
     useEffect(() => {
-        //getProfileById(1).then(x => setProfile(x));
+        Health().then(x => setProfiles(x));
     }, []);
 
+    console.log(profiles)
     //if(!profile) {
     //    return <>Error loading profile...</>;
     //}
@@ -35,23 +37,23 @@ export const ProfileDetails = () => {
                     <span> 21</span>
                 </h3>                        
                 <p className="fs-5 col-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item bg-light"></li>
-                    <li class="list-group-item bg-light">
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item bg-light"></li>
+                    <li className="list-group-item bg-light">
                         <span className="fw-bold">Has Residence: </span>Yes
                     </li>
-                    <li class="list-group-item bg-light">
+                    <li className="list-group-item bg-light">
                         <span className="fw-bold">Roommates needed: </span>5
                     </li>
-                    <li class="list-group-item bg-light">
+                    <li className="list-group-item bg-light">
                         <span className="fw-bold">Professional Preferences: </span>
                         working remotely, 9-5
                     </li>
-                    <li class="list-group-item bg-light">
+                    <li className="list-group-item bg-light">
                         <span className="fw-bold">Lifestyle Preferences: </span>
                         no dogs, like to stay up late
                     </li>
-                    <li class="list-group-item bg-light"></li>
+                    <li className="list-group-item bg-light"></li>
                 </ul>
                 <button type="button" className="btn btn-primary btn-lg col-12 mt-3">
                     Send Roommate Request
