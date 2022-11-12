@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { User } from "../../models/user";
-import { Profile } from "../../models/profile";
+import { User } from "../../../models/user";
+import { Profile } from "../../../models/profile";
 import { ProfileCards } from "./ProfileCards";
-import { Menu } from "../common/Menu";
+import { Menu } from "../../common/Menu";
 import { Link } from "react-router-dom";
 
 export const HomepageLogged = () => {
@@ -25,7 +25,7 @@ export const HomepageLogged = () => {
         <header className="ms-2">
             <h1 className="mb-4">Find Your Roommate</h1>
         </header>
-
+    
         <div className="dropdown">
             <button className="btn btn-primary dropdown-toggle" id="menuButton" type="button" data-bs-toggle="dropdown">Menu</button>
             <ul className="dropdown-menu">

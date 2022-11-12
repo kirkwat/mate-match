@@ -1,4 +1,4 @@
-import { Profile } from "../../models/profile";
+import { Profile } from "../../../models/profile";
 
 export const ProfileCards = ({profiles}) =>
 <div className="profileCardContainer">
