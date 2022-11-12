@@ -3,6 +3,7 @@ import { User } from "../../models/user";
 import { Profile } from "../../models/profile";
 import { ProfileCards } from "./ProfileCards";
 import { Menu } from "../common/Menu";
+import { Link } from "react-router-dom";
 
 export const HomepageLogged = () => {
     const [profiles, setProfiles] = useState([
@@ -25,27 +26,39 @@ export const HomepageLogged = () => {
             <h1 className="mb-4">Find Your Roommate</h1>
         </header>
 
-        <Menu
-            text="Menu"
-            options={["Sample login", "Log in", "Sign up"]}
-            optionsSrcList={["", "", ""]}
-        />
+        <div className="dropdown">
+            <button className="btn btn-primary dropdown-toggle" id="menuButton" type="button" data-bs-toggle="dropdown">Menu</button>
+            <ul className="dropdown-menu">
+                <Link to={ `/profileEditor` }>
+                    <li className="dropdown-item">My Profile</li>
+                </Link>
+                <Link to={ `/roommate` }>
+                    <li className="dropdown-item">My Roommates</li>
+                </Link>
+                <Link to={ `/profileDetail` }>
+                    <li className="dropdown-item">My Requests</li>
+                </Link>
+                <Link to={ `/LoginPage` }>
+                    <li className="dropdown-item">Sign Out</li>
+                </Link>
+            </ul>
+        </div>
 
         <div className="ms-3">
             <h2 id="homeViewHeading">Welcome, {user.name}</h2>
-                <label className = "me-2" htmlFor = "filter">Sort By</label>
-                    <select type="text" id="sortBy" name="sortBy">
-                        <option></option>
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                    </select>
+            <label className="me-2" htmlFor="filter">Sort By</label>
+            <select type="text" id="sortBy" name="sortBy">
+                <option></option>
+                <option>Option 1</option>
+                <option>Option 2</option>
+            </select>
 
-                <ProfileCards profiles={profiles}/>
-                
+            <ProfileCards profiles={profiles} />
+
         </div>
 
     </>;
 
 
 
-    }
+}

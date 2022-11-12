@@ -1,3 +1,4 @@
-import { HomepageLogged, ProfileDetails, ProfileEditor, Registration, Login, HomepageNotLogged } from "./domain";
+import { HomepageLogged, ProfileDetails, ProfileEditor, SignupPage, LoginPage, HomepageNotLogged, RoommateList } from "./domain";
+import { Router } from "./domain";
 
-export const App = () => <Registration/>;
+export const App = () => <Router/>;
