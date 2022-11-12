@@ -1,52 +1,70 @@
-import { useState, useEffect } from "react";
-import { Menu, CredentialsField } from "../../common";
+//TODO add authprovider to router
+//TODO add api and router stuff
 
-export const Login = () => { 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+import {useRef, useState, useEffect, useContext} from "react";
+import { TextField, PasswordField} from "../../common";
+import AuthContext from "../../../context/AuthProvider";
 
-    //Add functionality to get username/passwword from db and see if it matches
+export const Login = () => {
+    const errorRef = useRef();
+    const { setAuth } = useContext(AuthContext);
 
-    if (false) {    //If username or password is incorrect
-        return <>I
-            <p className="d-flex align-items-center justify-content-center mb-3">Incorrect username or password. Try again.</p>
-            <div className = "d-flex align-items-center justify-content-center mb-3">
-                <button type = "button" className = "btn btn-primary">Back</button>
-            </div>
-        </>;
+    const [username, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [loginSuccess, setLoginSuccess] = useState(false);
+
+    useEffect(() => {
+        setErrorMessage('');
+    }, [username, password])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        //ADD API CALL HERE
+        //set to true if account successfully logged in
+        setLoginSuccess(true);
+        setUserName('');
+        setPassword('');
+        //display error messages if not logged in
+        
     }
 
-    return <>
-        <Menu
-                text="Menu"
-                options={["Home", "Signup"]}
-                optionsSrcList={["", ""]}
-            />
-        <div className="d-flex align-items-center justify-content-center mb-2">
-            <h1 className = "">Log in</h1>
+    return <> {loginSuccess ? (
+        <div className="container py-4">
+            <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
+                <h1>Account Logged In!</h1>
+                <p className="py-4">
+                    {/*TODO put dashboard router link here*/}
+                    TODO redirect to dashboard router link here
+                </p>
+            </div>
         </div>
-
-        <div className="d-flex align-items-center justify-content-center">
-            <CredentialsField
-                label={"Username"}
-                value = {username}
-                setValue = {x => setUsername(x)}
-            />
-        </div>
-
-        <div className="d-flex align-items-center justify-content-center">
-            <CredentialsField
-                label={"Password"}
-                value = {password}
-                setValue = {x => setPassword(x)}
-                password = {true}
-            />  
-         </div>
-
-        <div className = "d-flex align-items-center justify-content-center mb-3">
-            <button type = "button" className = "btn btn-primary">Log in</button>
-        </div>
-    
+        ) : (
+        <div className="container py-4">
+            <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
+                <div ref={errorRef} className={errorMessage ? "alert alert-danger" : "d-none"}>
+                    {/*TODO add API error messages here*/}
+                    {errorMessage}
+                </div>
+                <h1>Sign In</h1>
+                <TextField label="Username:"
+                        id="username"
+                        value={username}
+                        setValue={ name => setUserName( name ) } />
+                <PasswordField label="Password:"
+                        id="password"
+                        value={password}
+                        setValue={ pwd => setPassword( pwd ) } />
+                <button type="button" className="btn btn-primary btn-lg col-12 mt-1 mb-2" 
+                    onClick={ handleSubmit }>
+                    Sign Up
+                </button>
+                <hr/>
+                <p className="mt-1">
+                    {/*TODO put sign-in router link here*/}
+                    Don't have an account? <a href="#"> Create an account</a>
+                </p>
+            </div>
+        </div>)}
     </>;
-  
-}
+};

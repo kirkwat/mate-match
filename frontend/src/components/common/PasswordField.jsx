@@ -1,9 +1,9 @@
-export const PasswordField = ({ label, value, setValue, setFocus }) => <>
+export const PasswordField = ({ label, id, value, setValue, setFocus }) => <>
     <div className="form-group fw-bold mb-3">
-        <label htmlFor="value">{ label }</label>
+        <label htmlFor={id}>{ label }</label>
         <input type="password"
             name="value"
-            id="value"
+            id={id}
             className="form-control"
             autoComplete="off"
             required

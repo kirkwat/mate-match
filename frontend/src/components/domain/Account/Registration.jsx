@@ -1,4 +1,4 @@
-//add api and router stuff
+//TODO add api and router stuff
 
 import {useRef, useState, useEffect} from "react";
 import { createAccount } from "../../../api";
@@ -40,7 +40,7 @@ export const Registration = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //if button enabled with JS hack
+        //to prevent button from getting enabled with JS hack (not important)
         const v1 = USER_REGEX.test(username);
         const v2 = PASSWORD_REGEX.test(password);
         if (!v1 || !v2) {
@@ -76,6 +76,7 @@ export const Registration = () => {
                 </div>
                 <h1>Register Your Account</h1>
                 <TextField label="Username:"
+                        id="username"
                         value={username}
                         setValue={ name => setUserName( name ) }
                         setFocus={ x => setUserNameFocus( x ) } />
@@ -85,6 +86,7 @@ export const Registration = () => {
                     Letters, numbers, underscores, hyphens allowed.
                 </div>
                 <PasswordField label="Password:"
+                        id="password"
                         value={password}
                         setValue={ pwd => setPassword( pwd ) }
                         setFocus={ x => setPasswordFocus( x ) } />
@@ -94,18 +96,20 @@ export const Registration = () => {
                     Allowed special characters: ! @ # $ %
                 </p>
                 <PasswordField label="Confirm Password:"
+                        id="confirmPassword"
                         value={confirmPassword}
                         setValue={ confirmPwd => setConfirmPassword( confirmPwd ) }
                         setFocus={ x => setConfirmFocus( x ) } />
                 <p className={(confirmFocus||confirmPassword) && !validConfirm ? "alert alert-primary" : "d-none"}>
                     Must match the first password input field.
                 </p>
-                <button type="button" className="btn btn-primary btn-lg col-12 mt-1" 
+                <button type="button" className="btn btn-primary btn-lg col-12 mt-1 mb-2" 
                     disabled={!validUserName || !validPassword || !validConfirm ? true : false}
                     onClick={ handleSubmit }>
                     Sign Up
                 </button>
-                <p className="mt-2">
+                <hr/>
+                <p className="mt-1">
                     {/*TODO put sign-in router link here*/}
                     Already have an account? <a href="#"> Sign In</a>
                 </p>
