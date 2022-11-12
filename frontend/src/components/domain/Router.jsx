@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { HomepageLogged, ProfileDetails, ProfileEditor, SignupPage, LoginPage, HomepageNotLogged } from ".";
+import { HomepageLogged, ProfileDetails, ProfileEditor, Registration, Login, HomepageNotLogged } from ".";
 import { RoommateList } from ".";
 
 export const Router = () => {
     return <BrowserRouter>
         <Routes>
             <Route path="/" element={ <HomepageNotLogged /> } exact />
-            <Route path="/LoginPage" element= { <LoginPage/> } />
-            <Route path="/SignUpPage" element= { <SignupPage/> } />
+            <Route path="/LoginPage" element= { <Login/> } />
+            <Route path="/SignUpPage" element= { <Registration/> } />
             <Route path="/Logged" element= { <HomepageLogged/> } /> 
             <Route path="/profileDetail" element= { <ProfileDetails/> } /> 
             <Route path="/profileEditor" element= { <ProfileEditor/> } /> 
