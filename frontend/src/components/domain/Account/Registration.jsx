@@ -2,7 +2,7 @@
 
 import {useRef, useState, useEffect} from "react";
 import { createAccount } from "../../../api";
-import { TextField, PasswordField} from "../../common";
+import { CredentialsField} from "../../common";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,11}$/;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -75,7 +75,7 @@ export const Registration = () => {
                     {errorMessage}
                 </div>
                 <h1>Register Your Account</h1>
-                <TextField label="Username:"
+                <CredentialsField label="Username:"
                         id="username"
                         value={username}
                         setValue={ name => setUserName( name ) }
@@ -85,7 +85,8 @@ export const Registration = () => {
                     Must begin with a letter.<br />
                     Letters, numbers, underscores, hyphens allowed.
                 </div>
-                <PasswordField label="Password:"
+                <CredentialsField label="Password:"
+                        password={true}
                         id="password"
                         value={password}
                         setValue={ pwd => setPassword( pwd ) }
@@ -95,7 +96,8 @@ export const Registration = () => {
                     Must include uppercase and lowercase letters, a number, and a special character.<br />
                     Allowed special characters: ! @ # $ %
                 </p>
-                <PasswordField label="Confirm Password:"
+                <CredentialsField label="Confirm Password:"
+                        password={true}
                         id="confirmPassword"
                         value={confirmPassword}
                         setValue={ confirmPwd => setConfirmPassword( confirmPwd ) }

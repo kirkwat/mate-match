@@ -2,7 +2,7 @@
 //TODO add api and router stuff
 
 import {useRef, useState, useEffect, useContext} from "react";
-import { TextField, PasswordField} from "../../common";
+import {CredentialsField} from "../../common";
 import AuthContext from "../../../context/AuthProvider";
 
 export const Login = () => {
@@ -26,7 +26,7 @@ export const Login = () => {
         setUserName('');
         setPassword('');
         //display error messages if not logged in
-        
+
     }
 
     return <> {loginSuccess ? (
@@ -47,11 +47,12 @@ export const Login = () => {
                     {errorMessage}
                 </div>
                 <h1>Sign In</h1>
-                <TextField label="Username:"
+                <CredentialsField label="Username:"
                         id="username"
                         value={username}
                         setValue={ name => setUserName( name ) } />
-                <PasswordField label="Password:"
+                <CredentialsField label="Password:"
+                        password={true}
                         id="password"
                         value={password}
                         setValue={ pwd => setPassword( pwd ) } />
