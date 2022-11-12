@@ -56,9 +56,5 @@ export const HomepageLogged = () => {
             <ProfileCards profiles={profiles} />
 
         </div>
-
     </>;
-
-
-
-}
+};

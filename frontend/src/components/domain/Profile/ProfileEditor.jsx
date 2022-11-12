@@ -26,9 +26,11 @@ export const ProfileEditor = () => {
             <div className="bg-light rounded p-5 pb-4 mb-4">
                 <h1>Profile Editor</h1>
                 <TextField label="Name"
+                            id="name"
                             value={profile.name}
                             setValue={ name => mergeProfile({ name }) } />
                 <TextField label="Location"
+                            id="location"
                             value={profile.location}
                             setValue={ location => mergeProfile({ location }) } />
                 <div className="col-1">
