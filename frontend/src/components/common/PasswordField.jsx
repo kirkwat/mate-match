@@ -1,7 +1,7 @@
-export const TextField = ({ label, value, setValue, setFocus }) => <>
+export const PasswordField = ({ label, value, setValue, setFocus }) => <>
     <div className="form-group fw-bold mb-3">
         <label htmlFor="value">{ label }</label>
-        <input type="text"
+        <input type="password"
             name="value"
             id="value"
             className="form-control"

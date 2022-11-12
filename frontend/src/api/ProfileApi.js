@@ -1,14 +1,7 @@
-import axios from "axios";
-//update api endpoint and config
-const apiEndPoint = "http://localhost:8000";
-const apiConfig = {
-    headers: {
-        Authorization: 'kwatson'
-    }
-};
+import axios from './Endpoint';
 
 export const getProfileById = (profileId) => new Promise((resolve, reject) => {
-    axios.get(`${apiEndPoint}/${profileId}`, apiConfig)
+    axios.get(`/${profileId}`)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -16,9 +9,8 @@ export const getProfileById = (profileId) => new Promise((resolve, reject) => {
         });
 });
 
-
 export const Health = () => new Promise((resolve, reject) => {
-    axios.get(`${apiEndPoint}/health`)
+    axios.get(`/health`)
         .then(x => { resolve(x.data) })
         .catch(x => {
             alert(x);
