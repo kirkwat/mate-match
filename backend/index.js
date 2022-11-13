@@ -11,7 +11,7 @@ const registerRoutes  = require('./routes/register' );
 const { createModelsMiddleware  } = require('./middleware/model-middleware' );
 const { authenticateJWT } = require('./middleware/auth' );
 const app = express();
-const port = 3002;
+const port = 3000;
 app.use(createModelsMiddleware );
 app.use(bodyParser.json());
 app.use(cors({
