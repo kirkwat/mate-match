@@ -6,7 +6,7 @@ import { CheckBoxField, SelectField, TextField, TextAreaField } from "../../comm
 
 export const ProfileEditor = () => {
     //DELETE - this is just an example until api is working
-    let profile={name:"Kirk Watson"}
+    let profile={name:"Kirk Watson",location:""}
 
     const [ profile1, setProfile ] = useState(undefined);
     //TODO update for on click
@@ -78,6 +78,7 @@ export const ProfileEditor = () => {
                         checked={profile.condo}
                         setChecked={ condo => mergeProfile({ condo }) } />
                 </div>
+                {console.log(profile)}
                 <button type="button" className="btn btn-primary btn-lg col-12 mt-3">
                     Save Changes
                 </button>
