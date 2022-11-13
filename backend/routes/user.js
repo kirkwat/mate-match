@@ -33,7 +33,7 @@ router.post('/', async (req, res, next) => {
   next();
  });
  router.put('/', async (req, res, next) => {
-    const updateUser = await req.models.user.updateUser(req.body.name, req.body.email);
+    const updateUser = await req.models.user.updateUser(req.body.email, req.body.name, req.body.age, req.body.desiredRoomates, req.body.city, req.body.bio, req.body.gender);
     res.json(updateUser);
     next();
  });
