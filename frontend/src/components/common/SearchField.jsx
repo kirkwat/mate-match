@@ -1,5 +1,5 @@
 export const SearchField = ({ label, id, value, setValue }) => <>
-    <div className="form-group form-label rounded-pill fw-bold mb-3">
+    <div className="form-group form-label rounded-pill fw-bold w-50">
         <label htmlFor={id}>{ label }</label>
         <input type="text"
             name="value"
