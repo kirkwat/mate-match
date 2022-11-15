@@ -16,8 +16,8 @@ const USERS_TABLE = 'users';
     const result = await query;
     return result;
     }
-   const updateUser = async (name, email)  => {
-    const query = knex(USERS_TABLE).update({name}).where({email});
+   const updateUser = async (email, name, age, desiredRoomates, city, bio, gender)  => {
+    const query = knex(USERS_TABLE).update({name, age, desiredRoomates, city, bio, gender}).where({email});
     const results = await query;
     return results;
 }
