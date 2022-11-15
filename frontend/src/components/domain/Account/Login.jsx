@@ -5,7 +5,7 @@ import {useRef, useState, useEffect, useContext} from "react";
 import {CredentialsField} from "../../common";
 import { loginAccount } from "../../../api";
 import AuthContext from "../../../context/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
     const errorRef = useRef();
@@ -28,16 +28,16 @@ export const Login = () => {
         setUserName('');
         setPassword('');
         //display error messages if not logged in
-
     }
+
+    const nav = useNavigate();
 
     return <> {loginSuccess ? (
         <div className="container py-4">
             <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
                 <h1>Account Logged In!</h1>
                 <p className="py-4">
-                    {/*TODO put dashboard router link here*/}
-                    TODO redirect to dashboard router link here
+                    {nav(`/dashboard?name=${username}`)}
                 </p>
             </div>
         </div>
@@ -60,7 +60,7 @@ export const Login = () => {
                         setValue={ pwd => setPassword( pwd ) } />
                 <button type="button" className="btn btn-primary btn-lg col-12 mt-1 mb-2" 
                     onClick={ handleSubmit }>
-                    Sign Up
+                    Sign In
                 </button>
                 <hr/>
                 <p className="mt-1">
