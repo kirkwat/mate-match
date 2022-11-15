@@ -8,7 +8,8 @@ export const CheckBoxDropdown = ({ dd_label, labels, values, setValues }) => {
     const handleToggle = index => {
         const newChecked = [...checked];
         newChecked[index]=!newChecked[index];
-
+        //TODO fix this error from console
+        //component is changing a controlled input to be uncontrolled. This is likely caused by the value changing from a defined to undefined
         setChecked(newChecked);
         setValues(newChecked);
     };

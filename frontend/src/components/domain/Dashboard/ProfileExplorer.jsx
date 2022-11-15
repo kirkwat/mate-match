@@ -1,50 +1,32 @@
-//TODO update checkboxdropdown to handle objects instead of arrays
-
-import {useRef, useState, useEffect} from "react";
-import { SearchField, CheckBoxDropdown } from "../../common";
+import { useState, useEffect } from 'react';
+import { ProfileSearch, SearchResults, ProfileList } from '../Dashboard';
+import { getProfiles } from "../../../api";
 
 export const ProfileExplorer = () => { 
 
-    const [ search, setSearch ] = useState("");
+    const roomies = [
+        {name: "Robert Derl", gender: "male", city: "DFW", age: 26, paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
+        {name: "Dan Robins", gender: "male", city: "Dallas", age: 24, paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
+    ];
 
-    const lifestyle_labels=["Night-owl","Early-bird","Smoke-free","Pet-friendly"];
-    const [ lifestylePref, setLifestylePref ] = useState([false,false,false,false]);
+    const [profiles, setProfiles] = useState(
+        [{name:"kirk",city:"dallas",age:21},{name:"robert",city:"dfw",age:22}])
+    const [searchResults, setSearchResults] = useState([])
+    //TODO update for on click
+    useEffect(() => {
+        //getProfiles.then(x => setProfiles(x));
+    }, []);
 
-    const property_labels=["House","Apartment","Condo"];
-    const [ propertyPref, setPropertyPref ] = useState([false,false,false]);
-
-    const age_labels=["18-23","24-29","30+"];
-    const [ agePref, setAgePref ] = useState([false,false,false]);
+    
 
     return <>
         <div className="container py-4">
             <div className="bg-light rounded p-5 pb-4 mb-4">
-                <h1>Profile Explorer</h1>
-                <div className="d-flex flex">
-                    <SearchField id="username"
-                            value={search}
-                            setValue={x => setSearch(x)} />
-                    <div className="mt-4 ms-3">
-                        <CheckBoxDropdown dd_label="Lifestyle " 
-                                labels={lifestyle_labels} 
-                                values={lifestylePref} 
-                                setValues={x => setLifestylePref({x})}/>
-                    </div>
-                    <div className="mt-4 ms-3">
-                        <CheckBoxDropdown dd_label="Property " 
-                                labels={property_labels} 
-                                values={propertyPref} 
-                                setValues={x => setPropertyPref({x})}/>
-                    </div>
-                    <div className="mt-4 ms-3">
-                        <CheckBoxDropdown dd_label="Age " 
-                                labels={age_labels} 
-                                values={agePref} 
-                                setValues={x => setAgePref({x})}/>
-                    </div>
-                </div>
-                {console.log("search:",search)}
+                <ProfileList results={roomies}/>
             </div>
         </div>
     </>;
 };
+
+//<ProfileSearch profiles={profiles} setSearchResults={setSearchResults}/>
+//<SearchResults results={profiles}/>
