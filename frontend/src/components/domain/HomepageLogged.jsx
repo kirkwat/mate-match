@@ -25,7 +25,7 @@ export const HomepageLogged = () => {
         <header className="ms-2">
             <h1 className="mb-4">Find Your Roommate</h1>
         </header>
-
+    
         <div className="dropdown">
             <button className="btn btn-primary dropdown-toggle" id="menuButton" type="button" data-bs-toggle="dropdown">Menu</button>
             <ul className="dropdown-menu">

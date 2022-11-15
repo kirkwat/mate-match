@@ -6,9 +6,7 @@ import { CheckBoxField, SelectField, TextField, TextAreaField } from "../../comm
 
 export const ProfileEditor = () => {
     //DELETE - this is just an example until api is working
-    let profile={name:"Kirk Watson"}
-
-    const [ profile1, setProfile ] = useState(undefined);
+    const [ profile, setProfile ] = useState({name:"Kirk Watson",location:""});
     //TODO update for on click
     useEffect(() => {
         //getProfileById(1).then(x => setProfile(x));
@@ -40,12 +38,12 @@ export const ProfileEditor = () => {
                                 options={[...Array(85 - 18 + 1).keys()].map(x => x + 18)}/>
                 </div>
                 <TextAreaField label="About me"
-                                        value={profile.bio}
-                                        setValue={profile.bio} />
+                                value={profile.bio}
+                                setValue={profile.bio} />
                 <div className="col-3">
                     <SelectField label="How many roommates do you need?"
-                                value={profile.age}
-                                setValue={ age => mergeProfile({ age }) }
+                                value={profile.roommieCount}
+                                setValue={ roommieCount => mergeProfile({ roommieCount }) }
                                 options={[...Array(10).keys()].map(x => x + 1)}/>
                 </div>
                 <CheckBoxField label="Check this box if you have a residence."
@@ -78,6 +76,7 @@ export const ProfileEditor = () => {
                         checked={profile.condo}
                         setChecked={ condo => mergeProfile({ condo }) } />
                 </div>
+                {console.log(profile)}
                 <button type="button" className="btn btn-primary btn-lg col-12 mt-3">
                     Save Changes
                 </button>
