@@ -5,6 +5,7 @@ import {useRef, useState, useEffect, useContext} from "react";
 import {CredentialsField} from "../../common";
 import { loginAccount } from "../../../api";
 import AuthContext from "../../../context/AuthProvider";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
     const errorRef = useRef();
@@ -63,8 +64,10 @@ export const Login = () => {
                 </button>
                 <hr/>
                 <p className="mt-1">
-                    {/*TODO put sign-in router link here*/}
-                    Don't have an account? <a href="#"> Create an account</a>
+                    Don't have an account? 
+                    <Link to={ `/SignUpPage` }>
+                        Create an account
+                    </Link>
                 </p>
             </div>
         </div>)}

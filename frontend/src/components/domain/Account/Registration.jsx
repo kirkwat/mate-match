@@ -3,6 +3,7 @@
 import {useRef, useState, useEffect} from "react";
 import { CredentialsField} from "../../common";
 import { createAccount } from "../../../api";
+import { Link } from "react-router-dom";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,11}$/;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -62,9 +63,11 @@ export const Registration = () => {
             <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
                 <h1>Account Created!</h1>
                 <p className="py-4">
-                    {/*TODO put sign-in router link here*/}
-                    Click here to sign into your new account. <a href="#"> Sign In</a>
+                    Click here to sign into your new account. 
                 </p>
+                <Link to={ `/LoginPage` }>
+                    Log in
+                </Link>
             </div>
         </div>
         ) : (
@@ -112,8 +115,10 @@ export const Registration = () => {
                 </button>
                 <hr/>
                 <p className="mt-1">
-                    {/*TODO put sign-in router link here*/}
-                    Already have an account? <a href="#"> Sign In</a>
+                    Already have an account?
+                    <Link to={ `/LoginPage` }>
+                        Sign in
+                    </Link>
                 </p>
             </div>
         </div>)}

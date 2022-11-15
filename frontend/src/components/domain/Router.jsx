@@ -9,7 +9,7 @@ export const Router = () => {
             <Route path="/LoginPage" element= { <Login/> } />
             <Route path="/SignUpPage" element= { <Registration/> } />
             <Route path="/Logged" element= { <HomepageLogged/> } /> 
-            <Route path="/profileDetail" element= { <ProfileDetails/> } /> 
+            <Route path="/profileDetails" element= { <ProfileDetails/> } /> 
             <Route path="/profileEditor" element= { <ProfileEditor/> } /> 
             <Route path="/roommate" element= { <RoommateList/> } /> 
 
