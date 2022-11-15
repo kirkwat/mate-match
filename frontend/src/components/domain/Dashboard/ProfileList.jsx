@@ -1,4 +1,3 @@
-//TODO update styling
 export const ProfileList = ({ results }) => {
 
     if(results.length === 0) {
