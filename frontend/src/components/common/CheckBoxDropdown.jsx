@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { CheckBoxField } from "./CheckBoxField";
 
-export const CheckBoxDropdown = ({ dd_label, labels, values, setValues }) => {
+export const CheckBoxDropdown = ({ dd_label, options, setValues }) => {
 
-    const [checked, setChecked] = useState(values);
+    const [checked, setChecked] = useState(options);
 
-    const handleToggle = index => {
-        const newChecked = [...checked];
-        newChecked[index]=!newChecked[index];
-        //TODO fix this error from console
-        //component is changing a controlled input to be uncontrolled. This is likely caused by the value changing from a defined to undefined
+    const handleToggle = label => {
+        const newChecked = {...checked};
+        console.log("new",newChecked)
+        console.log("label",label)
+        newChecked[label]=!newChecked[label];
+
         setChecked(newChecked);
         setValues(newChecked);
     };
@@ -20,11 +21,11 @@ export const CheckBoxDropdown = ({ dd_label, labels, values, setValues }) => {
                 { dd_label }
             </button>
             <ul className="dropdown-menu">
-                {labels.map((label, index) =>
+                {Object.keys(options).map((label, index) =>
                     <li className="ps-2 pe-0" key={index}>
                         <CheckBoxField label={label}
-                                checked={values[index]}
-                                setChecked={ () => handleToggle(index) } />
+                                checked={options[index]}
+                                setChecked={ () => handleToggle(label) } />
                     </li>)
                 }
             </ul>
