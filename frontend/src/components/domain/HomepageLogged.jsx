@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { User } from "../../../models/user";
-import { Profile } from "../../../models/profile";
+import { User } from "../../models/user";
+import { Profile } from "../../models/profile";
 import { ProfileCards } from "./ProfileCards";
-import { Menu } from "../../common/Menu";
+import { Menu } from "../common/Menu";
 import { Link } from "react-router-dom";
 
 export const HomepageLogged = () => {
