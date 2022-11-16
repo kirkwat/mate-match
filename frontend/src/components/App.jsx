@@ -3,6 +3,7 @@ import { Router } from "./domain";
 
 //export const App = () => <Router/>;
 export const App = () => <>
-    <NavBar/>
-    <ProfileExplorer/>
+    {/* <NavBar/>
+    <ProfileExplorer/> */}
+    <Router/>
 </>;

@@ -1,4 +1,5 @@
 //TODO update styling
+import { Roommate } from "../../../models/roommate";
 
 export const RoommateList = ({ roommates, standalone=false }) => {
     return <> 
