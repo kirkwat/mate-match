@@ -1,16 +1,16 @@
 //TODO update styling
-export const RoommateList = ({ roommates, standalone=false }) => {
+export const RequestList = ({ requests, standalone=false }) => {
     return <> 
         <div className={standalone?"container py-4":""}>
-            <h3>Roommates
-                    <span className="text-secondary"> ({roommates.length})</span>
+            <h3>Requests
+                    <span className="text-secondary"> ({requests.length})</span>
             </h3>
-            {roommates.length === 0 ? (
-                <p className="bg-light rounded p-3">Send a request to become roommates!</p>
+            {requests.length === 0 ? (
+                <p className="bg-light rounded p-3">Your roommate requests from other users will appear here.</p>
             ) : (
                 <ul className="list-group">
                     {
-                        roommates.map((roommate, index) =>
+                        requests.map((roommate, index) =>
                             <div key={index} className="card mb-3">
                                 <div className="card-header fs-4">
                                     {roommate.name}
