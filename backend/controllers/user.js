@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken' );
 const User = require('../models/user' );
-//put in env
-const accessTokenSecret  = 'mysupercoolsecret' ;
+const accessTokenSecret = 'mysupercoolsecret' ;
+//const accessToken = process.env.MAIN_TOKEN;
 const authenticatePers  = async (email, password) => {
    const user = await User.authenticateUser (email, password);
    if (user === null) {
