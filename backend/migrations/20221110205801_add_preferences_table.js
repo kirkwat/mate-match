@@ -1,6 +1,7 @@
 exports.up = function(knex) {
     return knex.schema.createTable('preferences', (table) => {
-        table.increments('id').primary();
+        table.increments('id').notNullable().primary();
+        table.string('email').notNullable().references('email').inTable("users");
         table.boolean('apartment');
         table.boolean('house');
         table.boolean('condo');
