@@ -1,17 +1,14 @@
+import { Link } from "react-router-dom"
+
 export const Menu = ({text, options, optionsSrcList}) => <>
-    <div className="dropdown">
-        <button className="btn btn-primary dropdown-toggle" id="menuButton" type="button" data-bs-toggle="dropdown">{text}</button>
+    <button className="btn btn-primary dropdown-toggle" style={{marginLeft: "95%"}} type="button" data-bs-toggle="dropdown">{text}</button>
         <ul className="dropdown-menu">
         {
             options.map((option, index) =>
-                <li key={index}><a className="dropdown-item" href={optionsSrcList[index]}>{option}</a></li>
+                <Link to={ optionsSrcList[index] }>
+                    <li className="dropdown-item">{option}</li>
+                </Link>
             )
         }
-
-
-            
         </ul>
-    </div>
-
-
-</>
+</>;

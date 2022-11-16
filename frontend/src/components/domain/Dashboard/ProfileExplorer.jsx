@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { ProfileSearch, ProfileList } from '../Dashboard';
+import { ProfileSearch, ResultList } from '../Dashboard';
 import { getProfiles } from "../../../api";
+import { Menu } from '../../common';
 
 export const ProfileExplorer = () => { 
 
@@ -24,8 +25,13 @@ export const ProfileExplorer = () => {
     return <>
         <div className="container py-4">
             <div className="bg-light rounded p-5 pb-4 mb-4">
+                <Menu
+                    text={"Menu"}
+                    options = {["My Profile", "My Roommates", "My Requests", "Sign Out"]}
+                    optionsSrcList = {["/profileEditor", "/roommate", "RequestList", "/LoginPage"]}
+                />
                 <ProfileSearch profiles={roomies} setSearchResults={setSearchResults}/>
-                <ProfileList results={searchResults}/>
+                <ResultList results={searchResults}/>
             </div>
         </div>
     </>;

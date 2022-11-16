@@ -4,6 +4,7 @@ import { Profile } from "../../models/profile";
 import { ProfileCards } from "./ProfileCards";
 import { Menu } from "../common/Menu";
 import { Link } from "react-router-dom";
+import { getProfiles } from "../../api";
 
 export const HomepageLogged = () => {
     const [profiles, setProfiles] = useState([
@@ -13,7 +14,7 @@ export const HomepageLogged = () => {
     const [user, setUser] = useState(new User("John"));
 
     useEffect(() => {
-        //Get list of matching profiles from db
+        // setProfiles(getProfiles());
     }, []);
 
 
@@ -26,23 +27,11 @@ export const HomepageLogged = () => {
             <h1 className="mb-4">Find Your Roommate</h1>
         </header>
     
-        <div className="dropdown">
-            <button className="btn btn-primary dropdown-toggle" id="menuButton" type="button" data-bs-toggle="dropdown">Menu</button>
-            <ul className="dropdown-menu">
-                <Link to={ `/profileEditor` }>
-                    <li className="dropdown-item">My Profile</li>
-                </Link>
-                <Link to={ `/roommate` }>
-                    <li className="dropdown-item">My Roommates</li>
-                </Link>
-                <Link to={ `/profileDetail` }>
-                    <li className="dropdown-item">My Requests</li>
-                </Link>
-                <Link to={ `/LoginPage` }>
-                    <li className="dropdown-item">Sign Out</li>
-                </Link>
-            </ul>
-        </div>
+        <Menu
+            text={"Menu"}
+            options = {["My Profile", "My Roommates", "My Requests", "Sign Out"]}
+            optionsSrcList = {["/profileEditor", "/roommate", "RequestList", "/LoginPage"]}
+        />
 
         <div className="ms-3">
             <h2 id="homeViewHeading">Welcome, {user.name}</h2>
