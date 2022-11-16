@@ -3,36 +3,32 @@
 
 export const NavBar = () => {
     return <> 
-        <nav class="navbar navbar-expand-lg sticky-top bg-light">
-            <div class="container-fluid">
+        <nav className="navbar navbar-expand-md sticky-top bg-light">
+            <div className="container-fluid">
                 {/* change route to go back to dashboard*/}
-                <a class="navbar-brand fw-bold" href="#">Roommate Finder</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-                    <span class="navbar-toggler-icon"></span>
+                <a className="navbar-brand fw-bold" href="#">Roommate Finder</a>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
+                <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                    <div className="navbar-nav">
                         {/*update routes*/}
-                        <a class="nav-link" href="#">Your Requests</a>
-                        <a class="nav-link" href="#">Your Roommates</a>
+                        <a className="nav-link" href="#">Your Requests</a>
+                        <a className="nav-link" href="#">Your Roommates</a>
 
-
-
-
-                        <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div className="nav-item dropdown-center">
+                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                 Your Account
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-                                <li><a class="dropdown-item" href="#">View Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                            <ul className="dropdown-menu">
+                                {/*update routes*/}
+                                <li><a className="dropdown-item py-0 ps-3" href="#">Edit Profile</a></li>
+                                <li><hr className="dropdown-divider"/></li>
+                                <li><a className="dropdown-item py-0 ps-3" href="#">View Profile</a></li>
+                                <li><hr className="dropdown-divider"/></li>
+                                <li><a className="dropdown-item py-0 ps-3" href="#">Sign Out</a></li>
                             </ul>
                         </div>
-
-
-                        
-                        
                     </div>
                 </div>
             </div>
