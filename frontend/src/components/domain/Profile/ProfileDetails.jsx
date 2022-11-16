@@ -19,7 +19,6 @@ export const ProfileDetails = () => {
         Health().then(x => setProfiles(x));
     }, []);
 
-    console.log(profiles)
     //if(!profile) {
     //    return <>Error loading profile...</>;
     //}
