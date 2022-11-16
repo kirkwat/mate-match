@@ -37,6 +37,11 @@ router.post('/', async (req, res, next) => {
     res.json(updateUser);
     next();
  });
+ router.post('/preferences', async (req, res, next) => {
+    const addPrefstoUser = await req.models.user.addPref(req.body.email, req.body.apartment, req.body.house, req.body.condo, req.body.nightPerson, req.body.morningPerson, req.body.extrovert, req.body.introvert, req.body.smoker, req.body.bringFriendsOver, req.body.loud, req.body.shareFood, req.body.messy);
+    res.json(addPrefstoUser);
+    next();
+ });
  router.delete('/', async (req, res, next) => {
     const deleteUser = await req.models.user.deleteUser(req.body.email);
     res.status(204).end();

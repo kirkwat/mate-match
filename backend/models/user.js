@@ -1,6 +1,8 @@
 const knex = require('../database/knex');
 const bcrypt = require('bcrypt');
 const USERS_TABLE = 'users';
+const PREF_TABLE = 'preferences';
+
    const fetchAllUsers = async () => {
        const query = knex(USERS_TABLE);
        const results = await query;
@@ -21,7 +23,11 @@ const USERS_TABLE = 'users';
     const results = await query;
     return results;
 }
-//add bcrypt
+const addPref = async (email, apartment, house, condo, nightPerson, morningPerson, extrovert, introvert, smoker, bringFriendsOver, loud, shareFood, messy)  => {
+    const query = knex(PREF_TABLE).insert({email, apartment, house, condo, nightPerson, morningPerson, extrovert, introvert, smoker, bringFriendsOver, loud, shareFood, messy});
+    const results = await query;
+    return results;
+}
 const createUser = async (email, password) => {
     console.log('Raw password:', password);
     const salt = await bcrypt.genSalt(10);
@@ -58,6 +64,7 @@ module.exports = {
     fetchUserByName,
     findUserByEmail,
     updateUser, 
+    addPref,
     createUser,
     deleteUser, 
     authenticateUser
