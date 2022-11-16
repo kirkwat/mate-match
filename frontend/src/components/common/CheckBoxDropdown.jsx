@@ -7,8 +7,6 @@ export const CheckBoxDropdown = ({ dd_label, options, setValues }) => {
 
     const handleToggle = label => {
         const newChecked = {...checked};
-        console.log("new",newChecked)
-        console.log("label",label)
         newChecked[label]=!newChecked[label];
 
         setChecked(newChecked);
