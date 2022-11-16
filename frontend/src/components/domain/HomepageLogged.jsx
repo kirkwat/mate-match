@@ -4,6 +4,7 @@ import { Profile } from "../../models/profile";
 import { ProfileCards } from "./ProfileCards";
 import { Menu } from "../common/Menu";
 import { Link } from "react-router-dom";
+import { getProfiles } from "../../api";
 
 export const HomepageLogged = () => {
     const [profiles, setProfiles] = useState([
@@ -13,7 +14,7 @@ export const HomepageLogged = () => {
     const [user, setUser] = useState(new User("John"));
 
     useEffect(() => {
-        //Get list of matching profiles from db
+        // setProfiles(getProfiles());
     }, []);
 
 
@@ -35,7 +36,7 @@ export const HomepageLogged = () => {
                 <Link to={ `/roommate` }>
                     <li className="dropdown-item">My Roommates</li>
                 </Link>
-                <Link to={ `/profileDetail` }>
+                <Link to={ `/RequestList` }>
                     <li className="dropdown-item">My Requests</li>
                 </Link>
                 <Link to={ `/LoginPage` }>

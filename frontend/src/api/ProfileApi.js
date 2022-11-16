@@ -1,4 +1,5 @@
-import axios from './Endpoint';
+import axios from 'axios';
+import { Profile } from '../models/profile';
 
 export const getProfiles = () => new Promise((resolve, reject) => {
     axios.get(`/profiles`)
@@ -26,3 +27,29 @@ export const Health = () => new Promise((resolve, reject) => {
             reject(x);
         });
 });
+
+
+export const createProfile = (profile) => new Promise((resolve, reject) => {
+    axios.post(`/profiles/${profile.id}`, profile)
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
+
+export const updateProfile = (profile) => new Promise((resolve, reject) => {
+    axios.put(`/profiles/${profile.id}`, profile)
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { HomepageLogged, ProfileDetails, ProfileEditor, Registration, Login, HomepageNotLogged } from ".";
+import { HomepageLogged, ProfileDetails, ProfileEditor, Registration, Login, HomepageNotLogged, RequestList } from ".";
 import { RoommateList } from ".";
 
 export const Router = () => {
@@ -12,6 +12,7 @@ export const Router = () => {
             <Route path="/profileDetails" element= { <ProfileDetails/> } /> 
             <Route path="/profileEditor" element= { <ProfileEditor/> } /> 
             <Route path="/roommate" element= { <RoommateList/> } /> 
+            <Route path="//RequestList" element= {<RequestList/>} />
 
         </Routes>
     </BrowserRouter>
