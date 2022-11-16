@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ProfileSearch, ProfileList } from '../Dashboard';
+import { ProfileSearch, ResultList } from '../Dashboard';
 import { getProfiles } from "../../../api";
 
 export const ProfileExplorer = () => { 
@@ -25,7 +25,7 @@ export const ProfileExplorer = () => {
         <div className="container py-4">
             <div className="bg-light rounded p-5 pb-4 mb-4">
                 <ProfileSearch profiles={roomies} setSearchResults={setSearchResults}/>
-                <ProfileList results={searchResults}/>
+                <ResultList results={searchResults}/>
             </div>
         </div>
     </>;
