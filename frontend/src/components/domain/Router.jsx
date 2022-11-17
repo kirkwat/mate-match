@@ -13,7 +13,6 @@ export const Router = () => {
             <Route path="/profileEditor" element= { <ProfileEditor/> } /> 
             <Route path="/roommate" element= { <RoommateList/> } /> 
             <Route path="/RequestList" element= {<RequestList/>} />
-
         </Routes>
     </BrowserRouter>
 };

@@ -1,6 +1,8 @@
 //TODO update routing
 //TODO update styling
 
+import { Link } from "react-router-dom";
+
 export const RequestList = ({ requests, standalone=false }) => {
     return <> 
         <div className={standalone?"container py-4":""}>
@@ -12,13 +14,14 @@ export const RequestList = ({ requests, standalone=false }) => {
             ) : (
                 <ul className="list-group">
                     {
-                        requests.map((roommate, index) =>
+                        requests && requests.map((roommate, index) =>
                             <div key={index} className="card mb-3">
                                 <div className="card-header fs-4">
                                     {roommate.name}
                                     <span className="fs-5"> {roommate.gender === "male"?"(He/Him)":"(She/Her)"}</span>
-                                    {/*update with routing*/}
-                                    <a href="#" className="btn btn-primary btn-sm float-end">View Profile</a>
+                                    <Link to={ `/profileDetail` }>
+                                        <button type ="button" className="btn btn-primary btn-sm float-end">View Profile</button>
+                                    </Link>
                                 </div>
                                 <div className="card-body">
                                     <p className="card-text text-secondary float-end">

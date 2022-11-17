@@ -58,7 +58,9 @@ export const ProfileDetails = () => {
                     Send Roommate Request
                 </button>
             </div>
-            <RoommateList roommates={roomies}></RoommateList>
+            <div>
+                <RoommateList roommates = { roomies } />
+            </div>
         </div>
     </>;
 };

@@ -1,6 +1,7 @@
 //TODO make changes with api
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getProfileById } from "../../../api";
 import { CheckBoxField, SelectField, TextField, TextAreaField } from "../../common";
 
@@ -77,9 +78,11 @@ export const ProfileEditor = () => {
                         setChecked={ condo => mergeProfile({ condo }) } />
                 </div>
                 {console.log(profile)}
-                <button type="button" className="btn btn-primary btn-lg col-12 mt-3">
-                    Save Changes
-                </button>
+                <Link to={ `/dashboard` }>
+                    <button type="button" className="btn btn-primary btn-lg col-12 mt-3">
+                        Save Changes
+                    </button>
+                </Link>
             </div>
         </div>
     </>;
