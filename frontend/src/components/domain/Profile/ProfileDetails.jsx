@@ -2,7 +2,7 @@
 //TODO make changes with api
 
 import { useState, useEffect } from "react";
-import { getProfile, Health } from "../../../api";
+import { getProfileByUsername, Health, getProfiles } from "../../../api";
 import { RoommateList } from './RoommateList';
 
 export const ProfileDetails = () => {
@@ -16,12 +16,15 @@ export const ProfileDetails = () => {
     const [ profile, setProfile ] = useState(undefined);
     //TODO update for on click
     useEffect(() => {
-        Health().then(x => setProfiles(x));
+        getProfileByUsername("Person").then(x => setProfile(x));
     }, []);
 
-    //if(!profile) {
-    //    return <>Error loading profile...</>;
-    //}
+    console.log(profile);
+
+    
+    if(!profile) {
+       return <>Loading...</>;
+    }
 
     return <>
         <div className="container py-4">
