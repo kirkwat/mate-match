@@ -24,7 +24,10 @@ app.get('/health', (request, response, next) => {
    next();
 });
 app.use('/session', sessionRoutes);
-app.use('/user', authenticateJWT , userRoutes);
+   //with authentication
+//app.use('/user', authenticateJWT , userRoutes);
+   //without authentication
+app.use('/user', userRoutes);
 app.use('/register', registerRoutes );
 app.listen(port, () => {
    console.log(`This app is listening on port  ${port}`);
