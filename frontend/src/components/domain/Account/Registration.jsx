@@ -2,7 +2,7 @@
 
 import {useRef, useState, useEffect} from "react";
 import { CredentialsField} from "../../common";
-import { createAccount } from "../../../api";
+import { createAccount, getAccount, createProfile } from "../../../api";
 import { Link } from "react-router-dom";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,11}$/;
@@ -48,11 +48,17 @@ export const Registration = () => {
             setErrorMessage("Invalid Entry");
             return;
         }
+
         //ADD API CALL HERE
+        createAccount(username, password);
+
+        //TODO Redirect to proifle creation
+
+
         //set to true if account successfully created
         setRegisterSuccess(true);
-        setUserName('');
-        setPassword('');
+        setUserName(username);
+        setPassword(password);
         setConfirmFocus('');
         //display error messages if not created
 
