@@ -41,7 +41,7 @@ export const createProfile = (profile) => new Promise((resolve, reject) => {
 });
 
 export const updateProfile = (profile) => new Promise((resolve, reject) => {
-    axios.put(`${baseURL}/profiles/${profile.id}`, profile)
+    axios.put(`${baseURL}/user?email=${profile.email}`, profile)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);

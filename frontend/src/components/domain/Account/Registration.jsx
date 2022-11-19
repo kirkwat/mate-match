@@ -3,7 +3,7 @@
 import {useRef, useState, useEffect} from "react";
 import { CredentialsField} from "../../common";
 import { createAccount, getAccount, createProfile } from "../../../api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,11}$/;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -25,6 +25,8 @@ export const Registration = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
     const [registerSuccess, setRegisterSuccess] = useState(false);
+
+    const nav = useNavigate();
 
     useEffect(() => {
         setValidUserName(USER_REGEX.test(username));
@@ -50,11 +52,9 @@ export const Registration = () => {
         }
 
         //ADD API CALL HERE
-        createAccount(username, password);
+        createAccount(username, password)
 
-        //TODO Redirect to proifle creation
-
-
+    
         //set to true if account successfully created
         setRegisterSuccess(true);
         setUserName(username);
@@ -69,9 +69,9 @@ export const Registration = () => {
             <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
                 <h1>Account Created!</h1>
                 <p className="py-4">
-                    Click here to sign into your new account. 
+                    Click here create profile. 
                 </p>
-                <Link to={ `/LoginPage` }>
+                <Link to={ `/ProfileEditor/${username}` }>
                     Log in
                 </Link>
             </div>

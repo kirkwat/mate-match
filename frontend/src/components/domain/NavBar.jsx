@@ -3,7 +3,7 @@
 
 import { Link } from "react-router-dom";
 
-export const NavBar = () => {
+export const NavBar = ({username}) => {
     return <> 
         <nav className="navbar navbar-expand-md sticky-top bg-light">
             <div className="container-fluid">
@@ -28,14 +28,14 @@ export const NavBar = () => {
                                 Your Account
                             </a>
                             <ul className="dropdown-menu">
-                                <Link to={ `/profileEditor` } className = "active">
+                                <Link to={ `/profileEditor/${username}` } className = "active">
                                     <li><button type = "button" className="dropdown-item py-0 ps-3" >Edit Profile</button></li>
                                 </Link>
                                 
 
                                 <li><hr className="dropdown-divider"/></li>
                                 
-                                <Link to={ `/profileDetails` } className = "active">
+                                <Link to={ `/profileDetails/${username}` } className = "active">
                                     <li><button className="dropdown-item py-0 ps-3" >View Profile</button></li>
                                 </Link>
 

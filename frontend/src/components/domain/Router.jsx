@@ -8,9 +8,9 @@ export const Router = () => {
             <Route path="/" element={ <HomepageNotLogged /> } exact />
             <Route path="/LoginPage" element= { <Login/> } />
             <Route path="/SignUpPage" element= { <Registration/> } />
-            <Route path="/dashboard" element= { <ProfileExplorer/> } /> 
-            <Route path="/profileDetails" element= { <ProfileDetails/> } /> 
-            <Route path="/profileEditor" element= { <ProfileEditor/> } /> 
+            <Route path="/dashboard/:username" element= { <ProfileExplorer/> } /> 
+            <Route path="/profileDetails/:username" element= { <ProfileDetails/> } /> 
+            <Route path="/profileEditor/:username" element= { <ProfileEditor/> } /> 
             <Route path="/roommate" element= { <RoommateList/> } /> 
             <Route path="/RequestList" element= {<RequestList/>} />
         </Routes>

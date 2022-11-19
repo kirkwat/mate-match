@@ -1,19 +1,54 @@
 //TODO make changes with api
 
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { getProfileById } from "../../../api";
+import { Link, useParams } from "react-router-dom";
+import { getProfileByUsername, updateProfile } from "../../../api";
 import { CheckBoxField, SelectField, TextField, TextAreaField } from "../../common";
 
 export const ProfileEditor = () => {
     //DELETE - this is just an example until api is working
-    const [ profile, setProfile ] = useState({name:"Kirk Watson",location:""});
+    const [ profile, setProfile ] = useState("");
+    
+    const lifestylePreferences = [];
+    const propertyPreferences = [];
+
+    const params = useParams();
+
     //TODO update for on click
     useEffect(() => {
-        //getProfileById(1).then(x => setProfile(x));
+        getProfileByUsername(params.username).then(x => setProfile(x));
     }, []);
 
+    console.log(profile);
+
     const mergeProfile = delta => setProfile({ ...profile, ...delta });
+
+    const addLifestyle = pref => {
+        lifestylePreferences.push(pref);
+    }
+
+    const addProperty = pref => {
+        propertyPreferences.push(pref);
+    }
+
+
+    const saveChanges = () => {
+        profile[0].name = profile.name;
+        profile[0].city = profile.location;
+        profile[0].age = profile.age;
+        profile[0].gender = profile.gender;
+        profile[0].bio = profile.bio;
+        profile[0].desiredRoomates = profile.roommieCount;
+
+        console.log(profile);
+
+        //Add lifestyle and property preferences
+
+
+        updateProfile(profile[0]);
+    }
+
+
 
 
     if(!profile) {
@@ -27,11 +62,15 @@ export const ProfileEditor = () => {
                 <TextField label="Name"
                             id="name"
                             value={profile.name}
-                            setValue={ name => mergeProfile({ name }) } />
+                            setValue={name => mergeProfile({ name }) } />
                 <TextField label="Location"
                             id="location"
                             value={profile.location}
                             setValue={ location => mergeProfile({ location }) } />
+                <TextField label="Gender"
+                            id="gender"
+                            value={profile.gender}
+                            setValue={ gender => mergeProfile({ gender }) } />
                 <div className="col-1">
                     <SelectField label="Age"
                                 value={profile.age}
@@ -40,7 +79,7 @@ export const ProfileEditor = () => {
                 </div>
                 <TextAreaField label="About me"
                                 value={profile.bio}
-                                setValue={profile.bio} />
+                                setValue={bio => mergeProfile({ bio })} />
                 <div className="col-3">
                     <SelectField label="How many roommates do you need?"
                                 value={profile.roommieCount}
@@ -54,32 +93,32 @@ export const ProfileEditor = () => {
                     <p className="mt-3 mb-0 fw-bold">Select your lifestyle references below.</p>
                     <CheckBoxField label="Night-owl"
                         checked={profile.nightOwl}
-                        setChecked={ nightOwl => mergeProfile({ nightOwl }) } />
+                        setChecked={ nightOwl => {addLifestyle({ nightOwl }); mergeProfile({lifestylePreferences}) }} />
                     <CheckBoxField label="Early-bird"
                         checked={profile.earlyBird}
-                        setChecked={ earlyBird => mergeProfile({ earlyBird }) } />
+                        setChecked={ earlyBird => {addLifestyle({ earlyBird }); mergeProfile({lifestylePreferences}) }} />
                     <CheckBoxField label="Smoke-free"
                         checked={profile.smokeFree}
-                        setChecked={ smokeFree => mergeProfile({ smokeFree }) } />
+                        setChecked={ smokeFree => {addLifestyle({ smokeFree }); mergeProfile({lifestylePreferences}) }} />
                     <CheckBoxField label="Pet-friendly"
                         checked={profile.petFriendly}
-                        setChecked={ petFriendly => mergeProfile({ petFriendly }) } />
+                        setChecked={ petFriendly => {addLifestyle({ petFriendly }); mergeProfile({lifestylePreferences}) }} />
                 </div>
                 <div>
                     <p className="mt-3 mb-0 fw-bold">Select your property references below.</p>
                     <CheckBoxField label="House"
                         checked={profile.house}
-                        setChecked={ house => mergeProfile({ house }) } />
+                        setChecked={ house => {addProperty({ house }); mergeProfile({propertyPreferences}) }} />
                     <CheckBoxField label="Apartment"
                         checked={profile.apartment}
-                        setChecked={ apartment => mergeProfile({ apartment }) } />
+                        setChecked={ apartment => {addProperty({ apartment }); mergeProfile({propertyPreferences}) }} />
                     <CheckBoxField label="Condo"
                         checked={profile.condo}
-                        setChecked={ condo => mergeProfile({ condo }) } />
+                        setChecked={ condo => {addProperty({ condo }); mergeProfile({propertyPreferences}) }} />
                 </div>
-                {console.log(profile)}
-                <Link to={ `/dashboard` }>
-                    <button type="button" className="btn btn-primary btn-lg col-12 mt-3">
+           
+                <Link to={ `/dashboard/${profile[0].email}` }>
+                    <button type="button" className="btn btn-primary btn-lg col-12 mt-3" onClick={() => saveChanges()}>
                         Save Changes
                     </button>
                 </Link>
