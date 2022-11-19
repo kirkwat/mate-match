@@ -4,6 +4,7 @@
 import { useState, useEffect } from "react";
 import { getProfileByUsername, Health, getProfiles } from "../../../api";
 import { RoommateList } from './RoommateList';
+import { useParams } from "react-router-dom";
 
 export const ProfileDetails = () => {
     //DELETE - this is just an example until api is working
@@ -14,9 +15,13 @@ export const ProfileDetails = () => {
 
     const [ profiles, setProfiles ] = useState(undefined);
     const [ profile, setProfile ] = useState(undefined);
+
+    const param = useParams();
+
+
     //TODO update for on click
     useEffect(() => {
-        getProfileByUsername("Person").then(x => setProfile(x));
+        getProfileByUsername(param.username).then(x => setProfile(x[0]));
     }, []);
 
     console.log(profile);
@@ -31,21 +36,21 @@ export const ProfileDetails = () => {
             <div className="bg-light rounded p-5 pb-4 mb-4">
                 <img src="images/150.png" alt="default" className="float-end img-fluid img-thumbnail"/>
                 <h1 className="display-5">
-                    <span className="fw-bold">Kirk Watson</span>
-                    <span className="fs-1"> (He/Him)</span>
+                    <span className="fw-bold">{profile.name}</span>
+                    <span className="fs-1"> ({profile.gender})</span>
                 </h1>
                 <h3 className="display-7">
-                    <span>DTX</span> -
-                    <span> 21</span>
+                    <span>{profile.city}</span>
+                    <span> - {profile.age}</span>
                 </h3>                        
-                <p className="fs-5 col-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p className="fs-5 col-8">{profile.bio}</p>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item bg-light"></li>
                     <li className="list-group-item bg-light">
                         <span className="fw-bold">Has Residence: </span>Yes
                     </li>
                     <li className="list-group-item bg-light">
-                        <span className="fw-bold">Roommates needed: </span>5
+                        <span className="fw-bold">Roommates needed: {profile.desiredRoomates}</span>
                     </li>
                     <li className="list-group-item bg-light">
                         <span className="fw-bold">Professional Preferences: </span>
