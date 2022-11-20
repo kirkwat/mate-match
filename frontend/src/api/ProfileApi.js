@@ -31,8 +31,8 @@ export const Health = () => new Promise((resolve, reject) => {
 });
 
 
-export const createProfile = (profile) => new Promise((resolve, reject) => {
-    axios.post(`${baseURL}/profiles/${profile.id}`, profile)
+export const createProfile = (username, password) => new Promise((resolve, reject) => {
+    axios.post(`${baseURL}/register`, {"email": username, "password": password})
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
