@@ -14,6 +14,7 @@ exports.up = function(knex) {
         table.boolean('loud');
         table.boolean('shareFood');
         table.boolean('messy');
+        table.boolean('pets');
     });
 };
 exports.down = function(knex) {

@@ -9,8 +9,6 @@ exports.up = function(knex) {
       table.string('city');
       table.string('bio');
       table.string('gender');
-      //preference table foreign key???
-      //constraints in knex???
     });
 };
 exports.down = function(knex) {
