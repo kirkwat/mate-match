@@ -3,13 +3,13 @@
 
 import {useRef, useState, useEffect, useContext} from "react";
 import {CredentialsField} from "../../common";
-import { getProfileByUsername, getProfiles} from "../../../api";
+import { getProfileByUsername, getProfiles, LoginCheck} from "../../../api";
 import AuthContext from "../../../context/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
     const errorRef = useRef();
-    const { setAuth } = useContext(AuthContext);
+    // const [auth, setAuth ] = useState(null);
 
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -26,14 +26,15 @@ export const Login = () => {
         //Logs in user
         getProfileByUsername(username).then(profile => {
             //TODO figure out way to authenticate password with db
-            if (profile.password == password) {     //this currently doesn't work
-                //set to true if account successfully logged in
-                setLoginSuccess(true);
-                setUserName('');
-                setPassword('');
-                sessionStorage.setItem("username", username);
-            }
-
+            const auth = LoginCheck(username, password).then(x => {
+                console.log(x);
+                if (x != null) {
+                    setLoginSuccess(true);
+                    setUserName('');
+                    setPassword('');
+                    sessionStorage.setItem("username", username);
+                }
+            });
         });
     }
 
