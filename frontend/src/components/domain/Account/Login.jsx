@@ -13,7 +13,7 @@ export const Login = () => {
 
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('Error. Wrong username or password');
     const [loginSuccess, setLoginSuccess] = useState(false);
 
     useEffect(() => {
@@ -40,16 +40,21 @@ export const Login = () => {
 
     const nav = useNavigate();
 
-    return <> {loginSuccess ? (
-        <div className="container py-4">
-            <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
-                <h1>Account Logged In!</h1>
-                <p className="py-4">
-                    {nav(`/dashboard?name=${username}`)}
-                </p>
+    if (loginSuccess) {
+        return <>
+            <div className="container py-4">
+                <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
+                    <h1>Account Logged In!</h1>
+                    <p className="py-4">
+                        {nav(`/dashboard?name=${username}`)}
+                    </p>
+                </div>
             </div>
-        </div>
-        ) : (
+        </>;
+    }
+
+    
+    return <> {
         <div className="container py-4">
             <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
                 <div ref={errorRef} className={errorMessage ? "alert alert-danger" : "d-none"}>
@@ -78,6 +83,6 @@ export const Login = () => {
                     </Link>
                 </p>
             </div>
-        </div>)}
+        </div>}
     </>;
 };
