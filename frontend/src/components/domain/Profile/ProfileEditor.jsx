@@ -67,10 +67,10 @@ export const ProfileEditor = () => {
                             id="location"
                             value={profile.location}
                             setValue={ location => mergeProfile({ location }) } />
-                <TextField label="Gender"
-                            id="gender"
+                <SelectField label="Gender"
                             value={profile.gender}
-                            setValue={ gender => mergeProfile({ gender }) } />
+                            setValue={ gender => mergeProfile({ gender }) }
+                            options={["Male", "Female", "Other"]} />
                 <div className="col-1">
                     <SelectField label="Age"
                                 value={profile.age}

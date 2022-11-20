@@ -2,7 +2,7 @@
 
 import {useRef, useState, useEffect} from "react";
 import { CredentialsField} from "../../common";
-import { createAccount, getAccount, createProfile } from "../../../api";
+import { getProfile, createProfile } from "../../../api";
 import { Link, useNavigate } from "react-router-dom";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,11}$/;
@@ -52,7 +52,8 @@ export const Registration = () => {
         }
 
         //ADD API CALL HERE
-        createAccount(username, password)
+        createProfile(username, password);
+        sessionStorage.setItem("username", username);
 
     
         //set to true if account successfully created
@@ -69,11 +70,8 @@ export const Registration = () => {
             <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
                 <h1>Account Created!</h1>
                 <p className="py-4">
-                    Click here create profile. 
+                    <Link to={ `/ProfileEditor/${username}` }>Click here</Link> to create profile. 
                 </p>
-                <Link to={ `/ProfileEditor/${username}` }>
-                    Log in
-                </Link>
             </div>
         </div>
         ) : (

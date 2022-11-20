@@ -3,7 +3,7 @@
 
 import {useRef, useState, useEffect, useContext} from "react";
 import {CredentialsField} from "../../common";
-import { loginAccount } from "../../../api";
+import { getProfileByUsername, getProfiles} from "../../../api";
 import AuthContext from "../../../context/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -22,12 +22,19 @@ export const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //ADD API CALL HERE
-        //set to true if account successfully logged in
-        setLoginSuccess(true);
-        setUserName('');
-        setPassword('');
-        //display error messages if not logged in
+      
+        //Logs in user
+        getProfileByUsername(username).then(profile => {
+            //TODO figure out way to authenticate password with db
+            if (profile.password == password) {     //this currently doesn't work
+                //set to true if account successfully logged in
+                setLoginSuccess(true);
+                setUserName('');
+                setPassword('');
+                sessionStorage.setItem("username", username);
+            }
+
+        });
     }
 
     const nav = useNavigate();
