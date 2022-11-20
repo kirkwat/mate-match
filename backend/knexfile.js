@@ -1,3 +1,4 @@
+require('dotenv');
 module.exports = {
     development: {
       client: 'mysql',
