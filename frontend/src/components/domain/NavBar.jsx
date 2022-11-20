@@ -41,7 +41,7 @@ export const NavBar = ({username}) => {
 
                                 <li><hr className="dropdown-divider"/></li>
 
-                                <Link to={ `/LoginPage` } className = "active">
+                                <Link to={ `/Logout` } className = "active">
                                     <li><button className="dropdown-item py-0 ps-3">Sign Out</button></li>
                                 </Link>
                             </ul>

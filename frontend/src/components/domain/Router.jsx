@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { HomepageLogged, ProfileDetails, ProfileEditor, Registration, Login, HomepageNotLogged, RequestList, ProfileExplorer, HandleRedirect } from ".";
+import { HomepageLogged, ProfileDetails, ProfileEditor, Registration, Login, HomepageNotLogged, RequestList, ProfileExplorer, HandleRedirect, Logout } from ".";
 import { RoommateList } from ".";
 
 export const Router = () => {
@@ -7,6 +7,7 @@ export const Router = () => {
         <Routes>
             <Route path="/" element={ <HomepageNotLogged /> } exact />
             <Route path="/LoginPage" element= { <Login/> } />
+            <Route path="/Logout" element= { <Logout/> } />
             <Route path="/SignUpPage" element= { <Registration/> } />
             <Route path="/dashboard/" element= { <HandleRedirect page={"dashboard"}/> } /> 
             <Route path="/dashboard/:username" element= { <ProfileExplorer/> } /> 
