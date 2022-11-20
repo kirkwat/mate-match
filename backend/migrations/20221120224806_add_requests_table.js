@@ -3,6 +3,7 @@ exports.up = function(knex) {
     table.string('from').notNullable().references('email').inTable("users");
     table.string('to').notNullable().references('email').inTable("users");
     table.string('message');
+    table.boolean('accepted');
 };
 
 exports.down = function(knex) {
