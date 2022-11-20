@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Profile } from '../models/profile';
 
-const baseURL = "http://localhost:3000";
+const baseURL = "http://localhost:8000";
 
 export const getProfiles = () => new Promise((resolve, reject) => {
     axios.get(`${baseURL}/user`)

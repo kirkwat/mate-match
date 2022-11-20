@@ -24,9 +24,8 @@ export const Login = () => {
         e.preventDefault();
       
         //Logs in user
-        getProfileByUsername(username).then(profile => {
+        LoginCheck(username, password).then(x => {
             //TODO figure out way to authenticate password with db
-            const auth = LoginCheck(username, password).then(x => {
                 console.log(x);
                 if (x != null) {
                     setLoginSuccess(true);
@@ -35,8 +34,7 @@ export const Login = () => {
                     sessionStorage.setItem("username", username);
                 }
             });
-        });
-    }
+        };
 
     const nav = useNavigate();
 
@@ -54,7 +52,7 @@ export const Login = () => {
     }
 
     
-    return <> {
+    return <> 
         <div className="container py-4">
             <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
                 <div ref={errorRef} className={errorMessage ? "alert alert-danger" : "d-none"}>
@@ -83,6 +81,6 @@ export const Login = () => {
                     </Link>
                 </p>
             </div>
-        </div>}
+        </div>
     </>;
 };
