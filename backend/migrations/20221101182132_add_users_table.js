@@ -3,6 +3,7 @@ exports.up = function(knex) {
       table.string('email').notNullable();
       table.string('password').notNullable();
       table.primary('email');
+      table.string('photoID');
       table.string('name');
       table.integer('age');
       table.integer('desiredRoomates');

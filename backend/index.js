@@ -11,7 +11,7 @@ const registerRoutes  = require('./routes/register' );
 const { createModelsMiddleware  } = require('./middleware/model-middleware' );
 const { authenticateJWT } = require('./middleware/auth' );
 const app = express();
-const port = 3000;
+const port = 8000;
 app.use(createModelsMiddleware );
 app.use(bodyParser.json());
 app.use(cors({
@@ -25,9 +25,9 @@ app.get('/health', (request, response, next) => {
 });
 app.use('/session', sessionRoutes);
    //with authentication
-//app.use('/user', authenticateJWT , userRoutes);
+app.use('/user', authenticateJWT , userRoutes);
    //without authentication
-app.use('/user', userRoutes);
+//app.use('/user', userRoutes);
 app.use('/register', registerRoutes );
 app.listen(port, () => {
    console.log(`This app is listening on port  ${port}`);
