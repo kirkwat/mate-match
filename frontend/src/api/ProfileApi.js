@@ -49,6 +49,15 @@ export const updateProfile = (profile) => new Promise((resolve, reject) => {
         });
 });
 
+export const LoginCheck = (username, password) => new Promise((resolve, reject) => {
+    axios.post(`${baseURL}/session`, {"email": username, "password": password})
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
+
 
 
 
