@@ -27,4 +27,14 @@ router.post('/', async (req, res, next) => {
   }
   next();
  });
+ router.delete('/', async (req, res, next) => {
+    const deleteReq = await req.models.request.deleteRequest(req.body.to, req.body.from);
+    res.status(204).end();
+    next();
+ });
+ router.put('/', async (req, res, next) => {
+    const acceptReq = await req.models.request.acceptRequest(req.body.to, req.body.from, req.body.accepted);
+    res.json(acceptReq);
+    next();
+ });
 module.exports = router;
