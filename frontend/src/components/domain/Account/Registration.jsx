@@ -2,7 +2,7 @@
 
 import {useRef, useState, useEffect} from "react";
 import { CredentialsField} from "../../common";
-import { getProfile, createProfile } from "../../../api";
+import { getProfile, createProfile, LoginCheck } from "../../../api";
 import { Link, useNavigate } from "react-router-dom";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,11}$/;
@@ -52,8 +52,14 @@ export const Registration = () => {
         }
 
         //ADD API CALL HERE
-        createProfile(username, password);
-        sessionStorage.setItem("username", username);
+        createProfile(username, password).then(x => {
+            LoginCheck(username, password).then(y => {
+                sessionStorage.setItem("username", username);
+                sessionStorage.setItem("token", y);
+            })
+        });
+        
+        
 
     
         //set to true if account successfully created

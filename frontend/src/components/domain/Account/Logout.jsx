@@ -6,6 +6,7 @@ export const Logout = () => {
     
     useEffect(() => {
         delete sessionStorage.username;
+        delete sessionStorage.token;
         nav("/LoginPage");
     }, [])
 

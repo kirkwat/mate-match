@@ -19,7 +19,6 @@ export const ProfileEditor = () => {
         getProfileByUsername(params.username).then(x => setProfile(x));
     }, []);
 
-    console.log(profile);
 
     const mergeProfile = delta => setProfile({ ...profile, ...delta });
 
