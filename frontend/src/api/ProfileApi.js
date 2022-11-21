@@ -3,8 +3,14 @@ import { Profile } from '../models/profile';
 
 const baseURL = "http://localhost:8000";
 
+const apiConfig = {
+    headers: {
+        authorization: `token: ${sessionStorage.token}`
+    }
+};
+
 export const getProfiles = () => new Promise((resolve, reject) => {
-    axios.get(`${baseURL}/user`)
+    axios.get(`${baseURL}/user`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -13,7 +19,7 @@ export const getProfiles = () => new Promise((resolve, reject) => {
 });
 
 export const getProfileByUsername = (user) => new Promise((resolve, reject) => {
-    axios.get(`${baseURL}/user?email=${user}`)
+    axios.get(`${baseURL}/user?email=${user}`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -22,7 +28,7 @@ export const getProfileByUsername = (user) => new Promise((resolve, reject) => {
 });
 
 export const Health = () => new Promise((resolve, reject) => {
-    axios.get(`${baseURL}/user`)
+    axios.get(`${baseURL}/user`, apiConfig)
         .then(x => { resolve(x.data) })
         .catch(x => {
             alert(x);
@@ -41,7 +47,7 @@ export const createProfile = (username, password) => new Promise((resolve, rejec
 });
 
 export const updateProfile = (profile) => new Promise((resolve, reject) => {
-    axios.put(`${baseURL}/user?email=${profile.email}`, profile)
+    axios.put(`${baseURL}/user?email=${profile.email}`, profile, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);

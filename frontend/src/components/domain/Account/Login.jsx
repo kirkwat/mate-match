@@ -15,6 +15,7 @@ export const Login = () => {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('Error. Wrong username or password');
     const [loginSuccess, setLoginSuccess] = useState(false);
+    const [token, setToken] = useState(null);
 
     useEffect(() => {
         setErrorMessage('');
@@ -25,6 +26,7 @@ export const Login = () => {
       
         //Logs in user
         LoginCheck(username, password).then(x => {
+            setToken(x);
             //TODO figure out way to authenticate password with db
                 console.log(x);
                 if (x != null) {
@@ -32,6 +34,7 @@ export const Login = () => {
                     setUserName('');
                     setPassword('');
                     sessionStorage.setItem("username", username);
+                    sessionStorage.setItem("token", x);
                 }
             });
         };
