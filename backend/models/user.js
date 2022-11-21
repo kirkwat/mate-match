@@ -29,11 +29,8 @@ const addPref = async (email, apartment, house, condo, nightPerson, morningPerso
     return results;
 }
 const createUser = async (email, password) => {
-    console.log('Raw password:', password);
     const salt = await bcrypt.genSalt(10);
-    console.log('Password salt', salt);
     const hashedPassword = await bcrypt.hash(password, salt);
-    console.log('Hashed password', hashedPassword);
     const query = knex(USERS_TABLE).insert({ email, password: hashedPassword });
     console.log('Raw query for createNewUser:', query.toString());
     const result = await query;
