@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import { HomepageLogged, ProfileDetails, NavBar, ProfileEditor, ProfileExplorer, Login, Registration, HomepageNotLogged, RoommateList } from "./domain";
+import {  ProfileDetails, NavBar, ProfileEditor, ProfileExplorer, Login, Registration, HomepageNotLogged, RoommateList } from "./domain";
 import { Router } from "./domain";
 
 
