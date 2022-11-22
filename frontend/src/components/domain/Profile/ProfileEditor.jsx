@@ -6,8 +6,7 @@ import { getProfileByUsername, updateProfile } from "../../../api";
 import { CheckBoxField, SelectField, TextField, TextAreaField } from "../../common";
 
 export const ProfileEditor = () => {
-    //DELETE - this is just an example until api is working
-    const [ profile, setProfile ] = useState("");
+    const [ profile, setProfile ] = useState(null);
     
     const lifestylePreferences = [];
     const propertyPreferences = [];
@@ -19,7 +18,6 @@ export const ProfileEditor = () => {
         getProfileByUsername(params.username).then(x => setProfile(x));
     }, []);
 
-
     const mergeProfile = delta => setProfile({ ...profile, ...delta });
 
     const addLifestyle = pref => {
@@ -30,6 +28,15 @@ export const ProfileEditor = () => {
         propertyPreferences.push(pref);
     }
 
+    const loadInfo = () => {
+        profile.name = profile[0].name;
+        profile.location = profile[0].city;
+        profile.age = profile[0].age;
+        profile.gender = profile[0].gender;
+        profile.bio = profile[0].bio;
+        profile.desiredRoomates = profile[0].desiredRoomates;
+    }
+
 
     const saveChanges = () => {
         profile[0].name = profile.name;
@@ -37,17 +44,12 @@ export const ProfileEditor = () => {
         profile[0].age = profile.age;
         profile[0].gender = profile.gender;
         profile[0].bio = profile.bio;
-        profile[0].desiredRoomates = profile.roommieCount;
-
-        console.log(profile);
+        profile[0].desiredRoomates = profile.desiredRoomates;
 
         //Add lifestyle and property preferences
 
-
         updateProfile(profile[0]);
     }
-
-
 
 
     if(!profile) {
@@ -55,6 +57,7 @@ export const ProfileEditor = () => {
     }
 
     return <>
+        {loadInfo()}
         <div className="container py-4">
             <div className="bg-light rounded p-5 pb-4 mb-4">
                 <h1>Profile Editor</h1>
@@ -81,8 +84,8 @@ export const ProfileEditor = () => {
                                 setValue={bio => mergeProfile({ bio })} />
                 <div className="col-3">
                     <SelectField label="How many roommates do you need?"
-                                value={profile.roommieCount}
-                                setValue={ roommieCount => mergeProfile({ roommieCount }) }
+                                value={profile.desiredRoomates}
+                                setValue={ desiredRoomates => mergeProfile({ desiredRoomates }) }
                                 options={[...Array(10).keys()].map(x => x + 1)}/>
                 </div>
                 <CheckBoxField label="Check this box if you have a residence."
