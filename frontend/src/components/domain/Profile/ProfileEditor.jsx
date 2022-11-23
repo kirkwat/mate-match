@@ -1,21 +1,24 @@
 //TODO make changes with api
+//TODO make necessary fields mandatory
 
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getProfileByUsername, updateProfile } from "../../../api";
+import { useAuth } from "../../../hooks";
 import { CheckBoxField, SelectField, TextField, TextAreaField } from "../../common";
 
 export const ProfileEditor = () => {
+
+    const { auth } = useAuth();
+
     const [ profile, setProfile ] = useState(null);
     
     const lifestylePreferences = [];
     const propertyPreferences = [];
 
-    const params = useParams();
-
     //TODO update for on click
     useEffect(() => {
-        getProfileByUsername(params.username).then(x => setProfile(x));
+        getProfileByUsername(auth).then(x => setProfile(x));
     }, []);
 
     const mergeProfile = delta => setProfile({ ...profile, ...delta });
@@ -48,7 +51,7 @@ export const ProfileEditor = () => {
 
         //Add lifestyle and property preferences
 
-        updateProfile(profile[0]);
+        updateProfile(profile[0], auth);
     }
 
 
@@ -60,7 +63,7 @@ export const ProfileEditor = () => {
         {loadInfo()}
         <div className="container py-4">
             <div className="bg-light rounded p-5 pb-4 mb-4">
-                <h1>Profile Editor</h1>
+                <h1>{profile.name?"Profile Editor":"Create Your Profile"}</h1>
                 <TextField label="Name"
                             id="name"
                             value={profile.name}
@@ -72,7 +75,7 @@ export const ProfileEditor = () => {
                 <SelectField label="Gender"
                             value={profile.gender}
                             setValue={ gender => mergeProfile({ gender }) }
-                            options={["Male", "Female", "Other"]} />
+                            options={["Male", "Female"]} />
                 <div className="col-1">
                     <SelectField label="Age"
                                 value={profile.age}
@@ -119,7 +122,7 @@ export const ProfileEditor = () => {
                         setChecked={ condo => {addProperty({ condo }); mergeProfile({propertyPreferences}) }} />
                 </div>
            
-                <Link to={ `/dashboard/${profile[0].email}` }>
+                <Link to={ `/dashboard` }>
                     <button type="button" className="btn btn-primary btn-lg col-12 mt-3" onClick={() => saveChanges()}>
                         Save Changes
                     </button>

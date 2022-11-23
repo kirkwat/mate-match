@@ -51,11 +51,8 @@ export const Registration = () => {
                 setUserName('');
                 setPassword('');
                 setConfirmPassword('');
-                //TODO fix with context
-                sessionStorage.setItem("username", username);
-                sessionStorage.setItem("token", accessToken);
                 //TODO navigate to profile editor
-                navigate(`/dashboard?name=${username}`);
+                navigate(`/profile/edit`);
             })
             //TODO else set error message saying couldn't create account
         });
@@ -105,7 +102,7 @@ export const Registration = () => {
                 </button>
                 <hr/>
                 <p className="mt-1">
-                    Already have an account?
+                    Already have an account?&nbsp;
                     <Link to={ `/LoginPage` }>
                         Sign in
                     </Link>

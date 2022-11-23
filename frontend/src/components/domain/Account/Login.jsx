@@ -1,5 +1,3 @@
-//TODO fix sessionstorage with context
-
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginCheck} from "../../../api";
@@ -26,9 +24,6 @@ export const Login = () => {
                 setAuth({ username, accessToken });
                 setUserName('');
                 setPassword('');
-                //TODO fix with context
-                sessionStorage.setItem("username", username);
-                sessionStorage.setItem("token", accessToken);
                 navigate(`/dashboard`);
             }
             else {
@@ -59,8 +54,8 @@ export const Login = () => {
                 </button>
                 <hr/>
                 <p className="mt-1">
-                    Don't have an account? 
-                    <Link to={ `/SignUpPage` }>
+                    Don't have an account?&nbsp;
+                    <Link to={ `/register` }>
                         Create an account
                     </Link>
                 </p>

@@ -15,8 +15,17 @@ export const getProfiles = () => new Promise((resolve, reject) => {
         });
 });
 
-export const getProfileByUsername = (user) => new Promise((resolve, reject) => {
-    axios.get(`/user?email=${user}`, apiConfig)
+export const getProfileByUsername = (auth) => new Promise((resolve, reject) => {
+    axios.get(`/user?email=${auth.username}`, { headers: {  authorization: `token: ${auth.accessToken}` } })
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
+//TODO delete after figuring out how to not need auth for every request
+export const getProfileByUsername2 = (email,auth) => new Promise((resolve, reject) => {
+    axios.get(`/user?email=${email}`, { headers: {  authorization: `token: ${auth.accessToken}` } })
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -42,8 +51,8 @@ export const createProfile = (username, password) => new Promise((resolve, rejec
         });
 });
 
-export const updateProfile = (profile) => new Promise((resolve, reject) => {
-    axios.put(`/user?email=${profile.email}`, profile, apiConfig)
+export const updateProfile = (profile, auth) => new Promise((resolve, reject) => {
+    axios.put(`/user?email=${profile.email}`, profile, { headers: {  authorization: `token: ${auth.accessToken}` } })
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);

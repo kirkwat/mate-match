@@ -1,5 +1,6 @@
 //TODO update changes to handle all filters combined
 //currently filters can only be used one at a time
+//TODO add gender filter
 
 import {useState} from "react";
 import { SearchField, CheckBoxDropdown } from "../../common";

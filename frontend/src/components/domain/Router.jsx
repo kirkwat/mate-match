@@ -1,8 +1,7 @@
 //TODO setup roommate api
-//TODO add signout
 
 import { Route, Routes } from "react-router-dom"
-import { ProfileDetails, ProfileEditor, Registration, Login, HomepageNotLogged, RequestList, ProfileExplorer, HandleRedirect, Logout } from ".";
+import { ProfileDetails, ProfileEditor, Registration, Login, HomepageNotLogged, RequestList, ProfileExplorer, Logout } from ".";
 import { RoommateList } from ".";
 import { RequireAuth } from ".";
 
@@ -22,12 +21,13 @@ export const Router = () => {
             <Route path="/register" element= { <Registration/> } />
             <Route path="/logout" element= { <Logout/> } />
 
-            {/* protected routes*/}
+            {/* protected routes */}
             <Route element={<RequireAuth/>}>
                 <Route path="/dashboard" element= { <ProfileExplorer/>} />
                 <Route path="/requests" element= { <RequestList requests = { roomies } />} />
                 <Route path="/roommates" element= { <RoommateList roommates = { roomies } standalone={true}/>} />
                 <Route path="/profile" element= { <ProfileDetails/>} />
+                <Route path="/:username" element= { <ProfileDetails/>} />
                 <Route path="/profile/edit" element= { <ProfileEditor/>} />
             </Route>
 
