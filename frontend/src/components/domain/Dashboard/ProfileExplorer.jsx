@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ProfileSearch, ResultList } from '../Dashboard';
 import { getProfiles } from "../../../api";
-import { Menu } from '../../common';
 
 export const ProfileExplorer = () => {
 

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Menu } from "../common/Menu";
 
 export const HomepageNotLogged = () => {
     return <>

@@ -1,3 +1,3 @@
 export * from './Endpoint';
 export * from './ProfileApi';
-export * from './RoomateApi';
+export * from './RoommateApi';

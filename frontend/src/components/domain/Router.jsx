@@ -4,7 +4,6 @@
 import { Route, Routes } from "react-router-dom"
 import { ProfileDetails, ProfileEditor, Registration, Login, HomepageNotLogged, RequestList, ProfileExplorer, HandleRedirect, Logout } from ".";
 import { RoommateList } from ".";
-import { Layout } from ".";
 import { RequireAuth } from ".";
 
 export const Router = () => {
@@ -15,7 +14,7 @@ export const Router = () => {
     ];
 
     return <Routes>
-        <Route path="/" element={<Layout/>}>
+        <Route path="/">
 
             {/* public routes*/}
             <Route path="/" element={ <HomepageNotLogged /> } exact />
