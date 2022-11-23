@@ -1,21 +1,19 @@
-//TODO add authprovider to router
-//TODO add api and router stuff
+//TODO fix sessionstorage with context
 
-import {useRef, useState, useEffect, useContext} from "react";
-import {CredentialsField} from "../../common";
-import { getProfileByUsername, getProfiles, LoginCheck} from "../../../api";
-import AuthContext from "../../../context/AuthProvider";
+import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { LoginCheck} from "../../../api";
+import { AuthContext } from "../../../context";
+import { CredentialsField } from "../../common";
 
 export const Login = () => {
-    const errorRef = useRef();
-    // const [auth, setAuth ] = useState(null);
+    const { setAuth } = useContext(AuthContext)
+    const navigate = useNavigate();
 
-    const [username, setUserName] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('Error. Wrong username or password');
-    const [loginSuccess, setLoginSuccess] = useState(false);
-    const [token, setToken] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
+
 
     useEffect(() => {
         setErrorMessage('');
@@ -24,49 +22,33 @@ export const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
       
-        //Logs in user
-        LoginCheck(username, password).then(x => {
-            setToken(x);
-            //TODO figure out way to authenticate password with db
-                console.log(x);
-                if (x != null) {
-                    setLoginSuccess(true);
-                    setUserName('');
-                    setPassword('');
-                    sessionStorage.setItem("username", username);
-                    sessionStorage.setItem("token", x);
-                }
-            });
-        };
+        LoginCheck(username, password).then(accessToken => {
+            if (accessToken != null) {
+                setAuth({ username, accessToken });
+                setUsername('');
+                setPassword('');
+                navigate(`/dashboard?name=${username}`);
+                //TODO fix with context
+                sessionStorage.setItem("username", username);
+                sessionStorage.setItem("token", accessToken);
+            }
+            else {
+                setErrorMessage("Unsuccessful login attempt. Please try again.");
+            }
+        });
+    };
 
-    const nav = useNavigate();
-
-    if (loginSuccess) {
-        return <>
-            <div className="container py-4">
-                <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
-                    <h1>Account Logged In!</h1>
-                    <p className="py-4">
-                        {nav(`/dashboard?name=${username}`)}
-                    </p>
-                </div>
-            </div>
-        </>;
-    }
-
-    
     return <> 
         <div className="container py-4">
             <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
-                <div ref={errorRef} className={errorMessage ? "alert alert-danger" : "d-none"}>
-                    {/*TODO add API error messages here*/}
+                <div className={errorMessage ? "alert alert-danger" : "d-none"}>
                     {errorMessage}
                 </div>
                 <h1>Sign In</h1>
                 <CredentialsField label="Username:"
                         id="username"
                         value={username}
-                        setValue={ name => setUserName( name ) } />
+                        setValue={ name => setUsername( name ) } />
                 <CredentialsField label="Password:"
                         password={true}
                         id="password"

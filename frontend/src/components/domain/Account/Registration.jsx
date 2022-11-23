@@ -71,66 +71,67 @@ export const Registration = () => {
 
     }
 
-    return <> {registerSuccess ? (
+    return <> 
         <div className="container py-4">
             <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
-                <h1>Account Created!</h1>
-                <p className="py-4">
-                    <Link to={ `/ProfileEditor/${username}` }>Click here</Link> to create profile. 
-                </p>
+                {registerSuccess ? (
+                <>
+                    <h1>Account Created!</h1>
+                    <p className="py-4">
+                        <Link to={ `/ProfileEditor/${username}` }>Click here</Link> to create profile. 
+                    </p>
+                </>
+                ) : (
+                <>
+                    <div ref={errorRef} className={errorMessage ? "alert alert-danger" : "d-none"}>
+                        {/*TODO add API error messages here*/}
+                        {errorMessage}
+                    </div>
+                    <h1>Register Your Account</h1>
+                    <CredentialsField label="Username:"
+                            id="username"
+                            value={username}
+                            setValue={ name => setUserName( name ) }
+                            setFocus={ x => setUserNameFocus( x ) } />
+                    <div className={userNameFocus && !validUserName ? "alert alert-primary" : "d-none"}>
+                        4 to 12 characters.<br />
+                        Must begin with a letter.<br />
+                        Letters, numbers, underscores, hyphens allowed.
+                    </div>
+                    <CredentialsField label="Password:"
+                            password={true}
+                            id="password"
+                            value={password}
+                            setValue={ pwd => setPassword( pwd ) }
+                            setFocus={ x => setPasswordFocus( x ) } />
+                    <p className={(passwordFocus||password) && !validPassword ? "alert alert-primary" : "d-none"}>
+                        8 to 24 characters.<br />
+                        Must include uppercase and lowercase letters, a number, and a special character.<br />
+                        Allowed special characters: ! @ # $ %
+                    </p>
+                    <CredentialsField label="Confirm Password:"
+                            password={true}
+                            id="confirmPassword"
+                            value={confirmPassword}
+                            setValue={ confirmPwd => setConfirmPassword( confirmPwd ) }
+                            setFocus={ x => setConfirmFocus( x ) } />
+                    <p className={(confirmFocus||confirmPassword) && !validConfirm ? "alert alert-primary" : "d-none"}>
+                        Must match the first password input field.
+                    </p>
+                    <button type="button" className="btn btn-primary btn-lg col-12 mt-1 mb-2" 
+                        disabled={!validUserName || !validPassword || !validConfirm ? true : false}
+                        onClick={ handleSubmit }>
+                        Sign Up
+                    </button>
+                    <hr/>
+                    <p className="mt-1">
+                        Already have an account?
+                        <Link to={ `/LoginPage` }>
+                            Sign in
+                        </Link>
+                    </p>
+                </>)}
             </div>
         </div>
-        ) : (
-        <div className="container py-4">
-            <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
-                <div ref={errorRef} className={errorMessage ? "alert alert-danger" : "d-none"}>
-                    {/*TODO add API error messages here*/}
-                    {errorMessage}
-                </div>
-                <h1>Register Your Account</h1>
-                <CredentialsField label="Username:"
-                        id="username"
-                        value={username}
-                        setValue={ name => setUserName( name ) }
-                        setFocus={ x => setUserNameFocus( x ) } />
-                <div className={userNameFocus && !validUserName ? "alert alert-primary" : "d-none"}>
-                    4 to 12 characters.<br />
-                    Must begin with a letter.<br />
-                    Letters, numbers, underscores, hyphens allowed.
-                </div>
-                <CredentialsField label="Password:"
-                        password={true}
-                        id="password"
-                        value={password}
-                        setValue={ pwd => setPassword( pwd ) }
-                        setFocus={ x => setPasswordFocus( x ) } />
-                <p className={(passwordFocus||password) && !validPassword ? "alert alert-primary" : "d-none"}>
-                    8 to 24 characters.<br />
-                    Must include uppercase and lowercase letters, a number, and a special character.<br />
-                    Allowed special characters: ! @ # $ %
-                </p>
-                <CredentialsField label="Confirm Password:"
-                        password={true}
-                        id="confirmPassword"
-                        value={confirmPassword}
-                        setValue={ confirmPwd => setConfirmPassword( confirmPwd ) }
-                        setFocus={ x => setConfirmFocus( x ) } />
-                <p className={(confirmFocus||confirmPassword) && !validConfirm ? "alert alert-primary" : "d-none"}>
-                    Must match the first password input field.
-                </p>
-                <button type="button" className="btn btn-primary btn-lg col-12 mt-1 mb-2" 
-                    disabled={!validUserName || !validPassword || !validConfirm ? true : false}
-                    onClick={ handleSubmit }>
-                    Sign Up
-                </button>
-                <hr/>
-                <p className="mt-1">
-                    Already have an account?
-                    <Link to={ `/LoginPage` }>
-                        Sign in
-                    </Link>
-                </p>
-            </div>
-        </div>)}
     </>;
 };
