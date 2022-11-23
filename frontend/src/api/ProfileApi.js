@@ -1,7 +1,4 @@
-import axios from 'axios';
-import { Profile } from '../models/profile';
-
-const baseURL = "http://localhost:8000";
+import axios from './Endpoint';
 
 const apiConfig = {
     headers: {
@@ -10,7 +7,7 @@ const apiConfig = {
 };
 
 export const getProfiles = () => new Promise((resolve, reject) => {
-    axios.get(`${baseURL}/user`, apiConfig)
+    axios.get(`/user`, apiConfig)
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -18,8 +15,17 @@ export const getProfiles = () => new Promise((resolve, reject) => {
         });
 });
 
-export const getProfileByUsername = (user) => new Promise((resolve, reject) => {
-    axios.get(`${baseURL}/user?email=${user}`, apiConfig)
+export const getProfileByUsername = (auth) => new Promise((resolve, reject) => {
+    axios.get(`/user?email=${auth.username}`, { headers: {  authorization: `token: ${auth.accessToken}` } })
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
+//TODO delete after figuring out how to not need auth for every request
+export const getProfileByUsername2 = (email,auth) => new Promise((resolve, reject) => {
+    axios.get(`/user?email=${email}`, { headers: {  authorization: `token: ${auth.accessToken}` } })
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -28,7 +34,7 @@ export const getProfileByUsername = (user) => new Promise((resolve, reject) => {
 });
 
 export const Health = () => new Promise((resolve, reject) => {
-    axios.get(`${baseURL}/user`, apiConfig)
+    axios.get(`/user`, apiConfig)
         .then(x => { resolve(x.data) })
         .catch(x => {
             alert(x);
@@ -36,9 +42,8 @@ export const Health = () => new Promise((resolve, reject) => {
         });
 });
 
-
 export const createProfile = (username, password) => new Promise((resolve, reject) => {
-    axios.post(`${baseURL}/register`, {"email": username, "password": password})
+    axios.post(`/register`, {"email": username, "password": password})
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -46,8 +51,8 @@ export const createProfile = (username, password) => new Promise((resolve, rejec
         });
 });
 
-export const updateProfile = (profile) => new Promise((resolve, reject) => {
-    axios.put(`${baseURL}/user?email=${profile.email}`, profile, apiConfig)
+export const updateProfile = (profile, auth) => new Promise((resolve, reject) => {
+    axios.put(`/user?email=${profile.email}`, profile, { headers: {  authorization: `token: ${auth.accessToken}` } })
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -56,17 +61,10 @@ export const updateProfile = (profile) => new Promise((resolve, reject) => {
 });
 
 export const LoginCheck = (username, password) => new Promise((resolve, reject) => {
-    axios.post(`${baseURL}/session`, {"email": username, "password": password})
+    axios.post(`/session`, {"email": username, "password": password})
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
             reject(x);
         });
 });
-
-
-
-
-
-
-

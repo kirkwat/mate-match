@@ -1,15 +1,18 @@
-//TODO add api and router stuff
+//TODO route user to profile editor after creating an account
+//TODO have backend return something when creating an account with a username that already exists
 
-import {useRef, useState, useEffect} from "react";
-import { CredentialsField} from "../../common";
-import { getProfile, createProfile, LoginCheck } from "../../../api";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { createProfile, LoginCheck } from "../../../api";
+import { useAuth } from "../../../hooks";
+import { CredentialsField } from "../../common";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,11}$/;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 export const Registration = () => { 
-    const errorRef = useRef();
+    const { setAuth } = useAuth();
+    const navigate = useNavigate();
 
     const [username, setUserName] = useState('');
     const [validUserName, setValidUserName] = useState(false);
@@ -24,9 +27,6 @@ export const Registration = () => {
     const [confirmFocus, setConfirmFocus] = useState(false);
 
     const [errorMessage, setErrorMessage] = useState('');
-    const [registerSuccess, setRegisterSuccess] = useState(false);
-
-    const nav = useNavigate();
 
     useEffect(() => {
         setValidUserName(USER_REGEX.test(username));
@@ -43,48 +43,25 @@ export const Registration = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //to prevent button from getting enabled with JS hack (not important)
-        const v1 = USER_REGEX.test(username);
-        const v2 = PASSWORD_REGEX.test(password);
-        if (!v1 || !v2) {
-            setErrorMessage("Invalid Entry");
-            return;
-        }
 
-        //ADD API CALL HERE
         createProfile(username, password).then(x => {
-            LoginCheck(username, password).then(y => {
-                sessionStorage.setItem("username", username);
-                sessionStorage.setItem("token", y);
+            //TODO check if user was created
+            LoginCheck(username, password).then(accessToken => {
+                setAuth({ username, accessToken });
+                setUserName('');
+                setPassword('');
+                setConfirmPassword('');
+                //TODO navigate to profile editor
+                navigate(`/profile/edit`);
             })
+            //TODO else set error message saying couldn't create account
         });
-        
-        
-
-    
-        //set to true if account successfully created
-        setRegisterSuccess(true);
-        setUserName(username);
-        setPassword(password);
-        setConfirmFocus('');
-        //display error messages if not created
-
     }
 
-    return <> {registerSuccess ? (
+    return <> 
         <div className="container py-4">
             <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
-                <h1>Account Created!</h1>
-                <p className="py-4">
-                    <Link to={ `/ProfileEditor/${username}` }>Click here</Link> to create profile. 
-                </p>
-            </div>
-        </div>
-        ) : (
-        <div className="container py-4">
-            <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
-                <div ref={errorRef} className={errorMessage ? "alert alert-danger" : "d-none"}>
-                    {/*TODO add API error messages here*/}
+                <div className={errorMessage ? "alert alert-danger" : "d-none"}>
                     {errorMessage}
                 </div>
                 <h1>Register Your Account</h1>
@@ -125,12 +102,12 @@ export const Registration = () => {
                 </button>
                 <hr/>
                 <p className="mt-1">
-                    Already have an account?
+                    Already have an account?&nbsp;
                     <Link to={ `/LoginPage` }>
                         Sign in
                     </Link>
                 </p>
             </div>
-        </div>)}
+        </div>
     </>;
 };

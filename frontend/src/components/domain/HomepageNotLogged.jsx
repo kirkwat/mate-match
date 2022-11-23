@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Menu } from "../common/Menu";
 
 export const HomepageNotLogged = () => {
     return <>
@@ -11,11 +10,11 @@ export const HomepageNotLogged = () => {
             </p>
             <div className="d-grid gap-5 col-6 mx-auto">
                 <label htmlFor="button" className="d-grid gap-5 col-6 mx-auto fs-4">Signup now for free!</label>
-                <Link to={ `SignUpPage` }>
+                <Link to={ `register` }>
                     <button type = "button" className = "d-grid gap-5 col-6 mx-auto btn btn-primary btn-lg">Sign up</button>
                 </Link>
                 <label htmlFor="button" className="d-grid gap-5 col-6 mx-auto fs-4">Already have an account?</label>
-                <Link to={ `LoginPage` }>
+                <Link to={ `login` }>
                     <button type = "button" className = "d-grid gap-5 col-6 mx-auto btn btn-primary btn-lg">Log in</button>
                 </Link>
             </div>
