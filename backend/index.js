@@ -9,6 +9,7 @@ const userRoutes = require('./routes/user' );
 const sessionRoutes = require('./routes/session' );
 const registerRoutes  = require('./routes/register' );
 const requestRoutes = require('./routes/request');
+const algorithmRoutes  = require('./routes/algorithm' );
 const { createModelsMiddleware  } = require('./middleware/model-middleware' );
 const { authenticateJWT } = require('./middleware/auth' );
 const app = express();
@@ -28,6 +29,7 @@ app.use('/session', sessionRoutes);
 app.use('/user', authenticateJWT, userRoutes);
 app.use('/request', authenticateJWT, requestRoutes);
 app.use('/register', registerRoutes );
+app.use('/algorithm', algorithmRoutes );
 app.listen(port, () => {
    console.log(`This app is listening on port  ${port}`);
 });
