@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 import { ProfileSearch, ResultList } from '../Dashboard';
 import { getProfiles } from "../../../api";
 import { Menu } from '../../common';
-import { NavBar } from '../NavBar';
-import { useParams } from 'react-router-dom';
 
-export const ProfileExplorer = () => { 
+export const ProfileExplorer = () => {
 
     const roomies = [
         {name: "Robert Derl", gender: "male", city: "DFW", age: 26, "Night-owl":false,"Early-bird":false,"Smoke-free":false,"Pet-friendly":false},
@@ -18,8 +16,6 @@ export const ProfileExplorer = () => {
     const [profiles, setProfiles] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
 
-    const params = useParams();
-
     //TODO update for on click
     useEffect(() => {
         //getProfiles.then(x => setProfiles(x));
@@ -27,10 +23,8 @@ export const ProfileExplorer = () => {
     }, []);
 
     return <>
-    <NavBar username={params.username}/>
         <div className="container py-4">
             <div className="bg-light rounded p-5 pb-4 mb-4">
-                
                 <ProfileSearch profiles={roomies} setSearchResults={setSearchResults}/>
                 <ResultList results={searchResults}/>
             </div>

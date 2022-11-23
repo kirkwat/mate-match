@@ -1,7 +1,8 @@
 //TODO update styling
-import { Roommate } from "../../../models/roommate";
+import { useAuth } from "../../../hooks";
 
 export const RoommateList = ({ roommates, standalone=false }) => {
+
     return <> 
         <div className={standalone?"container py-4":""}>
             <h3>Roommates

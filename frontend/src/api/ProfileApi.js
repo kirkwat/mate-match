@@ -1,5 +1,4 @@
 import axios from './Endpoint';
-import { Profile } from '../models/profile';
 
 const apiConfig = {
     headers: {
@@ -34,7 +33,6 @@ export const Health = () => new Promise((resolve, reject) => {
         });
 });
 
-
 export const createProfile = (username, password) => new Promise((resolve, reject) => {
     axios.post(`/register`, {"email": username, "password": password})
         .then(x => resolve(x.data))
@@ -61,10 +59,3 @@ export const LoginCheck = (username, password) => new Promise((resolve, reject) 
             reject(x);
         });
 });
-
-
-
-
-
-
-

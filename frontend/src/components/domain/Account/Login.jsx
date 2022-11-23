@@ -29,7 +29,7 @@ export const Login = () => {
                 //TODO fix with context
                 sessionStorage.setItem("username", username);
                 sessionStorage.setItem("token", accessToken);
-                navigate(`/dashboard?name=${username}`);
+                navigate(`/dashboard`);
             }
             else {
                 setErrorMessage("Unsuccessful login attempt. Please try again.");

@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from './Endpoint';
 
-export const getRequests = (profileId) => new Promise((resolve, reject) => {
-    axios.get(`/profiles/${profileId}/requests`)
+export const getRequests = (auth) => new Promise((resolve, reject) => {
+    axios.get(`/request/?to=${auth.username}`,{ headers: {  authorization: `token: ${auth.accessToken}` } })
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -16,7 +16,4 @@ export const setRequests = (profileId, requests) => new Promise((resolve, reject
             alert(x);
             reject(x);
         });
-}); 
-
-
-
+});

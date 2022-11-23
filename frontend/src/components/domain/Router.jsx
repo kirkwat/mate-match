@@ -1,12 +1,22 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { HomepageLogged, ProfileDetails, ProfileEditor, Registration, Login, HomepageNotLogged, RequestList, ProfileExplorer, HandleRedirect, Logout } from ".";
+//TODO setup roommate api
+//TODO add signout
+
+import { Route, Routes } from "react-router-dom"
+import { ProfileDetails, ProfileEditor, Registration, Login, HomepageNotLogged, RequestList, ProfileExplorer, HandleRedirect, Logout } from ".";
 import { RoommateList } from ".";
 import { Layout } from ".";
 import { RequireAuth } from ".";
 
 export const Router = () => {
+
+    const roomies = [
+        {name: "Robert Derl", gender: "male", city: "DFW", age: 26, paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
+        {name: "Dan Robins", gender: "male", city: "Dallas", age: 24, paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
+    ];
+
     return <Routes>
         <Route path="/" element={<Layout/>}>
+
             {/* public routes*/}
             <Route path="/" element={ <HomepageNotLogged /> } exact />
             <Route path="/login" element= { <Login/> } />
@@ -15,13 +25,11 @@ export const Router = () => {
 
             {/* protected routes*/}
             <Route element={<RequireAuth/>}>
-                <Route path="/dashboard/" element= { <HandleRedirect page={"dashboard"}/> } /> 
-                <Route path="/dashboard/:username" element= { <ProfileExplorer/> } /> 
-                <Route path="/profileDetails/:username" element= { <ProfileDetails/> } /> 
-                <Route path="/profileEditor/" element= { <HandleRedirect page={"editor"}/> } />
-                <Route path="/profileEditor/:username" element= { <ProfileEditor/> } /> 
-                <Route path="/roommate" element= { <RoommateList/> } /> 
-                <Route path="/RequestList" element= {<RequestList/>} />
+                <Route path="/dashboard" element= { <ProfileExplorer/>} />
+                <Route path="/requests" element= { <RequestList requests = { roomies } />} />
+                <Route path="/roommates" element= { <RoommateList roommates = { roomies } standalone={true}/>} />
+                <Route path="/profile" element= { <ProfileDetails/>} />
+                <Route path="/profile/edit" element= { <ProfileEditor/>} />
             </Route>
 
             {/* TODO catchall 404 page*/}

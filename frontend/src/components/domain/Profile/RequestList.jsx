@@ -1,11 +1,21 @@
-//TODO update routing
-//TODO update styling
-
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getRequests } from "../../../api";
+import { useAuth } from "../../../hooks";
 
-export const RequestList = ({ requests, standalone=false }) => {
+export const RequestList = () => {
+
+    const { auth } = useAuth();
+
+    const [ requests, setRequests ] = useState([]);
+
+    useEffect(() => {
+        getRequests(auth).then(x => setRequests(x));
+        console.log(requests);
+    }, []);
+
     return <> 
-        <div className={standalone?"container py-4":""}>
+        <div className={"container py-4"}>
             <h3>Requests
                     <span className="text-secondary"> ({requests.length})</span>
             </h3>
@@ -29,7 +39,7 @@ export const RequestList = ({ requests, standalone=false }) => {
                                     </p>
                                     <p className="card-text col-10">{roommate.paragraph}</p>
                                     {/*update with api to accept or decline requests*/}
-                                    <div class="btn-group">
+                                    <div className="btn-group">
                                         <a href="#" className="btn btn-danger">Decline</a>
                                         <a href="#" className="btn btn-success">Approve</a>
                                     </div>
