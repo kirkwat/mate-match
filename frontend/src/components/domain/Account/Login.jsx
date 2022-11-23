@@ -1,23 +1,22 @@
 //TODO fix sessionstorage with context
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginCheck} from "../../../api";
-import { AuthContext } from "../../../context";
+import { useAuth } from "../../../hooks";
 import { CredentialsField } from "../../common";
 
 export const Login = () => {
-    const { setAuth } = useContext(AuthContext)
+    const { setAuth } = useAuth();
     const navigate = useNavigate();
 
-    const [username, setUsername] = useState('');
+    const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-
     useEffect(() => {
         setErrorMessage('');
-    }, [username, password])
+    }, [username, password]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,12 +24,12 @@ export const Login = () => {
         LoginCheck(username, password).then(accessToken => {
             if (accessToken != null) {
                 setAuth({ username, accessToken });
-                setUsername('');
+                setUserName('');
                 setPassword('');
-                navigate(`/dashboard?name=${username}`);
                 //TODO fix with context
                 sessionStorage.setItem("username", username);
                 sessionStorage.setItem("token", accessToken);
+                navigate(`/dashboard?name=${username}`);
             }
             else {
                 setErrorMessage("Unsuccessful login attempt. Please try again.");
@@ -48,7 +47,7 @@ export const Login = () => {
                 <CredentialsField label="Username:"
                         id="username"
                         value={username}
-                        setValue={ name => setUsername( name ) } />
+                        setValue={ name => setUserName( name ) } />
                 <CredentialsField label="Password:"
                         password={true}
                         id="password"
