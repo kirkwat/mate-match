@@ -1,4 +1,3 @@
-//TODO route user to profile editor after creating an account
 //TODO have backend return something when creating an account with a username that already exists
 
 import { useState, useEffect } from "react";
@@ -51,7 +50,6 @@ export const Registration = () => {
                 setUserName('');
                 setPassword('');
                 setConfirmPassword('');
-                //TODO navigate to profile editor
                 navigate(`/profile/edit`);
             })
             //TODO else set error message saying couldn't create account
@@ -103,7 +101,7 @@ export const Registration = () => {
                 <hr/>
                 <p className="mt-1">
                     Already have an account?&nbsp;
-                    <Link to={ `/LoginPage` }>
+                    <Link to={ `/login` }>
                         Sign in
                     </Link>
                 </p>
