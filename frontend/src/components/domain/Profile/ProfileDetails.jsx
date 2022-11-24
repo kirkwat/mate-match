@@ -1,4 +1,5 @@
 //TODO send roommate request
+//TODO api get preferences and get roommates
 
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -6,9 +7,9 @@ import { getProfileByUsername, getProfileByUsername2 } from "../../../api";
 import { useAuth } from "../../../hooks";
 import { RoommateList } from './RoommateList';
 import { useParams } from "react-router-dom";
+import './styles/avatar.css';
 
 export const ProfileDetails = () => {
-
     const { auth } = useAuth();
     const params = useParams();
 
@@ -17,19 +18,41 @@ export const ProfileDetails = () => {
         {name: "Robert Derl", gender: "male", city: "DFW", age: 26, paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
         {name: "Dan Robins", gender: "male", city: "Dallas", age: 24, paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
     ];
+    //DELETE - this is just an example until api is working
+    const prefs = {
+        apartment: true,
+        house: true,
+        condo: true,
 
-    const [ roommates, setRoommates ] = useState(undefined);
+        nightPerson: true,
+        morningPerson: true,
+        shareFood: true,
+        pets: true,
+
+        extrovert: true,
+        introvert: true,
+        bringFriendsOver: true,
+
+        loud: true,
+        messy: true,
+        smoker: true,
+    };
+
     const [ profile, setProfile ] = useState(undefined);
+    const [ preferences, setPreferences ] = useState(undefined);
+    const [ roommates, setRoommates ] = useState(undefined);
 
     useEffect(() => {
         if (params.username) {
             getProfileByUsername2(params.username,auth).then(x => setProfile(x[0]));
+            //TODO get preferences
+            //TODO get roommates
         } else {
             getProfileByUsername(auth).then(x => setProfile(x[0]));
+            //TODO get preferences
+            //TODO get roommates
         }
     }, [params]);
-
-    console.log(profile);
 
     if(!profile) {
        return <>Loading...</>;
@@ -38,10 +61,12 @@ export const ProfileDetails = () => {
     return <>
         <div className="container py-4">
             <div className="bg-light rounded p-5 pb-4 mb-4">
-                <img src={profile.photoID?profile.photoID:"images/150.png"} alt="default" className="float-end img-fluid img-thumbnail"/>
+                <div className="avatar-image float-end">
+                    <img src={profile.photoID?profile.photoID:"images/default.jpg"} alt="avatar" className="img-fluid avatar"/>
+                </div>
                 <h1 className="display-5">
                     <span className="fw-bold">{profile.name}</span>
-                    <span className="fs-1"> {profile.gender === "Male"?"(He/Him)":"(She/Her)"}</span>
+                    <span className="fs-1"> {profile.gender === "male"?"(He/Him)":"(She/Her)"}</span>
                 </h1>
                 <h3 className="display-7">
                     <span>{profile.city}</span>
@@ -51,18 +76,42 @@ export const ProfileDetails = () => {
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item bg-light"></li>
                     <li className="list-group-item bg-light">
-                        <span className="fw-bold">Has Residence: </span>Yes
+                        <span className="fw-bold">Roommates needed:&nbsp;</span>
+                        {profile.desiredRoomates}
                     </li>
                     <li className="list-group-item bg-light">
-                        <span className="fw-bold">Roommates needed: {profile.desiredRoomates}</span>
+                        <span className="fw-bold">Property Preferences:&nbsp;</span>
+                        <span className={prefs["apartment"]?"":"d-none"}>Apartment</span>
+                        <span className={prefs["apartment"]&&(prefs["house"]||prefs["condo"])?"":"d-none"}>,&nbsp;</span>
+                        <span className={prefs["house"]?"":"d-none"}>House</span>
+                        <span className={prefs["house"]&&prefs["condo"]?"":"d-none"}>,&nbsp;</span>
+                        <span className={prefs["condo"]?"":"d-none"}>Condo</span>
                     </li>
                     <li className="list-group-item bg-light">
-                        <span className="fw-bold">Professional Preferences: </span>
-                        working remotely, 9-5
+                        <span className="fw-bold">Lifestyle Preferences:&nbsp;</span>
+                        <span className={prefs["nightPerson"]?"":"d-none"}>Night-owl</span>
+                        <span className={prefs["nightPerson"]&&(prefs["morningPerson"]||prefs["shareFood"]||prefs["pets"])?"":"d-none"}>,&nbsp;</span>
+                        <span className={prefs["morningPerson"]?"":"d-none"}>Early-bird</span>
+                        <span className={prefs["morningPerson"]&&(prefs["shareFood"]||prefs["pets"])?"":"d-none"}>,&nbsp;</span>
+                        <span className={prefs["pets"]?"":"d-none"}>Pet-friendly</span>
+                        <span className={prefs["pets"]&&prefs["shareFood"]?"":"d-none"}>,&nbsp;</span>
+                        <span className={prefs["shareFood"]?"":"d-none"}>Likes to share food</span>
                     </li>
                     <li className="list-group-item bg-light">
-                        <span className="fw-bold">Lifestyle Preferences: </span>
-                        no dogs, like to stay up late
+                        <span className="fw-bold">Personality:&nbsp;</span>
+                        <span className={prefs["extrovert"]?"":"d-none"}>Extrovert</span>
+                        <span className={prefs["extrovert"]&&(prefs["introvert"]||prefs["bringFriendsOver"])?"":"d-none"}>,&nbsp;</span>
+                        <span className={prefs["introvert"]?"":"d-none"}>Introvert</span>
+                        <span className={prefs["introvert"]&&prefs["bringFriendsOver"]?"":"d-none"}>,&nbsp;</span>
+                        <span className={prefs["bringFriendsOver"]?"":"d-none"}>Likes to bring friends over</span>
+                    </li>
+                    <li className="list-group-item bg-light">
+                        <span className="fw-bold">Important to Know:&nbsp;</span>
+                        <span className={prefs["loud"]?"":"d-none"}>Loud</span>
+                        <span className={prefs["loud"]&&(prefs["messy"]||prefs["smoker"])?"":"d-none"}>,&nbsp;</span>
+                        <span className={prefs["messy"]?"":"d-none"}>Messy</span>
+                        <span className={prefs["messy"]&&prefs["smoker"]?"":"d-none"}>,&nbsp;</span>
+                        <span className={prefs["smoker"]?"":"d-none"}>Likes to smoke</span>
                     </li>
                     <li className="list-group-item bg-light"></li>
                 </ul>

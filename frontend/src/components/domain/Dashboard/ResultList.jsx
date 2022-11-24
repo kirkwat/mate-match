@@ -11,7 +11,7 @@ export const ResultList = ({ results }) => {
                     results.map((result, index) =>
                         <div key={index} className="col-md-6 col-xl-4">
                             <div className="card">
-                                <img src="images/150.png" alt="default" className="card-img-top"/>
+                                <img src="images/default.jpg" alt="default" className="card-img-top"/>
                                 <div className="card-body">
                                     <div className="card-title fw-bold fs-4">
                                         {result.name}
