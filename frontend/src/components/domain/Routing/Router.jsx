@@ -1,9 +1,10 @@
 //TODO setup roommate api
 
 import { Route, Routes } from "react-router-dom"
-import { ProfileDetails, ProfileEditor, Registration, Login, HomepageNotLogged, RequestList, ProfileExplorer, Logout } from ".";
-import { RoommateList } from ".";
-import { RequireAuth } from ".";
+import { HomepageNotLogged, Registration, Login, Logout, Missing } from "..";
+import { RoommateList, RequestList, ProfileExplorer, ProfileDetails, ProfileEditor } from "..";
+import { RequireAuth } from "..";
+
 
 export const Router = () => {
 
@@ -14,6 +15,7 @@ export const Router = () => {
 
     return <Routes>
         <Route path="/">
+            <Route path="*" element={<Missing/>} />
 
             {/* public routes*/}
             <Route path="/" element={ <HomepageNotLogged /> } exact />
@@ -27,35 +29,11 @@ export const Router = () => {
                 <Route path="/requests" element= { <RequestList requests = { roomies } />} />
                 <Route path="/roommates" element= { <RoommateList roommates = { roomies } standalone={true}/>} />
                 <Route path="/profile" element= { <ProfileDetails/>} />
-                <Route path="/:username" element= { <ProfileDetails/>} />
                 <Route path="/profile/edit" element= { <ProfileEditor/>} />
+                <Route path="/:username/profile" element= { <ProfileDetails/>} />
             </Route>
 
-            {/* TODO catchall 404 page*/}
-            <Route path="*" element={<Login/>} />
-
+            <Route path="*" element={<Missing/>} />
         </Route>
     </Routes>
 };
-
-
-
-/*
-export const Router = () => {
-    return <BrowserRouter>
-        <Routes>
-            <Route path="/" element={ <HomepageNotLogged /> } exact />
-            <Route path="/LoginPage" element= { <Login/> } />
-            <Route path="/Logout" element= { <Logout/> } />
-            <Route path="/SignUpPage" element= { <Registration/> } />
-            <Route path="/dashboard/" element= { <HandleRedirect page={"dashboard"}/> } /> 
-            <Route path="/dashboard/:username" element= { <ProfileExplorer/> } /> 
-            <Route path="/profileDetails/:username" element= { <ProfileDetails/> } /> 
-            <Route path="/profileEditor/" element= { <HandleRedirect page={"editor"}/> } />
-            <Route path="/profileEditor/:username" element= { <ProfileEditor/> } /> 
-            <Route path="/roommate" element= { <RoommateList/> } /> 
-            <Route path="/RequestList" element= {<RequestList/>} />
-        </Routes>
-    </BrowserRouter>
-};
-*/

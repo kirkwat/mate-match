@@ -14,7 +14,7 @@ export const NavBar = () => {
                 </button>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <Link to={`requests`} className="nav-link">
+                        <Link to={`fast`} className="nav-link">
                             Your Requests
                         </Link>
                         <Link to={`roommates`} className="nav-link">

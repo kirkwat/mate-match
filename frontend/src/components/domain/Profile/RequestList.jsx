@@ -30,7 +30,7 @@ export const RequestList = () => {
                                 <div className="card-header fs-4">
                                     {request.from}
                                     <span className="fs-5"> {request.gender === "male"?"(He/Him)":"(She/Her)"}</span>
-                                    <Link to={ `/${request.from}` }>
+                                    <Link to={ `/${request.from}/profile` }>
                                         <button type ="button" className="btn btn-primary btn-sm float-end">View Profile</button>
                                     </Link>
                                 </div>
