@@ -31,15 +31,27 @@ router.post('/', async (req, res, next) => {
   next();
  });
  router.put('/', async (req, res, next) => {
-    const updateUser = await req.models.user.updateUser(req.body.email, req.body.name, req.body.age, req.body.desiredRoomates, req.body.city, req.body.bio, req.body.gender);
+    const updateUser = await req.models.user.updateUser(req.body.email, req.body.photoID, req.body.name, req.body.age, req.body.city, req.body.bio, req.body.gender, req.body.desired_gender, req.body.desired_roomates);
     res.json(updateUser);
     next();
  });
  router.post('/preferences', async (req, res, next) => {
-    const addPrefstoUser = await req.models.user.addPref(req.body.email, req.body.apartment, req.body.house, req.body.condo, req.body.nightPerson, req.body.morningPerson, req.body.extrovert, req.body.introvert, req.body.smoker, req.body.bringFriendsOver, req.body.loud, req.body.shareFood, req.body.messy);
+    const addPrefstoUser = await req.models.user.addPref(req.body.email, req.body.relationship, req.body.person_type, req.body.bring_over, req.body.shared_space, req.body.environment, req.body.smoker, req.body.cleanliness, req.body.temperature, req.body.sharing, req.body.pet);
     res.json(addPrefstoUser);
     next();
  });
+ router.get('/preferences', async (req, res, next) => {
+    if (req.query.email){
+       const PrefByEmail = await req.models.user.findPrefByEmail(req.query.email);
+        res.json(PrefByEmail);
+        next();
+    }
+ });
+ router.put('/preferences', async (req, res, next) => {
+   const updateUser = await req.models.user.updatePref(req.body.email, req.body.relationship, req.body.person_type, req.body.bring_over, req.body.shared_space, req.body.environment, req.body.smoker, req.body.cleanliness, req.body.temperature, req.body.sharing, req.body.pet);
+   res.json(updateUser);
+   next();
+});
  router.delete('/', async (req, res, next) => {
     const deleteUser = await req.models.user.deleteUser(req.body.email);
     res.status(204).end();

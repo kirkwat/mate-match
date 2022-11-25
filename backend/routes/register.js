@@ -6,10 +6,16 @@ router.post('/', async (req, res, next) => {
        console.log(body);
        console.log(req.models);
        const result = await req.models.user.createUser(body.email, body.password);
+       const pref = await req.models.user.addPref(body.email, null, null, null, null, null, null, null, null, null, null);
        res.status(201).json(result);
    } catch (err) {
        console.error('Failed to create new user:', err);
-       res.status(500).json({ message: err.toString() });
+       if (err.code === "ER_DUP_ENTRY"){
+            res.status(500).json({message: "User with that email already exists. Please use another email or login to your existing account."})
+       }
+       else {
+            res.status(500).json({ message: err.toString() });
+       }
    }
    next();
 });

@@ -18,13 +18,18 @@ const PREF_TABLE = 'preferences';
     const result = await query;
     return result;
     }
-   const updateUser = async (email, name, age, desiredRoomates, city, bio, gender)  => {
-    const query = knex(USERS_TABLE).update({name, age, desiredRoomates, city, bio, gender}).where({email});
+   const updateUser = async (email, photoID, name, age, city, bio, gender, desired_gender, desired_roomates)  => {
+    const query = knex(USERS_TABLE).update({photoID, name, age, city, bio, gender, desired_gender, desired_roomates}).where({email});
     const results = await query;
     return results;
 }
-const addPref = async (email, apartment, house, condo, nightPerson, morningPerson, extrovert, introvert, smoker, bringFriendsOver, loud, shareFood, messy)  => {
-    const query = knex(PREF_TABLE).insert({email, apartment, house, condo, nightPerson, morningPerson, extrovert, introvert, smoker, bringFriendsOver, loud, shareFood, messy});
+const addPref = async (email, relationship, person_type, bring_over, shared_space, environment, smoker, cleanliness, temperature, sharing, pet)  => {
+    const query = knex(PREF_TABLE).insert({email, relationship, person_type, bring_over, shared_space, environment, smoker, cleanliness, temperature, sharing, pet});
+    const results = await query;
+    return results;
+}
+const updatePref = async (email, relationship, person_type, bring_over, shared_space, environment, smoker, cleanliness, temperature, sharing, pet)  => {
+    const query = knex(PREF_TABLE).update({relationship, person_type, bring_over, shared_space, environment, smoker, cleanliness, temperature, sharing, pet}).where({email});
     const results = await query;
     return results;
 }
@@ -56,13 +61,20 @@ const authenticateUser = async (email, password) => {
     }
     return null;
  }
+ const findPrefByEmail = async (email) => {
+    const query = knex(PREF_TABLE).where({ email });
+    const result = await query;
+    return result;
+    }
 module.exports = {
     fetchAllUsers,
     fetchUserByName,
     findUserByEmail,
     updateUser, 
     addPref,
+    updatePref,
     createUser,
     deleteUser, 
-    authenticateUser
+    authenticateUser, 
+    findPrefByEmail
  }
