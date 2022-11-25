@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-//get all or ?name=... or ?email=...
 router.post("/", async (req, res, next) => {
   try {
     const body = req.body;
@@ -16,6 +15,14 @@ router.post("/", async (req, res, next) => {
     res.status(500).json({ message: err.toString() });
   }
   next();
+});
+
+router.get('/', async (req, res, next) => {
+  if (req.query.email) {
+      const House = await req.models.roommate.getRoommates(req.query.email);
+      res.json(House);
+      next();
+  } 
 });
 
 module.exports = router;
