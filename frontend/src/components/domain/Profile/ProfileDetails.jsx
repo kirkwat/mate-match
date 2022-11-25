@@ -1,5 +1,6 @@
 //TODO send roommate request
-//TODO api get preferences and get roommates
+//TODO don't allow sending requests to someone who is already your roommate
+//TODO api get preferences
 
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -13,11 +14,6 @@ export const ProfileDetails = () => {
     const { auth } = useAuth();
     const params = useParams();
 
-    //DELETE - this is just an example until api is working
-    const roomies = [
-        {name: "Robert Derl", gender: "male", city: "DFW", age: 26, paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-        {name: "Dan Robins", gender: "male", city: "Dallas", age: 24, paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-    ];
     //DELETE - this is just an example until api is working
     const prefs = {
         apartment: true,
@@ -40,17 +36,14 @@ export const ProfileDetails = () => {
 
     const [ profile, setProfile ] = useState(undefined);
     const [ preferences, setPreferences ] = useState(undefined);
-    const [ roommates, setRoommates ] = useState(undefined);
 
     useEffect(() => {
         if (params.username) {
             getProfileByUsername2(params.username,auth).then(x => setProfile(x[0]));
             //TODO get preferences
-            //TODO get roommates
         } else {
             getProfileByUsername(auth).then(x => setProfile(x[0]));
             //TODO get preferences
-            //TODO get roommates
         }
     }, [params]);
 
@@ -127,7 +120,7 @@ export const ProfileDetails = () => {
                 )}
             </div>
             <div>
-                <RoommateList roommates = { roomies } />
+                <RoommateList username={params.username?params.username:false} />
             </div>
         </div>
     </>;
