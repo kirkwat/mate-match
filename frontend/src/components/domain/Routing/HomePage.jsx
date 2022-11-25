@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const HomepageNotLogged = () => {
+export const HomePage = () => {
     return <>
         <div className="jumbotron bg-light mx-5 rounded-3 pb-5">
             <h1 className="display-4 d-flex align-items-center justify-content-center mb-5">Roomate Finder</h1>

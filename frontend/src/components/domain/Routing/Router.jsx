@@ -1,9 +1,8 @@
 //TODO setup roommate api
 
 import { Route, Routes } from "react-router-dom"
-import { HomepageNotLogged, Registration, Login, Logout, Missing } from "..";
-import { RoommateList, RequestList, ProfileExplorer, ProfileDetails, ProfileEditor } from "..";
-import { RequireAuth } from "..";
+import { HomePage, RequireAuth, Registration, Login, Logout, Missing } from "..";
+import { ProfileExplorer, ProfileDetails, ProfileEditor, RoommateList, RequestList } from "..";
 
 
 export const Router = () => {
@@ -15,15 +14,13 @@ export const Router = () => {
 
     return <Routes>
         <Route path="/">
-            <Route path="*" element={<Missing/>} />
-
-            {/* public routes*/}
-            <Route path="/" element={ <HomepageNotLogged /> } exact />
+            {/* public routes */}
+            <Route path="/" element={ <HomePage /> } exact />
             <Route path="/login" element= { <Login/> } />
             <Route path="/register" element= { <Registration/> } />
             <Route path="/logout" element= { <Logout/> } />
 
-            {/* protected routes */}
+            {/* account routes */}
             <Route element={<RequireAuth/>}>
                 <Route path="/dashboard" element= { <ProfileExplorer/>} />
                 <Route path="/requests" element= { <RequestList requests = { roomies } />} />
