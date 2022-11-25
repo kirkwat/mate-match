@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const bodyParser = require('body-parser');
-router.use(bodyParser.json());
 router.get('/', async (req, res, next) => {
   if (req.body.email) {
       //console.log(req.body.email)

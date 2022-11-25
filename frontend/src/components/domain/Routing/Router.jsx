@@ -24,7 +24,7 @@ export const Router = () => {
             <Route element={<RequireAuth/>}>
                 <Route path="/dashboard" element= { <ProfileExplorer/>} />
                 <Route path="/requests" element= { <RequestList requests = { roomies } />} />
-                <Route path="/roommates" element= { <RoommateList roommates = { roomies } standalone={true}/>} />
+                <Route path="/roommates" element= { <RoommateList standalone={true}/>} />
                 <Route path="/profile" element= { <ProfileDetails/>} />
                 <Route path="/profile/edit" element= { <ProfileEditor/>} />
                 <Route path="/:username/profile" element= { <ProfileDetails/>} />

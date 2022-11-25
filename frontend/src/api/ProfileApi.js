@@ -68,3 +68,12 @@ export const LoginCheck = (username, password) => new Promise((resolve, reject) 
             reject(x);
         });
 });
+
+export const getRoommates = (email, auth) => new Promise((resolve, reject) => {
+    axios.get(`/roommate?email=${email}`, { headers: {  authorization: `token: ${auth.accessToken}` } })
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
