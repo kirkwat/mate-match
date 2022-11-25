@@ -18,25 +18,16 @@ export const RoommateList = ({ username=false, standalone=false }) => {
             });
     }, []);
 
-    if(!roommates) {
-        return <>
-        <div className="container py-4">
-            <div className="bg-light rounded p-5 pb-4 mb-4">
-                <div className="spinner-border" role="status">
-                    <span className="visually-hidden">Loading Roommates...</span>
-                </div>
-                <span className="fs-2 fw-bold">&nbsp;Loading Roommates...</span>
-            </div>
-        </div>
-    </>;
-    }
-
     return <> 
         <div className={standalone?"container py-4":""}>
             <h3>Roommates
             </h3>
-            {false ? (
-                <p className="bg-light rounded p-3">Send a request to become roommates!</p>
+            {!roommates ? (
+                <p className="bg-light rounded p-3">
+                    {
+                        username?"This user currently has no roommates!":"Send a request to become roommates!"
+                    }
+                </p>
             ) : (
                 <ul className="list-group">
                     {
