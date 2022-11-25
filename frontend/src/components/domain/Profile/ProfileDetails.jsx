@@ -55,7 +55,16 @@ export const ProfileDetails = () => {
     }, [params]);
 
     if(!profile) {
-       return <>Loading...</>;
+        return <>
+        <div className="container py-4">
+            <div className="bg-light rounded p-5 pb-4 mb-4">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading Profile...</span>
+                </div>
+                <span className="fs-2 fw-bold">&nbsp;Loading Profile...</span>
+            </div>
+        </div>
+    </>;
     }
 
     return <>
