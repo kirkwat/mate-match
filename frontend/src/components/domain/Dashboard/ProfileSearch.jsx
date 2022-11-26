@@ -10,6 +10,7 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
     const [ lifestylePref, setLifestylePref ] = useState({"Night-owl":false,"Early-bird":false,"Smoke-free":false,"Pet-friendly":false});
     const [ propertyPref, setPropertyPref ] = useState({"House":false,"Apartment":false,"Condo":false});
     const [ agePref, setAgePref ] = useState({"18-23":false,"24-29":false,"30+":false});
+    const [ genderPref, setGenderPref ] = useState({"Male":false,"Female":false});
 
     const handleSearchChange = (e) => {
         if (!e.target.value) return setSearchResults(profiles);
@@ -85,6 +86,29 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
         setSearchResults(results);
     }
     
+    const handleGenderToggle = (e) => {
+        setGenderPref(e);
+        //remove false attributes
+        const filters=Object.keys(e).reduce((o, key) => {
+            e[key] === true && (o[key] = e[key]);
+            return o;
+        }, {});
+
+        const results=profiles.filter(profile => { 
+            let filterCheck=true;
+            Object.keys(filters).map((label) => {
+                if(label==="Male"){
+                    if(profile.desired_gender!=="male") filterCheck=false;
+                }
+                else if(label==="Female"){
+                    if(profile.desired_gender!=="female") filterCheck=false;
+                }
+            })
+            return filterCheck;
+        });
+        setSearchResults(results);
+    }
+
     return <>
         <h1>Profile Explorer</h1>
         <div className="d-flex flex g-3">
@@ -103,6 +127,11 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
                 <CheckBoxDropdown dd_label="Age " 
                         options={agePref} 
                         setValues={handleAgeToggle}/>
+            </div>
+            <div className="ms-3">
+                <CheckBoxDropdown dd_label="Gender " 
+                        options={genderPref} 
+                        setValues={handleGenderToggle}/>
             </div>
         </div>
         <hr/>
