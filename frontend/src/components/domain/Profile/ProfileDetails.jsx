@@ -34,7 +34,7 @@ export const ProfileDetails = () => {
     };
 
     const [ profile, setProfile ] = useState(undefined);
-    const [ roommate, setRoommate ] = useState([]); 
+    const [ roommate, setRoommate ] = useState(undefined); 
     const [ request, setRequest ] = useState(undefined); 
 
     const [ preferences, setPreferences ] = useState(undefined);
@@ -49,7 +49,7 @@ export const ProfileDetails = () => {
             //TODO get preferences
         }
         getRoommates(auth.username,auth).then(x => {
-            setRoommate(x[0]?Object.values(x[0]).find(email => email === params.username):[]);
+            setRoommate(x[0]?Object.values(x[0]).find(email => email === params.username):undefined);
         });
     }, [params]);
 
@@ -57,8 +57,6 @@ export const ProfileDetails = () => {
         sendRequest({to:params.username,from:auth.username},auth);
         navigate(`/requests`);
     };
-
-    const getButton = () => {};
 
     if(!profile) {
         return <>

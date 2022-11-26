@@ -27,8 +27,8 @@ export const sendRequest = (request, auth) => new Promise((resolve, reject) => {
         });
 });
 
-export const deleteRequest = (request, auth) => new Promise((resolve, reject) => {
-    axios.delete(`/request`, request, { headers: {  authorization: `token: ${auth.accessToken}` } })
+export const deleteRequest = (to, from, auth) => new Promise((resolve, reject) => {
+    axios.delete(`/request/?to=${to}&from=${from}`, { headers: {  authorization: `token: ${auth.accessToken}` } })
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);

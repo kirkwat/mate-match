@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
   next();
  });
  router.delete('/', async (req, res, next) => {
-    const deleteReq = await req.models.request.deleteRequest(req.body.to, req.body.from);
+    const deleteReq = await req.models.request.deleteRequest(req.query.to, req.query.from);
     res.status(204).end();
     next();
  });

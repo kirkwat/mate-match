@@ -1,3 +1,4 @@
+//TODO get roommates page to show updated roommates list
 //TODO make getrequests that get profile to show details for each request
 
 import { useState, useEffect } from "react";
@@ -10,30 +11,31 @@ export const RequestList = () => {
     const navigate = useNavigate()
 
     const [ requests, setRequests ] = useState([]);
+    const [ sender, setSender ] = useState(undefined);
 
     useEffect(() => {
         getRequestsForUser(auth).then(x => setRequests(x));
     }, []);
 
-    const handleAcceptRequest = (sender) => {
-        console.log("hello");
-        deleteRequest({from:sender,to:auth.username},auth);
-        addRoommate({person1:sender,person2:auth.username},auth);
-        navigate(`/roommates`);
-
-        //delete request 
-        //add roommate
-        //redirect to roommates
-        //sendRequest({to:params.username,from:auth.username},auth);
-        //navigate(`/requests`);
-    };
-
-    const handleDeclineRequest = (sender) => {
-        console.log("bye");
-        //sendRequest({to:params.username,from:auth.username},auth);
-        //navigate(`/requests`);
-    };
-
+    useEffect(() => {
+        if(sender){
+            //decline request
+            if(sender.status===0){
+                deleteRequest(auth.username,sender.sender,auth).then(() => {
+                    setRequests(requests.filter(x => x.from !== sender.sender));
+                });
+            }
+            //approve request
+            else if(sender.status===1){
+                deleteRequest(auth.username,sender.sender,auth).then(
+                    setRequests()
+                );
+                addRoommate({person1:sender.sender,person2:auth.username},auth);
+                //TODO get roommates page to show updated roommates list
+                navigate(`/roommates`);
+            }
+        }
+    }, [sender]);
 
     return <> 
         <div className={"container py-4"}>
@@ -42,16 +44,8 @@ export const RequestList = () => {
             </h3>
             {requests.length === 0 ? (
                 <p className="bg-light rounded p-3">
-                    
-                    {/* DELETE */}
-                    <Link to={ `/deuce/profile` }>
-                        <button type ="button" className="btn btn-primary btn-sm float-end">
-                            View Profile
-                        </button>
-                    </Link>
-                    
-                    
-                    Your roommate requests from other users will appear here.</p>
+                    Your roommate requests from other users will appear here.
+                </p>
             ) : (
                 <ul className="list-group">
                     {
@@ -74,11 +68,11 @@ export const RequestList = () => {
                                     <p className="card-text col-10">{request.message}</p>
                                     <div className="btn-group">
                                         <button type="button" className="btn btn-danger"
-                                            onClick= {handleDeclineRequest}>
+                                            onClick= {()=> setSender({sender:request.from,status:0})}>
                                             Decline
                                         </button>
                                         <button type="button" className="btn btn-success"
-                                            onClick= {handleAcceptRequest(request.from)}>
+                                            onClick= {()=> setSender({sender:request.from,status:1})}>
                                             Approve
                                         </button>
                                     </div>
