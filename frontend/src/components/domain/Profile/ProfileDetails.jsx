@@ -1,10 +1,9 @@
-//TODO send roommate request
-//TODO don't allow sending requests to someone who is already your roommate
+//TODO don't allow sending requests to someone who aleady sent you a request
 //TODO api get preferences
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getProfileByUsername, getProfileByUsername2 } from "../../../api";
+import { getProfileByUsername, getProfileByUsername2, sendRequest, getRoommates } from "../../../api";
 import { useAuth } from "../../../hooks";
 import { RoommateList } from './RoommateList';
 import { useParams } from "react-router-dom";
@@ -13,6 +12,7 @@ import './styles/avatar.css';
 export const ProfileDetails = () => {
     const { auth } = useAuth();
     const params = useParams();
+    const navigate = useNavigate();
 
     //DELETE - this is just an example until api is working
     const prefs = {
@@ -35,6 +35,7 @@ export const ProfileDetails = () => {
     };
 
     const [ profile, setProfile ] = useState(undefined);
+    const [ roommate, setRoommate ] = useState([]); 
     const [ preferences, setPreferences ] = useState(undefined);
 
     useEffect(() => {
@@ -45,7 +46,15 @@ export const ProfileDetails = () => {
             getProfileByUsername(auth).then(x => setProfile(x[0]));
             //TODO get preferences
         }
+        getRoommates(auth.username,auth).then(x => {
+            setRoommate(x[0]?Object.values(x[0]).find(email => email === params.username):[]);
+        });
     }, [params]);
+
+    const handleSendRequest = () => {
+        sendRequest({to:params.username,from:auth.username},auth).then(x => console.log("here",x));
+        navigate(`/requests`);
+    };
 
     if(!profile) {
         return <>
@@ -118,8 +127,9 @@ export const ProfileDetails = () => {
                     <li className="list-group-item bg-light"></li>
                 </ul>
                 {params.username ? (
-                    <button type="button" className={"btn btn-primary btn-lg col-12 mt-3"}>
-                        {/* add api post send request here */}
+                    <button type="button" 
+                        className={roommate?"d-none":"btn btn-primary btn-lg col-12 mt-3"}
+                        onClick= {handleSendRequest}>
                         Send Roommate Request
                     </button>
                 ) : (
