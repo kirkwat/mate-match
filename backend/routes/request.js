@@ -2,15 +2,20 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
-   if (req.query.to) {
-       const ReqByName = await req.models.request.fetchReqByRecipient(req.query.to);
-       res.json(ReqByName);
-       next();
-   } 
-   else {
-       const allReq = await req.models.request.fetchAllReq();
-       res.json(allReq);
-   }
+    if (req.query.to && req.query.from) {
+        const ReqByName = await req.models.request.fetchReq(req.query.to,req.query.from);
+        res.json(ReqByName);
+        next();
+    } 
+    else if (req.query.to) {
+        const ReqByName = await req.models.request.fetchReqByRecipient(req.query.to);
+        res.json(ReqByName);
+        next();
+    } 
+    else {
+        const allReq = await req.models.request.fetchAllReq();
+        res.json(allReq);
+    }
 });
 router.post('/', async (req, res, next) => {
     try {

@@ -9,6 +9,15 @@ export const getRequestsForUser = (auth) => new Promise((resolve, reject) => {
         });
 });
 
+export const checkRequests = (to, from, auth) => new Promise((resolve, reject) => {
+    axios.get(`/request/?to=${to}&from=${from}`,{ headers: {  authorization: `token: ${auth.accessToken}` } })
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+})
+
 export const sendRequest = (request, auth) => new Promise((resolve, reject) => {
     axios.post(`/request`, request, { headers: {  authorization: `token: ${auth.accessToken}` } })
         .then(x => resolve(x.data))

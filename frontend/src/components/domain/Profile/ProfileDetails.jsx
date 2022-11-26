@@ -1,9 +1,8 @@
-//TODO don't allow sending requests to someone who aleady sent you a request
 //TODO api get preferences
 
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getProfileByUsername, getProfileByUsername2, sendRequest, getRoommates } from "../../../api";
+import { getProfileByUsername, getProfileByUsername2, sendRequest, checkRequests, getRoommates } from "../../../api";
 import { useAuth } from "../../../hooks";
 import { RoommateList } from './RoommateList';
 import { useParams } from "react-router-dom";
@@ -36,11 +35,14 @@ export const ProfileDetails = () => {
 
     const [ profile, setProfile ] = useState(undefined);
     const [ roommate, setRoommate ] = useState([]); 
+    const [ request, setRequest ] = useState(undefined); 
+
     const [ preferences, setPreferences ] = useState(undefined);
 
     useEffect(() => {
         if (params.username) {
             getProfileByUsername2(params.username,auth).then(x => setProfile(x[0]));
+            checkRequests(params.username,auth.username,auth).then(x => setRequest(x[0]));
             //TODO get preferences
         } else {
             getProfileByUsername(auth).then(x => setProfile(x[0]));
@@ -52,9 +54,11 @@ export const ProfileDetails = () => {
     }, [params]);
 
     const handleSendRequest = () => {
-        sendRequest({to:params.username,from:auth.username},auth).then(x => console.log("here",x));
+        sendRequest({to:params.username,from:auth.username},auth);
         navigate(`/requests`);
     };
+
+    const getButton = () => {};
 
     if(!profile) {
         return <>
@@ -126,17 +130,25 @@ export const ProfileDetails = () => {
                     </li>
                     <li className="list-group-item bg-light"></li>
                 </ul>
-                {params.username ? (
-                    <button type="button" 
-                        className={roommate?"d-none":"btn btn-primary btn-lg col-12 mt-3"}
-                        onClick= {handleSendRequest}>
-                        Send Roommate Request
-                    </button>
-                ) : (
+                {!params.username ? (
                     <Link to={`edit`} className="btn btn-primary btn-lg col-12 mt-3">
                         Edit Profile
                     </Link>
-                )}
+                ) : request ? (
+                        <button type="button" 
+                            className="btn btn-primary btn-lg col-12 mt-3"
+                            disabled={true}
+                            onClick= {handleSendRequest}>
+                            Roommate Request Sent!
+                        </button>
+                    ) : (
+                        <button type="button" 
+                            className={roommate?"d-none":"btn btn-primary btn-lg col-12 mt-3"}
+                            onClick= {handleSendRequest}>
+                            Send Roommate Request
+                        </button>
+                    )
+                }
             </div>
             <div>
                 <RoommateList username={params.username?params.username:false} />
