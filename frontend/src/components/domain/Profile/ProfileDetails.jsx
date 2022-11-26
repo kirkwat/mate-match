@@ -75,7 +75,8 @@ export const ProfileDetails = () => {
         <div className="container py-4">
             <div className="bg-light rounded p-5 pb-4 mb-4">
                 <div className="avatar-image float-end">
-                    <img src={profile.photoID?profile.photoID:"images/default.jpg"} alt="avatar" className="img-fluid avatar"/>
+                    <img src={profile.photoID?profile.photoID:"images/default.jpg"} 
+                        alt="avatar" className="img-fluid"/>
                 </div>
                 <h1 className="display-5">
                     <span className="fw-bold">{profile.name}</span>

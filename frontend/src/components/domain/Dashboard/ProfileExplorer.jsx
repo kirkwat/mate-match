@@ -19,11 +19,17 @@ export const ProfileExplorer = () => {
 
     //TODO update for on click
     useEffect(() => {
-        getProfiles(auth).then(x => setProfiles(x));
-        //setSearchResults(roomies);
+        //getProfiles(auth).then(x => setProfiles(x));
+
+        getProfiles(auth).then(x => 
+            //TODO switch
+            //setProfiles(x.filter(y => y.email !== auth.username && y.name !== null))
+            setSearchResults(x.filter(y => y.email !== auth.username && y.name !== null))
+        );
     }, []);
 
     return <>
+    {console.log(searchResults)}
         <div className="container py-4">
             <div className="bg-light rounded p-5 pb-4 mb-4">
                 <ProfileSearch profiles={roomies} setSearchResults={setSearchResults}/>
