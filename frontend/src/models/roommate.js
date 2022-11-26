@@ -1,7 +1,7 @@
 export class Roommate {
-    constructor(name, gender, city, age, paragraph) {
+    constructor(name, desired_gender, city, age, paragraph) {
         this.name = name;
-        this.gender = gender;
+        this.desired_gender = desired_gender;
         this.city = city;
         this.age = age;
         this.paragraph = paragraph;

@@ -18,8 +18,8 @@ const PREF_TABLE = 'preferences';
     const result = await query;
     return result;
     }
-   const updateUser = async (email, photoID, name, age, city, bio, gender, desired_gender, desired_roomates)  => {
-    const query = knex(USERS_TABLE).update({photoID, name, age, city, bio, gender, desired_gender, desired_roomates}).where({email});
+   const updateUser = async (email, photoID, name, age, city, bio, gender, desired_gender, desired_roommates)  => {
+    const query = knex(USERS_TABLE).update({photoID, name, age, city, bio, gender, desired_gender, desired_roommates}).where({email});
     const results = await query;
     return results;
 }

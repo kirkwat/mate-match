@@ -1,5 +1,3 @@
-//TODO have backend return something when creating an account with a username that already exists
-
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createProfile, LoginCheck } from "../../../api";
@@ -44,15 +42,18 @@ export const Registration = () => {
         e.preventDefault();
 
         createProfile(username, password).then(x => {
-            //TODO check if user was created
-            LoginCheck(username, password).then(accessToken => {
-                setAuth({ username, accessToken });
-                setUserName('');
-                setPassword('');
-                setConfirmPassword('');
-                navigate(`/profile/edit`);
-            })
-            //TODO else set error message saying couldn't create account
+            if(!x["message"]){
+                LoginCheck(username, password).then(accessToken => {
+                    setAuth({ username, accessToken });
+                    setUserName('');
+                    setPassword('');
+                    setConfirmPassword('');
+                    navigate(`/profile/edit`);
+                })
+            }
+            else{
+                setErrorMessage(x["message"])
+            }
         });
     }
 

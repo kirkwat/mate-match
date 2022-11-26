@@ -1,9 +1,9 @@
 export class Profile {
-    constructor(name, location, bio, gender, age, lifestylePreference, propertyPreference, roomates) {
+    constructor(name, location, bio, desired_gender, age, lifestylePreference, propertyPreference, roomates) {
         this.name = name
         this.location = location
         this.bio = bio
-        this.gender = gender
+        this.desired_gender = desired_gender
         this.age = age
         this.lifestylePreference = lifestylePreference
         this.propertyPreference = propertyPreference

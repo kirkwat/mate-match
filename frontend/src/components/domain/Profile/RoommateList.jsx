@@ -32,12 +32,12 @@ export const RoommateList = ({ username=false, standalone=false }) => {
                 <ul className="list-group">
                     {
                         keys && keys.filter(x=>x!=='id').map((roommate, index) => (
-                            roommates[roommate]===(username?username:auth.username)||!roommates[roommate]?<></>:(
+                            roommates[roommate]===(username?username:auth.username)||!roommates[roommate]?<div key={index}/>:(
                                 <div key={index} className="card mb-3">
                                     <div className="card-header fs-4">
                                         {roommates[roommate]}
                                         <span className="fs-5">
-                                            {roommate.gender === "male"?"(He/Him)":"(She/Her)"}
+                                            {roommate.desired_gender === "male"?"(He/Him)":"(She/Her)"}
                                         </span>
                                         <Link to={ `/${roommates[roommate]}/profile` }>
                                             <button type ="button" className="btn btn-primary btn-sm float-end">

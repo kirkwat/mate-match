@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
   next();
  });
  router.put('/', async (req, res, next) => {
-    const updateUser = await req.models.user.updateUser(req.body.email, req.body.photoID, req.body.name, req.body.age, req.body.city, req.body.bio, req.body.gender, req.body.desired_gender, req.body.desired_roomates);
+    const updateUser = await req.models.user.updateUser(req.body.email, req.body.photoID, req.body.name, req.body.age, req.body.city, req.body.bio, req.body.gender, req.body.desired_gender, req.body.desired_roommates);
     res.json(updateUser);
     next();
  });

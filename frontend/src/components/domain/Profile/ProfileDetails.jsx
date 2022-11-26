@@ -51,8 +51,8 @@ export const ProfileDetails = () => {
         return <>
         <div className="container py-4">
             <div className="bg-light rounded p-5 pb-4 mb-4">
-                <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading Profile...</span>
+                <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading Profile...</span>
                 </div>
                 <span className="fs-2 fw-bold">&nbsp;Loading Profile...</span>
             </div>
@@ -68,7 +68,7 @@ export const ProfileDetails = () => {
                 </div>
                 <h1 className="display-5">
                     <span className="fw-bold">{profile.name}</span>
-                    <span className="fs-1"> {profile.gender === "male"?"(He/Him)":"(She/Her)"}</span>
+                    <span className="fs-1"> {profile.desired_gender === "male"?"(He/Him)":"(She/Her)"}</span>
                 </h1>
                 <h3 className="display-7">
                     <span>{profile.city}</span>
@@ -79,7 +79,7 @@ export const ProfileDetails = () => {
                     <li className="list-group-item bg-light"></li>
                     <li className="list-group-item bg-light">
                         <span className="fw-bold">Roommates needed:&nbsp;</span>
-                        {profile.desiredRoomates}
+                        {profile.desired_roommates}
                     </li>
                     <li className="list-group-item bg-light">
                         <span className="fw-bold">Property Preferences:&nbsp;</span>

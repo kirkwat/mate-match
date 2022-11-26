@@ -11,7 +11,7 @@ router.post('/', async (req, res, next) => {
    } catch (err) {
        console.error('Failed to create new user:', err);
        if (err.code === "ER_DUP_ENTRY"){
-            res.status(500).json({message: "User with that email already exists. Please use another email or login to your existing account."})
+            res.status(201).json({message: "Username already in use. Please use another username or login to your existing account."});
        }
        else {
             res.status(500).json({ message: err.toString() });

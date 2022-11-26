@@ -57,8 +57,8 @@ export const ProfileEditor = () => {
         return <>
             <div className="container py-4">
                 <div className="bg-light rounded p-5 pb-4 mb-4">
-                    <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading Profile...</span>
+                    <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading Profile...</span>
                     </div>
                     <span className="fs-2 fw-bold">&nbsp;Loading Profile...</span>
                 </div>
@@ -83,8 +83,8 @@ export const ProfileEditor = () => {
                             value={profile.city}
                             setValue={ city => mergeProfile({ city }) } />
                 <SelectField label="Gender"
-                            value={profile.gender}
-                            setValue={ gender => mergeProfile({ gender }) }
+                            value={profile.desired_gender}
+                            setValue={ desired_gender => mergeProfile({ desired_gender }) }
                             options={genders}
                             optionValueKey="id"
                             optionLabelKey="withCaps"/>
@@ -99,8 +99,8 @@ export const ProfileEditor = () => {
                                 setValue={bio => mergeProfile({ bio })} />
                 <div className="col-4">
                     <SelectField label="How many roommates do you need?"
-                                value={profile.desiredRoomates}
-                                setValue={ desiredRoomates => mergeProfile({ desiredRoomates }) }
+                                value={profile.desired_roommates}
+                                setValue={ desired_roommates => mergeProfile({ desired_roommates }) }
                                 options={[...Array(9).keys()].map(x => x + 1)}/>
                 </div>
                 {/*
