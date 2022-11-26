@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import { ProfileSearch, ResultList } from '../Dashboard';
+import { useAuth } from "../../../hooks";
 import { getProfiles } from "../../../api";
+import { ProfileSearch, ResultList } from '../Dashboard';
 
 export const ProfileExplorer = () => {
+    const { auth } = useAuth();
 
     const roomies = [
         {name: "Robert Derl", gender: "male", city: "DFW", age: 26, "Night-owl":false,"Early-bird":false,"Smoke-free":false,"Pet-friendly":false},
@@ -17,8 +19,8 @@ export const ProfileExplorer = () => {
 
     //TODO update for on click
     useEffect(() => {
-        //getProfiles.then(x => setProfiles(x));
-        setSearchResults(roomies);
+        getProfiles(auth).then(x => setProfiles(x));
+        //setSearchResults(roomies);
     }, []);
 
     return <>

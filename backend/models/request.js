@@ -12,6 +12,11 @@ const fetchReqByRecipient = async (to) => {
     const results = await query;
     return results;
 }
+const fetchReq = async (to,from) => {
+    const query = knex(REQ_TABLE).where({ to, from });
+    const results = await query;
+    return results;
+}
 const createRequest = async (to, from, message) => {
     const query = knex(REQ_TABLE).insert({ to, from, message});
     console.log('Raw query for createRequest:', query.toString());
@@ -31,6 +36,7 @@ const createRequest = async (to, from, message) => {
  module.exports = {
     fetchAllReq,
     fetchReqByRecipient,
+    fetchReq,
     createRequest,
     acceptRequest,
     deleteRequest

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../hooks";
-import { getRoommates, getProfileByUsername2 } from "../../../api";
+import { getRoommates } from "../../../api";
 
 export const RoommateList = ({ username=false, standalone=false }) => {
     const { auth } = useAuth();
@@ -39,10 +39,11 @@ export const RoommateList = ({ username=false, standalone=false }) => {
                                         <span className="fs-5">
                                             {roommate.desired_gender === "male"?"(He/Him)":"(She/Her)"}
                                         </span>
-                                        <Link to={ `/${roommates[roommate]}/profile` }>
-                                            <button type ="button" className="btn btn-primary btn-sm float-end">
-                                                View Profile
-                                            </button>
+                                        <Link to={ 
+                                                roommates[roommate]===auth.username?`/profile`:`/${roommates[roommate]}/profile`
+                                            }
+                                            className="btn btn-primary btn-sm float-end">
+                                            View Profile
                                         </Link>
                                     </div>
                                     <div className="card-body">

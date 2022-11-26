@@ -6,8 +6,8 @@ const apiConfig = {
     }
 };
 
-export const getProfiles = () => new Promise((resolve, reject) => {
-    axios.get(`/user`, apiConfig)
+export const getProfiles = (auth) => new Promise((resolve, reject) => {
+    axios.get(`/user`, { headers: {  authorization: `token: ${auth.accessToken}` } })
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -62,15 +62,6 @@ export const updateProfile = (profile, auth) => new Promise((resolve, reject) =>
 
 export const LoginCheck = (username, password) => new Promise((resolve, reject) => {
     axios.post(`/session`, {"email": username, "password": password})
-        .then(x => resolve(x.data))
-        .catch(x => {
-            alert(x);
-            reject(x);
-        });
-});
-
-export const getRoommates = (email, auth) => new Promise((resolve, reject) => {
-    axios.get(`/roommate?email=${email}`, { headers: {  authorization: `token: ${auth.accessToken}` } })
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);

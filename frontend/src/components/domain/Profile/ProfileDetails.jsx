@@ -1,10 +1,8 @@
-//TODO send roommate request
-//TODO don't allow sending requests to someone who is already your roommate
 //TODO api get preferences
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getProfileByUsername, getProfileByUsername2 } from "../../../api";
+import { getProfileByUsername, getProfileByUsername2, sendRequest, checkRequests, getRoommates } from "../../../api";
 import { useAuth } from "../../../hooks";
 import { RoommateList } from './RoommateList';
 import { useParams } from "react-router-dom";
@@ -13,6 +11,7 @@ import './styles/avatar.css';
 export const ProfileDetails = () => {
     const { auth } = useAuth();
     const params = useParams();
+    const navigate = useNavigate();
 
     //DELETE - this is just an example until api is working
     const prefs = {
@@ -35,17 +34,29 @@ export const ProfileDetails = () => {
     };
 
     const [ profile, setProfile ] = useState(undefined);
+    const [ roommate, setRoommate ] = useState(undefined); 
+    const [ request, setRequest ] = useState(undefined); 
+
     const [ preferences, setPreferences ] = useState(undefined);
 
     useEffect(() => {
         if (params.username) {
             getProfileByUsername2(params.username,auth).then(x => setProfile(x[0]));
+            checkRequests(params.username,auth.username,auth).then(x => setRequest(x[0]));
             //TODO get preferences
         } else {
             getProfileByUsername(auth).then(x => setProfile(x[0]));
             //TODO get preferences
         }
+        getRoommates(auth.username,auth).then(x => {
+            setRoommate(x[0]?Object.values(x[0]).find(email => email === params.username):undefined);
+        });
     }, [params]);
+
+    const handleSendRequest = () => {
+        sendRequest({to:params.username,from:auth.username},auth);
+        navigate(`/requests`);
+    };
 
     if(!profile) {
         return <>
@@ -117,16 +128,25 @@ export const ProfileDetails = () => {
                     </li>
                     <li className="list-group-item bg-light"></li>
                 </ul>
-                {params.username ? (
-                    <button type="button" className={"btn btn-primary btn-lg col-12 mt-3"}>
-                        {/* add api post send request here */}
-                        Send Roommate Request
-                    </button>
-                ) : (
+                {!params.username ? (
                     <Link to={`edit`} className="btn btn-primary btn-lg col-12 mt-3">
                         Edit Profile
                     </Link>
-                )}
+                ) : request ? (
+                        <button type="button" 
+                            className="btn btn-primary btn-lg col-12 mt-3"
+                            disabled={true}
+                            onClick= {handleSendRequest}>
+                            Roommate Request Sent!
+                        </button>
+                    ) : (
+                        <button type="button" 
+                            className={roommate?"d-none":"btn btn-primary btn-lg col-12 mt-3"}
+                            onClick= {handleSendRequest}>
+                            Send Roommate Request
+                        </button>
+                    )
+                }
             </div>
             <div>
                 <RoommateList username={params.username?params.username:false} />
