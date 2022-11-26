@@ -1,198 +1,43 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
 
-        <link rel = "stylesheet" href = "../src/index.css" />
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
 
-        <script>var app;</script>
-        <script src = "../src/views/admin.js"></script>
-        <script src = "../src/views/homeloggedin.js"></script>
-        <script src = "../src/views/homenotloggedin.js"></script>
-        <script src = "../src/views/login.js"></script>
-        <script src = "../src/views/profile.js"></script>
-        <script src = "../src/views/editProfile.js"></script>
-        <script src = "../src/views/search.js"></script>
-        <script src = "../src/views/signup.js"></script>
-        <script src = "../src/App.js"></script>
-        <script src = "../src/viewer.js"></script>
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
 
-
-    </head>
-
-    <body onload="app.homeView_logged.load()">
-        <header>
-            <h1>Find Your Roommate</h1>
-        </header>
-        <main>
-            <section id = "homeView_notlogged">
-
-            </section>
-
-            <section id = "homeView_logged">
-                <h2 id="homeViewHeading"></h2>
-                <label for = "filter">Sort By</label>
-                    <select type="text" id="sortBy" name="sortBy">
-                        <option></option>
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                    </select>
-
-                    <button type = "button" class = "menuButton" onclick="app.home.setMenuActive()">Menu</button>
-                    <div class="menuContainer">
-                    <button type = "button" class = "menuHidden" id="menuProfile" onclick="app.profileView.load()">Sample profile</button>
-                    <button type = "button" class = "menuHidden" id="menuLogin" onclick="app.loginView.load()">Log in</button>
-                    <button type = "button" class = "menuHidden" id="menuSignup" onclick="app.signupView.load()">Sign up</button>
-                    </div>
-
-                    <div class="profileCardContainer">
-                        <template class="profileCardTemp">
-                            <div class="profileCardDiv">
-                                <img src="https://via.placeholder.com/100" alt="Profile pic"/>
-                                <p id="profileCardName"></p>
-                                <p id="profileCardLocation"></p>
-                                <p id="profileCardGender"></p>
-                                <p id="profileCardAge"></p>
-                                <button type = "button" class = "reportButton">Report</button>
-                            </div>
-                        </template>
-                    </div>
-            </section>
-
-            <section id="profileView">
-                <button type = "button" class = "editProfile" onclick="app.profileViewEdit.load()">Edit Profile</button>
-                <img class = "profilePic" src = "https://via.placeholder.com/150" alt = "Profile pic">
-                <div class="nameClass">
-                    <label for="profileName">Name</label>
-                    <p></p>
-                </div>
-                <div class = "locationClass">
-                    <label for = "location">Location</label>
-                    <p></p>
-                </div>
-                <div class = "bioClass">
-                    <label for = "bio">Bio</label>
-                    <p></p>
-                </div>
-                <div class = "genderClass">
-                    <label for = "gender">Gender</label>
-                    <p></p>
-                </div>
-                <div class = "ageClass">
-                    <label for = "age">Age</label>
-                    <p></p>
-                </div>
-                <div class = "lifestyleClass">
-                    <label for = "lifestylePreference">Lifestyle Preference</label>
-                    <p></p>
-                </div>
-                <div class = "propertyClass">
-                    <label for = "propertyPreference">Property Preference</label>
-                    <p></p>
-                </div>
-                <div class = "roomateClass">
-                    <label for = "roomateNumber">Number of Roomates</label>
-                    <p></p>
-                </div>
-
-
-            </section>
-
-            <section id = "profileViewEdit">
-                <button type = "button" class = "done" onclick="app.profileViewEdit.save()">Save</button>
-                <img class = "profilePic" src = "https://via.placeholder.com/150" alt = "Profile pic">
-                <button type = "button" class = "uploadPhoto">Upload Photo</button>
-
-                <div class="nameClass">
-                    <label for="profileName">Name</label>
-                    <input type = "text" name = "profileName" id = "profileName"/>
-                </div>
-                <div class = "locationClass">
-                    <label for = "location">Location</label>
-                    <input type = "text" name = "profileLocation" id = "profileLocation"/>
-                </div>
-                <div class = "bioClass">
-                    <label for = "bio">Bio</label>
-                    <textarea name = "profileBio" id = "profileBio" rows="10"></textarea>
-                </div>
-                <div class = "genderClass">
-                    <label for = "gender">Gender</label>
-                    <select type="text" id="profileGender" name="profileGender">
-                        <option></option>
-                        <option>Male</option>
-                        <option>Female</option>
-                    </select>
-                </div>
-                <div class = "ageClass">
-                    <label for = "age">Age</label>
-                    <input type = "number" name = "profileAge" id = "profileAge" min="18"/>
-                </div>
-                <div class = "lifestyleClass">
-                    <label for = "lifestylePreference">Lifestyle Preference</label>
-                    <label> <input type="checkbox" id="Smoke-free" class="lifestyeChoice" name="Smoke-free" />Smoke-free</label>
-                    <label> <input type="checkbox" id="Partying" class="lifestyeChoice" name="Partying" />Partying</label>
-                    <label> <input type="checkbox" id="Quiet" class="lifestyeChoice" name="Quiet" />Quiet</label>
-                </div>
-                <div class = "propertyClass">
-                    <label for = "propertyPreference">Property Preference</label>
-                    <label> <input type="checkbox" id="House" class="propertyChoice" name="House" />House</label>
-                    <label> <input type="checkbox" id="Apartment" class="propertyChoice" name="Apartment" />Apartment</label>
-                    <label> <input type="checkbox" id="Condo" class="propertyChoice" name="Condo" />Condo</label>
-                </div>
-                <div class = "roomateClass">
-                    <label for = "roomateNumber">Number of Roomates</label>
-                    <input type="number" id="roomateNumber" name="roomateNumber" min="1"/>
-                </div>
-
-            </section>
-            <section id = "loginView">
-                <h1 class = "loginh1">Sign In</h1>
-                <div class = "loginUsername">
-                    <label for="logginUser">Username</label>
-                    <input type = "text" name = "logginUser" id = "logginUser"/>
-                </div>
-                
-                <div class = "loginPassword">
-                    <label for="logginPassword">Password</label>
-                    <input type = "password" name = "logginPassword" id = "logginPassword"/>
-                </div>
-
-                <button type = "button" class = "logginButton">Login</button>
-
-                <button type = "button" class = "loginin_signup_button" onclick="app.signupView.load()">Sign Up</button>
-                <button type = "button" onclick="app.homeView_logged.load()">Home</button>
-            </section>
-
-            <section id = "signupView">
-                <h1 class = "signuph1">Sign Up</h1>
-                <div class = "signupUsername">
-                    <label for="signupUser">Username</label>
-                    <input type = "text" name = "signupUser" id = "signupUser"/>
-                </div>
-
-                <div class = "signupPassword">
-                    <label for="signupPassword">Password</label>
-                    <input type = "password" name = "signupName" id = "signupName"/>
-                </div>
-                
-                <div class = "confirmPassword">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type = "password" name = "confirmName" id = "confirmName"/>
-                </div>
-
-                <button type = "button" class = "signupButton">Sign up</button>
-                <button type = "button" onclick="app.homeView_logged.load()">Home</button>
-
-            </section>
-            <section id = "adminView">
-                
-            </section>
-            
-            <section id = "searchView">
-                
-            </section>
-        </main>
-    </body>
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
 </html>
