@@ -1,6 +1,5 @@
 //TODO update changes to handle all filters combined
 //currently filters can only be used one at a time
-//TODO add gender filter
 
 import {useState} from "react";
 import { SearchField, CheckBoxDropdown } from "../../common";
@@ -98,10 +97,10 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
             let filterCheck=true;
             Object.keys(filters).map((label) => {
                 if(label==="Male"){
-                    if(profile.desired_gender!=="male") filterCheck=false;
+                    if(profile.gender!=="male") filterCheck=false;
                 }
                 else if(label==="Female"){
-                    if(profile.desired_gender!=="female") filterCheck=false;
+                    if(profile.gender!=="female") filterCheck=false;
                 }
             })
             return filterCheck;

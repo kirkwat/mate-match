@@ -37,7 +37,7 @@ export const RoommateList = ({ username=false, standalone=false }) => {
                                     <div className="card-header fs-4">
                                         {roommates[roommate]}
                                         <span className="fs-5">
-                                            {roommate.desired_gender === "male"?"(He/Him)":"(She/Her)"}
+                                            {roommate.gender === "male"?"(He/Him)":"(She/Her)"}
                                         </span>
                                         <Link to={ 
                                                 roommates[roommate]===auth.username?`/profile`:`/${roommates[roommate]}/profile`

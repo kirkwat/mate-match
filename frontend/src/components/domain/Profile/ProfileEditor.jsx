@@ -1,9 +1,8 @@
-//TODO make preference changes with api
 //TODO make necessary fields mandatory, make max char input for field
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getProfileByUsername, updateProfile } from "../../../api";
+import { getProfileByUsername, updateProfile, updatePreferences } from "../../../api";
 import { useAuth } from "../../../hooks";
 import { CheckBoxField, SelectField, TextField, TextAreaField } from "../../common";
 import { Gender } from "../../../models";
@@ -12,46 +11,51 @@ export const ProfileEditor = () => {
     const { auth } = useAuth();
 
     const [ profile, setProfile ] = useState(undefined);
-    const [ preferences, setPreferences ] = useState(undefined);
 
     const genders = [
         new Gender("male", "Man"),
         new Gender("female", "Woman"),
     ]
     
-    //DELETE - this is just an example until api is working
-    const prefs = {
-        apartment: true,
-        house: true,
-        condo: true,
-
-        nightPerson: true,
-        morningPerson: true,
-        shareFood: true,
-        pets: true,
-
-        extrovert: true,
-        introvert: true,
-        bringFriendsOver: true,
-
-        loud: true,
-        messy: true,
-        smoker: true,
-    };
-
     useEffect(() => {
         getProfileByUsername(auth).then(x => setProfile(x[0]));
-        //TODO get preferences
-        setPreferences(prefs);
     }, []);
 
-    const mergeProfile = delta => setProfile({ ...profile, ...delta });
-    const mergePreferences = delta => setPreferences({ ...preferences, ...delta });
+    const mergeProfile = delta => {
+        setProfile({ ...profile, ...delta });
+        console.log("here",delta)
+    };
 
     const handleSaveClick = () => {
-        updateProfile(profile, auth);
-        //TODO save preferences
-    }
+        updateProfile({
+            email:profile.email,
+            photoID:profile.photoID,
+            name:profile.name,
+            age:profile.age,
+            city:profile.city,
+            bio:profile.bio,
+            gender:profile.gender,
+            desired_roommates:profile.desired_roommates
+        }, auth);
+
+        updatePreferences({
+            email:profile.email,
+            apartment:profile.apartment,
+            house:profile.house,
+            condo:profile.condo,
+            nightPerson:profile.nightPerson,
+            morningPerson:profile.morningPerson,
+            extrovert:profile.extrovert,
+            introvert:profile.introvert,
+            smoker:profile.smoker,
+            bringFriendsOver:profile.bringFriendsOver,
+            loud:profile.loud,
+            shareFood:profile.shareFood,
+            messy:profile.messy,
+            pets:profile.pets,
+            relationship:profile.relationship,
+        }, auth);
+    };
 
     if(!profile) {
         return <>
@@ -64,7 +68,7 @@ export const ProfileEditor = () => {
                 </div>
             </div>
         </>;
-    }
+    };
 
     return <>
         <div className="container py-4">
@@ -84,8 +88,8 @@ export const ProfileEditor = () => {
                             value={profile.city}
                             setValue={ city => mergeProfile({ city }) } />
                 <SelectField label="Gender"
-                            value={profile.desired_gender}
-                            setValue={ desired_gender => mergeProfile({ desired_gender }) }
+                            value={profile.gender}
+                            setValue={ gender => mergeProfile({ gender }) }
                             options={genders}
                             optionValueKey="id"
                             optionLabelKey="withCaps"/>
@@ -112,41 +116,44 @@ export const ProfileEditor = () => {
                 <div>
                     <p className="mt-3 mb-0 fw-bold">Select your property references.</p>
                     <CheckBoxField label="Apartment"
-                        checked={preferences.apartment}
-                        setChecked={ apartment => mergePreferences({ apartment }) } />
+                        checked={profile.apartment}
+                        setChecked={ apartment => mergeProfile({ apartment }) } />
                     <CheckBoxField label="House"
-                        checked={preferences.house}
-                        setChecked={ house => mergePreferences({ house }) } />
+                        checked={profile.house}
+                        setChecked={ house => mergeProfile({ house }) } />
                     <CheckBoxField label="Condo"
-                        checked={preferences.condo}
-                        setChecked={ condo => mergePreferences({ condo }) } />
+                        checked={profile.condo}
+                        setChecked={ condo => mergeProfile({ condo }) } />
                 </div>
                 <div>
                     <p className="mt-3 mb-0 fw-bold">Select your lifestyle references.</p>
                     <CheckBoxField label="Night-owl"
-                        checked={preferences.nightPerson}
-                        setChecked={ nightPerson => mergePreferences({ nightPerson }) } />
+                        checked={profile.nightPerson}
+                        setChecked={ nightPerson => mergeProfile({ nightPerson }) } />
                     <CheckBoxField label="Early-bird"
-                        checked={preferences.morningPerson}
-                        setChecked={ morningPerson => mergePreferences({ morningPerson }) } />
+                        checked={profile.morningPerson}
+                        setChecked={ morningPerson => mergeProfile({ morningPerson }) } />
                     <CheckBoxField label="Pet-friendly"
-                        checked={preferences.pets}
-                        setChecked={ pets => mergePreferences({ pets }) } />
+                        checked={profile.pets}
+                        setChecked={ pets => mergeProfile({ pets }) } />
                     <CheckBoxField label="Likes to share food"
-                        checked={preferences.shareFood}
-                        setChecked={ shareFood => mergePreferences({ shareFood }) } />
+                        checked={profile.shareFood}
+                        setChecked={ shareFood => mergeProfile({ shareFood }) } />
                 </div>
                 <div>
                     <p className="mt-3 mb-0 fw-bold">Select what your potential roommates should know about you.</p>
                     <CheckBoxField label="Loud"
-                        checked={preferences.loud}
-                        setChecked={ loud => mergePreferences({ loud }) } />
+                        checked={profile.loud}
+                        setChecked={ loud => mergeProfile({ loud }) } />
                     <CheckBoxField label="Messy"
-                        checked={preferences.messy}
-                        setChecked={ messy => mergePreferences({ messy }) } />
+                        checked={profile.messy}
+                        setChecked={ messy => mergeProfile({ messy }) } />
                     <CheckBoxField label="I smoke"
-                        checked={preferences.smoker}
-                        setChecked={ smoker => mergePreferences({ smoker }) } />
+                        checked={profile.smoker}
+                        setChecked={ smoker => mergeProfile({ smoker }) } />
+                    <CheckBoxField label="I am in a relationship"
+                        checked={profile.relationship}
+                        setChecked={ relationship => mergeProfile({ relationship }) } />
                 </div>
                 <Link to={ `/profile` } 
                     className="btn btn-primary btn-lg col-12 mt-3"
