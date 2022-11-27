@@ -98,7 +98,8 @@ export const ProfileEditor = () => {
                 </div>
                 <TextAreaField label="About me"
                                 value={profile.bio}
-                                setValue={bio => mergeProfile({ bio })} />
+                                setValue={bio => mergeProfile({ bio })}
+                                max="1000" />
                 <div className="col-4">
                     <SelectField label="How many roommates do you need?"
                                 value={profile.desired_roommates}
