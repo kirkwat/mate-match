@@ -76,9 +76,11 @@ export const ProfileEditor = () => {
                             id="name"
                             value={profile.name}
                             setValue={name => mergeProfile({ name }) } />
-                <TextField label="Profile Image Link (use Imgur, etc)"
+                <TextAreaField label="Profile Image Link (use Imgur, etc)"
                             id="photo"
                             value={profile.photoID}
+                            max = "100"
+                            rows= "0"
                             setValue={photoID => mergeProfile({ photoID }) } />
                 <TextField label="Location/City"
                             id="city"
@@ -99,7 +101,8 @@ export const ProfileEditor = () => {
                 <TextAreaField label="About me"
                                 value={profile.bio}
                                 setValue={bio => mergeProfile({ bio })}
-                                max="1000" />
+                                max="1000"
+                                rows="5" />
                 <div className="col-4">
                     <SelectField label="How many roommates do you need?"
                                 value={profile.desired_roommates}
