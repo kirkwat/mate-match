@@ -54,7 +54,7 @@ export const RequestList = () => {
                                 <div className="card-header fs-4">
                                     {request.from}
                                     <span className="fs-5">
-                                        {request.desired_gender === "male"?"(He/Him)":"(She/Her)"}
+                                        {request.gender === "male"?"(He/Him)":"(She/Her)"}
                                     </span>
                                     <Link to={ `/${request.from}/profile` }
                                         className="btn btn-primary btn-sm float-end">

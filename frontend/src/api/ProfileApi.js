@@ -52,7 +52,16 @@ export const createProfile = (username, password) => new Promise((resolve, rejec
 });
 
 export const updateProfile = (profile, auth) => new Promise((resolve, reject) => {
-    axios.put(`/user?email=${profile.email}`, profile, { headers: {  authorization: `token: ${auth.accessToken}` } })
+    axios.put(`/user`, profile, { headers: {  authorization: `token: ${auth.accessToken}` } })
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
+
+export const updatePreferences = (preferences, auth) => new Promise((resolve, reject) => {
+    axios.put(`/user/preferences`, preferences, { headers: {  authorization: `token: ${auth.accessToken}` } })
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
