@@ -17,7 +17,8 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
     const propertyFilters = [
         new Filter("apartment", "Apartment", false),
         new Filter("house", "House", false),
-        new Filter("condo", "Condo", false)
+        new Filter("condo", "Condo", false),
+        new Filter("hasResidence", "Has Housing", false)
     ];
 
     const ageFilters = [
