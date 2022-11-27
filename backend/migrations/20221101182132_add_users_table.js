@@ -10,6 +10,7 @@ exports.up = function(knex) {
     table.string('gender');
     table.string('desired_gender');
     table.integer('desired_roommates');
+    table.boolean('hasResidence');
   });
 };
 exports.down = function(knex) {
