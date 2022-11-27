@@ -12,7 +12,7 @@ export const ProfileDetails = () => {
     const navigate = useNavigate();
 
     const [ profile, setProfile ] = useState(undefined);
-    const [ roommate, setRoommate ] = useState(undefined); 
+    const [ roommate, setRoommate ] = useState(false); 
     const [ request, setRequest ] = useState(undefined); 
 
     useEffect(() => {
@@ -23,7 +23,7 @@ export const ProfileDetails = () => {
             getProfileByUsername(auth).then(x => setProfile(x[0]));
         }
         getRoommates(auth.username,auth).then(x => {
-            setRoommate(x[0]?Object.values(x[0]).find(email => email === params.username):undefined);
+            setRoommate(x.length > 0);
         });
     }, [params]);
 

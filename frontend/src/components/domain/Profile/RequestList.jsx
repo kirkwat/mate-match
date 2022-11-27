@@ -1,5 +1,4 @@
 //TODO get roommates page to show updated roommates list
-//TODO make getrequests that get profile to show details for each request
 
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -37,7 +36,7 @@ export const RequestList = () => {
         }
     }, [sender]);
 
-    return <> 
+    return <>
         <div className={"container py-4"}>
             <h3>Requests
                     <span className="text-secondary"> ({requests.length})</span>
@@ -52,7 +51,7 @@ export const RequestList = () => {
                         requests && requests.map((request, index) =>
                             <div key={index} className="card mb-3">
                                 <div className="card-header fs-4">
-                                    {request.from}
+                                    {request.name}&nbsp;
                                     <span className="fs-5">
                                         {request.gender === "male"?"(He/Him)":"(She/Her)"}
                                     </span>
@@ -65,7 +64,7 @@ export const RequestList = () => {
                                     <p className="card-text text-secondary float-end">
                                         {request.city} - {request.age}
                                     </p>
-                                    <p className="card-text col-10">{request.message}</p>
+                                    <p className="card-text col-10">{request.bio}</p>
                                     <div className="btn-group">
                                         <button type="button" className="btn btn-danger"
                                             onClick= {()=> setSender({sender:request.from,status:0})}>
