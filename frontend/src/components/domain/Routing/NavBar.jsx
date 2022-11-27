@@ -1,6 +1,5 @@
 //TODO change classnames to "active" for active links
-
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export const NavBar = () => {
     return <> 
@@ -14,12 +13,12 @@ export const NavBar = () => {
                 </button>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <Link to={`requests`} className="nav-link">
+                        <NavLink to={`requests`} className="nav-link" activeClassName="nav-link active">
                             Your Requests
-                        </Link>
-                        <Link to={`roommates`} className="nav-link">
+                        </NavLink>
+                        <NavLink to={`roommates`} className="nav-link" activeClassName="nav-link active">
                             Your Roommates
-                        </Link>
+                        </NavLink>
                         <div className="nav-item dropdown-center">
                             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                 Your Account
