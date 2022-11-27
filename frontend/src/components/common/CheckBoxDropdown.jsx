@@ -5,9 +5,9 @@ export const CheckBoxDropdown = ({ dd_label, options, setValues }) => {
 
     const [checked, setChecked] = useState(options);
 
-    const handleToggle = label => {
-        const newChecked = {...checked};
-        newChecked[label]=!newChecked[label];
+    const handleToggle = id => {
+        const newChecked = [...checked];
+        newChecked[id].value=!newChecked[id].value;
 
         setChecked(newChecked);
         setValues(newChecked);
@@ -19,14 +19,32 @@ export const CheckBoxDropdown = ({ dd_label, options, setValues }) => {
                 { dd_label }
             </button>
             <ul className="dropdown-menu">
-                {Object.keys(options).map((label, index) =>
+                {options.map((option, index) =>
                     <li className="ps-2 pe-0" key={index}>
-                        <CheckBoxField label={label}
-                                checked={options[index]}
-                                setChecked={ () => handleToggle(label) } />
+                        <CheckBoxField label={option.display}
+                                checked={option.value}
+                                setChecked={ () => handleToggle(index) } />
                     </li>)
                 }
             </ul>
         </div>
-    </>
+    </>;
 };
+
+/*
+return <>
+<div className="dropdown">
+    <button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        { dd_label }
+    </button>
+    <ul className="dropdown-menu">
+        {Object.keys(options).map((label, index) =>
+            <li className="ps-2 pe-0" key={index}>
+                <CheckBoxField label={label}
+                        checked={options[index]}
+                        setChecked={ () => handleToggle(label) } />
+            </li>)
+        }
+    </ul>
+</div>
+</>*/

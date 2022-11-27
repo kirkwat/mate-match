@@ -21,10 +21,7 @@ export const ProfileEditor = () => {
         getProfileByUsername(auth).then(x => setProfile(x[0]));
     }, []);
 
-    const mergeProfile = delta => {
-        setProfile({ ...profile, ...delta });
-        console.log("here",delta)
-    };
+    const mergeProfile = delta => setProfile({ ...profile, ...delta });
 
     const handleSaveClick = () => {
         updateProfile({
@@ -92,7 +89,7 @@ export const ProfileEditor = () => {
                             setValue={ gender => mergeProfile({ gender }) }
                             options={genders}
                             optionValueKey="id"
-                            optionLabelKey="withCaps"/>
+                            optionLabelKey="display"/>
                 <div className="col-1">
                     <SelectField label="Age"
                                 value={profile.age}
@@ -139,6 +136,18 @@ export const ProfileEditor = () => {
                     <CheckBoxField label="Likes to share food"
                         checked={profile.shareFood}
                         setChecked={ shareFood => mergeProfile({ shareFood }) } />
+                </div>
+                <div>
+                    <p className="mt-3 mb-0 fw-bold">Select traits that describe you.</p>
+                    <CheckBoxField label="Extrovert"
+                        checked={profile.extrovert}
+                        setChecked={ extrovert => mergeProfile({ extrovert }) } />
+                    <CheckBoxField label="Introvert"
+                        checked={profile.introvert}
+                        setChecked={ introvert => mergeProfile({ introvert }) } />
+                    <CheckBoxField label="I like to bring friends over"
+                        checked={profile.bringFriendsOver}
+                        setChecked={ bringFriendsOver => mergeProfile({ bringFriendsOver }) } />
                 </div>
                 <div>
                     <p className="mt-3 mb-0 fw-bold">Select what your potential roommates should know about you.</p>

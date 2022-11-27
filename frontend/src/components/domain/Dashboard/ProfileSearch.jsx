@@ -3,11 +3,37 @@
 
 import {useState} from "react";
 import { SearchField, CheckBoxDropdown } from "../../common";
+import { Filter } from "../../../models";
 
 export const ProfileSearch = ({ profiles, setSearchResults}) => { 
 
-    const [ lifestylePref, setLifestylePref ] = useState({"Night-owl":false,"Early-bird":false,"Smoke-free":false,"Pet-friendly":false});
-    const [ propertyPref, setPropertyPref ] = useState({"House":false,"Apartment":false,"Condo":false});
+    const lifestyleFilters = [
+        new Filter("nightPerson", "Night-owl", false),
+        new Filter("morningPerson", "Early-bird", false),
+        new Filter("pets", "Pet-Friendly", false),
+        new Filter("shareFood", "Shares Food", false),
+    ];
+
+    const propertyFilters = [
+        new Filter("apartment", "Apartment", false),
+        new Filter("house", "House", false),
+        new Filter("condo", "Condo", false),
+    ];
+
+    const ageFilters = [
+        new Filter("age", "18-23", false),
+        new Filter("age", "24-29", false),
+        new Filter("age", "30+", false),
+    ];
+
+    const genderFilters = [
+        new Filter("apartment", "Apartment", false),
+        new Filter("house", "House", false),
+        new Filter("condo", "Condo", false),
+    ];
+
+    const [ lifestylePref, setLifestylePref ] = useState(lifestyleFilters);
+    const [ propertyPref, setPropertyPref ] = useState(propertyFilters);
     const [ agePref, setAgePref ] = useState({"18-23":false,"24-29":false,"30+":false});
     const [ genderPref, setGenderPref ] = useState({"Male":false,"Female":false});
 
@@ -17,47 +43,41 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
         setSearchResults(profiles.filter(profile => 
             profile.name.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0 ||
             profile.city.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0));
-    }
+    };
 
     const handleLifestyleToggle = (e) => {
         setLifestylePref(e);
-        //remove false attributes
-        const filters=Object.keys(e).reduce((o, key) => {
-            e[key] === true && (o[key] = e[key]);
-            return o;
-        }, {});
+        const filters=e.filter(pref => pref.value);
 
-        const results=profiles.filter(profile => { 
+        const results=profiles.filter(profile => {
             let filterCheck=true;
-            Object.keys(filters).map((label) => {
-                if(profile[label]!==true){
+
+            filters.forEach((pref) => {
+                if(!profile[pref.id]){
                     filterCheck = false;
                 }
-            })
+            });
             return filterCheck;
         });
         setSearchResults(results);
-    }
+    };
 
     const handlePropertyToggle = (e) => {
         setPropertyPref(e);
-        //remove false attributes
-        const filters=Object.keys(e).reduce((o, key) => {
-            e[key] === true && (o[key] = e[key]);
-            return o;
-        }, {});
+        const filters=e.filter(pref => pref.value);
 
-        const results=profiles.filter(profile => { 
+        const results=profiles.filter(profile => {
             let filterCheck=true;
-            Object.keys(filters).map((label) => {
-                if(profile[label]!==true){
+            
+            filters.forEach((pref) => {
+                if(!profile[pref.id]){
                     filterCheck = false;
                 }
-            })
+            });
             return filterCheck;
         });
         setSearchResults(results);
-    }
+    };
 
     const handleAgeToggle = (e) => {
         setAgePref(e);
@@ -83,7 +103,7 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
             return filterCheck;
         });
         setSearchResults(results);
-    }
+    };
     
     const handleGenderToggle = (e) => {
         setGenderPref(e);
@@ -106,7 +126,7 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
             return filterCheck;
         });
         setSearchResults(results);
-    }
+    };
 
     return <>
         <h1>Profile Explorer</h1>
@@ -122,6 +142,23 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
                         options={propertyPref} 
                         setValues={handlePropertyToggle}/>
             </div>
+
+
+
+
+        </div>
+        <hr/>
+    </>;
+};
+
+
+/*
+
+                        <div className="ms-3">
+                <CheckBoxDropdown dd_label="Property " 
+                        options={propertyPref} 
+                        setValues={handlePropertyToggle}/>
+            </div>
             <div className="ms-3">
                 <CheckBoxDropdown dd_label="Age " 
                         options={agePref} 
@@ -131,8 +168,4 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
                 <CheckBoxDropdown dd_label="Gender " 
                         options={genderPref} 
                         setValues={handleGenderToggle}/>
-            </div>
-        </div>
-        <hr/>
-    </>;
-};
+            </div>*/

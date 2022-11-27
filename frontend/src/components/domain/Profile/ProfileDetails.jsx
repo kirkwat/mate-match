@@ -46,7 +46,6 @@ export const ProfileDetails = () => {
     }
 
     return <>
-    {console.log(profile)}
         <div className="container py-4">
             <div className="bg-light rounded p-5 pb-4 mb-4">
                 <div className="avatar-image float-end">
@@ -70,40 +69,40 @@ export const ProfileDetails = () => {
                     </li>
                     <li className="list-group-item bg-light">
                         <span className="fw-bold">Property Preferences:&nbsp;</span>
-                        <span className={profile["apartment"]?"":"d-none"}>Apartment</span>
-                        <span className={profile["apartment"]&&(profile["house"]||profile["condo"])?"":"d-none"}>,&nbsp;</span>
-                        <span className={profile["house"]?"":"d-none"}>House</span>
-                        <span className={profile["house"]&&profile["condo"]?"":"d-none"}>,&nbsp;</span>
-                        <span className={profile["condo"]?"":"d-none"}>Condo</span>
+                        <span className={profile.apartment?"":"d-none"}>Apartment</span>
+                        <span className={profile.apartment&&(profile.house||profile.condo)?"":"d-none"}>,&nbsp;</span>
+                        <span className={profile.house?"":"d-none"}>House</span>
+                        <span className={profile.house&&profile.condo?"":"d-none"}>,&nbsp;</span>
+                        <span className={profile.condo?"":"d-none"}>Condo</span>
                     </li>
                     <li className="list-group-item bg-light">
                         <span className="fw-bold">Lifestyle Preferences:&nbsp;</span>
-                        <span className={profile["nightPerson"]?"":"d-none"}>Night-owl</span>
-                        <span className={profile["nightPerson"]&&(profile["morningPerson"]||profile["shareFood"]||profile["pets"])?"":"d-none"}>,&nbsp;</span>
-                        <span className={profile["morningPerson"]?"":"d-none"}>Early-bird</span>
-                        <span className={profile["morningPerson"]&&(profile["shareFood"]||profile["pets"])?"":"d-none"}>,&nbsp;</span>
-                        <span className={profile["pets"]?"":"d-none"}>Pet-friendly</span>
-                        <span className={profile["pets"]&&profile["shareFood"]?"":"d-none"}>,&nbsp;</span>
-                        <span className={profile["shareFood"]?"":"d-none"}>Likes to share food</span>
+                        <span className={profile.nightPerson?"":"d-none"}>Night-owl</span>
+                        <span className={profile.nightPerson&&(profile.morningPerson||profile.shareFood||profile.pets)?"":"d-none"}>,&nbsp;</span>
+                        <span className={profile.morningPerson?"":"d-none"}>Early-bird</span>
+                        <span className={profile.morningPerson&&(profile.shareFood||profile.pets)?"":"d-none"}>,&nbsp;</span>
+                        <span className={profile.pets?"":"d-none"}>Pet-friendly</span>
+                        <span className={profile.pets&&profile.shareFood?"":"d-none"}>,&nbsp;</span>
+                        <span className={profile.shareFood?"":"d-none"}>Likes to share food</span>
                     </li>
                     <li className="list-group-item bg-light">
                         <span className="fw-bold">Personality:&nbsp;</span>
-                        <span className={profile["extrovert"]?"":"d-none"}>Extrovert</span>
-                        <span className={profile["extrovert"]&&(profile["introvert"]||profile["bringFriendsOver"])?"":"d-none"}>,&nbsp;</span>
-                        <span className={profile["introvert"]?"":"d-none"}>Introvert</span>
-                        <span className={profile["introvert"]&&profile["bringFriendsOver"]?"":"d-none"}>,&nbsp;</span>
-                        <span className={profile["bringFriendsOver"]?"":"d-none"}>Likes to bring friends over</span>
+                        <span className={profile.extrovert?"":"d-none"}>Extrovert</span>
+                        <span className={profile.extrovert&&(profile.introvert||profile.bringFriendsOver)?"":"d-none"}>,&nbsp;</span>
+                        <span className={profile.introvert?"":"d-none"}>Introvert</span>
+                        <span className={profile.introvert&&profile.bringFriendsOver?"":"d-none"}>,&nbsp;</span>
+                        <span className={profile.bringFriendsOver?"":"d-none"}>Likes to bring friends over</span>
                     </li>
 
                     <li className="list-group-item bg-light">
                         <span className="fw-bold">Important to Know:&nbsp;</span>
-                        <span className={profile["loud"]?"":"d-none"}>Loud</span>
-                        <span className={profile["loud"]&&(profile["messy"]||profile["smoker"]||profile["relationship"])?"":"d-none"}>,&nbsp;</span>
-                        <span className={profile["messy"]?"":"d-none"}>Messy</span>
-                        <span className={profile["messy"]&&(profile["smoker"]||profile["relationship"])?"":"d-none"}>,&nbsp;</span>
-                        <span className={profile["smoker"]?"":"d-none"}>Likes to smoke</span>
-                        <span className={profile["smoker"]&&profile["relationship"]?"":"d-none"}>,&nbsp;</span>
-                        <span className={profile["relationship"]?"":"d-none"}>In a relationship</span>
+                        <span className={profile.loud?"":"d-none"}>Loud</span>
+                        <span className={profile.loud&&(profile.messy||profile.smoker||profile.relationship)?"":"d-none"}>,&nbsp;</span>
+                        <span className={profile.messy?"":"d-none"}>Messy</span>
+                        <span className={profile.messy&&(profile.smoker||profile.relationship)?"":"d-none"}>,&nbsp;</span>
+                        <span className={profile.smoker?"":"d-none"}>Likes to smoke</span>
+                        <span className={profile.smoker&&profile.relationship?"":"d-none"}>,&nbsp;</span>
+                        <span className={profile.relationship?"":"d-none"}>In a relationship</span>
                     </li>
                     <li className="list-group-item bg-light"></li>
                 </ul>

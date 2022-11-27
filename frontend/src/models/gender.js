@@ -1,6 +1,6 @@
 export class Gender {
-    constructor(id, withCaps) {
+    constructor(id, display) {
         this.id = id;
-        this.withCaps = withCaps;
+        this.display = display;
     }
 }
