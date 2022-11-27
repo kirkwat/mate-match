@@ -32,6 +32,7 @@ export const ProfileEditor = () => {
             city:profile.city,
             bio:profile.bio,
             gender:profile.gender,
+            hasResidence:profile.hasResidence,
             desired_roommates:profile.desired_roommates
         }, auth);
 
@@ -105,11 +106,9 @@ export const ProfileEditor = () => {
                                 setValue={ desired_roommates => mergeProfile({ desired_roommates }) }
                                 options={[...Array(9).keys()].map(x => x + 1)}/>
                 </div>
-                {/*
                 <CheckBoxField label="Check this box if you have a residence."
                             checked={profile.hasResidence}
                             setChecked={ hasResidence => mergeProfile({ hasResidence }) } /> 
-                */}
                 <div>
                     <p className="mt-3 mb-0 fw-bold">Select your property references.</p>
                     <CheckBoxField label="Apartment"

@@ -63,6 +63,7 @@ export const ProfileDetails = () => {
                 <p className="fs-5 col-8">{profile.bio}</p>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item bg-light"></li>
+                    <li className="list-group-item bg-light">{profile.hasResidence?"I currently have housing.":"I currently don't have housing."}</li>
                     <li className="list-group-item bg-light">
                         <span className="fw-bold">Roommates needed:&nbsp;</span>
                         {profile.desired_roommates}
@@ -93,7 +94,6 @@ export const ProfileDetails = () => {
                         <span className={profile.introvert&&profile.bringFriendsOver?"":"d-none"}>,&nbsp;</span>
                         <span className={profile.bringFriendsOver?"":"d-none"}>Likes to bring friends over</span>
                     </li>
-
                     <li className="list-group-item bg-light">
                         <span className="fw-bold">Important to Know:&nbsp;</span>
                         <span className={profile.loud?"":"d-none"}>Loud</span>
