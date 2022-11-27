@@ -76,6 +76,7 @@ export const ProfileEditor = () => {
                 <TextField label="Name"
                             id="name"
                             value={profile.name}
+                            required={true}
                             setValue={name => mergeProfile({ name }) } />
                 <TextAreaField label="Profile Image Link (use Imgur, etc)"
                             id="photo"
@@ -86,6 +87,7 @@ export const ProfileEditor = () => {
                 <TextField label="Location/City"
                             id="city"
                             value={profile.city}
+                            required={true}
                             setValue={ city => mergeProfile({ city }) } />
                 <SelectField label="Gender"
                             value={profile.gender}
