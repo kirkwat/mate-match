@@ -13,10 +13,10 @@ export const NavBar = () => {
                 </button>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <NavLink to={`requests`} className="nav-link" activeClassName="nav-link active">
+                        <NavLink to={`requests`} className="nav-link" activeclassname="nav-link active">
                             Your Requests
                         </NavLink>
-                        <NavLink to={`roommates`} className="nav-link" activeClassName="nav-link active">
+                        <NavLink to={`roommates`} className="nav-link" activeclassname="nav-link active">
                             Your Roommates
                         </NavLink>
                         <div className="nav-item dropdown-center">
