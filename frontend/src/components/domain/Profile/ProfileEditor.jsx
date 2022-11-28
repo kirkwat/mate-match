@@ -1,5 +1,3 @@
-//TODO make necessary fields mandatory, make max char input for field
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getProfileByUsername, updateProfile, updatePreferences } from "../../../api";
@@ -12,16 +10,64 @@ export const ProfileEditor = () => {
 
     const [ profile, setProfile ] = useState(undefined);
 
+    const [nameReq, setNameReq] = useState(false);
+    const [cityReq, setCityReq] = useState(false);
+
     const genders = [
         new Gender("male", "Man"),
         new Gender("female", "Woman"),
     ]
     
     useEffect(() => {
-        getProfileByUsername(auth).then(x => setProfile(x[0]));
+        getProfileByUsername(auth).then(x => {
+            setProfile(x[0]);
+            if (x[0].name) {
+                setNameReq(true);
+            }
+            if (x[0].city) {
+                setCityReq(true);
+            }
+        });
     }, []);
 
-    const mergeProfile = delta => setProfile({ ...profile, ...delta });
+    
+   const mergeProfile = delta => {
+        setProfile({ ...profile, ...delta });
+        if (delta['name'] != undefined) {
+            checkLength(delta['name'], 'name');
+        }
+
+        if (delta['city'] != undefined) {
+            checkLength(delta['city'], 'city');
+        }
+        checkReq();
+    };
+
+   const checkLength = (delta, type) => {
+        if (delta.length > 0 && type == "name") {
+            setNameReq(true);
+        }
+
+        else if (delta.length == 0 && type == "name") {
+            setNameReq(false);
+        }
+
+        else if (delta.length > 0 && type == "city") {
+            setCityReq(true);
+        }
+
+        else {
+            setCityReq(false);
+        }
+   }
+
+    const checkReq = () => {
+        if (!nameReq || !cityReq) {
+            return false;
+        }
+
+        return true;
+    }
 
     const handleSaveClick = () => {
         updateProfile({
@@ -77,7 +123,7 @@ export const ProfileEditor = () => {
                             id="name"
                             value={profile.name}
                             required={true}
-                            setValue={name => mergeProfile({ name }) } />
+                            setValue= {name => {mergeProfile({ name })}}  />
                 <TextAreaField label="Profile Image Link (use Imgur, etc)"
                             id="photo"
                             value={profile.photoID}
@@ -88,7 +134,7 @@ export const ProfileEditor = () => {
                             id="city"
                             value={profile.city}
                             required={true}
-                            setValue={ city => mergeProfile({ city }) } />
+                            setValue= {city => {mergeProfile({ city })}}  />
                 <SelectField label="Gender"
                             value={profile.gender}
                             setValue={ gender => mergeProfile({ gender }) }
@@ -169,11 +215,19 @@ export const ProfileEditor = () => {
                         checked={profile.relationship}
                         setChecked={ relationship => mergeProfile({ relationship }) } />
                 </div>
+                {checkReq() && 
                 <Link to={ `/profile` } 
                     className="btn btn-primary btn-lg col-12 mt-3"
                     onClick={ handleSaveClick }>
                     Save Changes
                 </Link>
+                }
+                {!checkReq() && 
+                    <div className="card text-center text-bg-primary opacity-50 fs-5 col-12 mt-3 p-2">
+                        Save Changes
+                    </div>
+                }
+                
             </div>
         </div>
     </>;
