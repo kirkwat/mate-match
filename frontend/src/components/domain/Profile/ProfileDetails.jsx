@@ -4,7 +4,6 @@ import { getProfileByUsername, getProfileByUsername2, sendRequest, checkRequests
 import { useAuth } from "../../../hooks";
 import { RoommateList } from './RoommateList';
 import { useParams } from "react-router-dom";
-import './styles/avatar.css';
 
 export const ProfileDetails = () => {
     const { auth } = useAuth();

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import './styles/cardImage.css';
 
 export const ResultList = ({ results }) => {
     return <>

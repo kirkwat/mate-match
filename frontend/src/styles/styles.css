@@ -1,0 +1,27 @@
+/* ProfileDetails avatar */
+
+.avatar-image {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 50%; 
+}
+
+.avatar-image img {
+    width: 100%;
+    height: auto;
+}
+
+/* ProfileExplorer cards */
+
+.card-image {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    object-fit: cover;
+}
