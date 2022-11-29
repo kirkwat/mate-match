@@ -23,7 +23,7 @@ export const RoommateList = ({ username=false, standalone=false }) => {
                     </span>
                 </h1>
                 {roommates.length === 0 ? (
-                    <p className="bg-light rounded p-3">
+                    <p className={standalone?"card mt-4 p-3 border-opacity-50":"bg-light rounded p-3"}>
                         {
                             username?"This user currently has no roommates!":"Send a request to become roommates!"
                         }
