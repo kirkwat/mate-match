@@ -1,7 +1,16 @@
 import axios from './Endpoint';
 
-export const getRequestsForUser = (auth) => new Promise((resolve, reject) => {
+export const getRequestsForRecipient = (auth) => new Promise((resolve, reject) => {
     axios.get(`/request/?to=${auth.username}`,{ headers: {  authorization: `token: ${auth.accessToken}` } })
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
+
+export const getRequestsForSender = (auth) => new Promise((resolve, reject) => {
+    axios.get(`/request/?from=${auth.username}`,{ headers: {  authorization: `token: ${auth.accessToken}` } })
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
