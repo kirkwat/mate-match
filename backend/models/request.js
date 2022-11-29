@@ -12,6 +12,11 @@ const fetchReqByRecipient = async (to) => {
     const results = await query;
     return results;
 }
+const fetchReqBySender = async (from) => {
+    const query = knex(REQ_TABLE).where({ from }).crossJoin(USERS_TABLE, 'users.email', 'requests.to');
+    const results = await query;
+    return results;
+}
 const fetchReq = async (to,from) => {
     const query = knex(REQ_TABLE).where({ to, from });
     const results = await query;
@@ -36,6 +41,7 @@ const createRequest = async (to, from, message) => {
  module.exports = {
     fetchAllReq,
     fetchReqByRecipient,
+    fetchReqBySender,
     fetchReq,
     createRequest,
     acceptRequest,

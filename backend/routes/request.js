@@ -11,6 +11,11 @@ router.get('/', async (req, res, next) => {
         const ReqByName = await req.models.request.fetchReqByRecipient(req.query.to);
         res.json(ReqByName);
         next();
+    }
+    else if (req.query.from) {
+        const ReqByName = await req.models.request.fetchReqBySender(req.query.from);
+        res.json(ReqByName);
+        next();
     } 
     else {
         const allReq = await req.models.request.fetchAllReq();
