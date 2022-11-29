@@ -4,7 +4,13 @@
 import {useState} from "react";
 import { SearchField, CheckBoxDropdown } from "../../common";
 import { Filter } from "../../../models";
-
+const filterFactor = {
+    key: '',
+    Lifestyle:[],
+    Property:[],
+    Age:[],
+    Gender:[],
+}
 export const ProfileSearch = ({ profiles, setSearchResults}) => { 
 
     const lifestyleFilters = [
@@ -36,88 +42,142 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
     const [ propertyPref, setPropertyPref ] = useState(propertyFilters);
     const [ agePref, setAgePref ] = useState(ageFilters);
     const [ genderPref, setGenderPref ] = useState(genderFilters);
-
+    
+    // const [ filterArr, setFilterArr ] = useState(filterFactor);
+    
     const handleSearchChange = (e) => {
-        if (!e.target.value) return setSearchResults(profiles);
+        let val = e.target.value;
+        filterFactor.key = val;
+        setFilterArrFun();
+        //  return setSearchResults(profiles);
 
-        setSearchResults(profiles.filter(profile => 
-            profile.name.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0 ||
-            profile.city.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0));
+        // setSearchResults(profiles.filter(profile => 
+        //     profile.name.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0 ||
+        //     profile.city.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0));
     };
 
     const handleLifestyleToggle = (e) => {
         setLifestylePref(e);
         const filters=e.filter(pref => pref.value);
+        filterFactor.Lifestyle = filters;
+        setFilterArrFun();
+        // const results=profiles.filter(profile => {
+        //     let filterCheck=true;
 
-        const results=profiles.filter(profile => {
-            let filterCheck=true;
-
-            filters.forEach((pref) => {
-                if(!profile[pref.id]){
-                    filterCheck = false;
-                }
-            });
-            return filterCheck;
-        });
-        setSearchResults(results);
+        //     filters.forEach((pref) => {
+        //         if(!profile[pref.id]){
+        //             filterCheck = false;
+        //         }
+        //     });
+        //     return filterCheck;
+        // });
+        // console.log(results);
+        // setSearchResults(results);
     };
 
     const handlePropertyToggle = (e) => {
         setPropertyPref(e);
         const filters=e.filter(pref => pref.value);
-
-        const results=profiles.filter(profile => {
-            let filterCheck=true;
+        filterFactor.Property = filters;
+        setFilterArrFun();
+        // const results=profiles.filter(profile => {
+        //     let filterCheck=true;
             
-            filters.forEach((pref) => {
-                if(!profile[pref.id]){
-                    filterCheck = false;
-                }
-            });
-            return filterCheck;
-        });
-        setSearchResults(results);
+        //     filters.forEach((pref) => {
+        //         if(!profile[pref.id]){
+        //             filterCheck = false;
+        //         }
+        //     });
+        //     return filterCheck;
+        // });
+        // setSearchResults(results);
     };
 
     const handleAgeToggle = (e) => {
         setAgePref(e);
         const filters=e.filter(pref => pref.value);
-
-        const results=profiles.filter(profile => {
-            let filterCheck=true;
+        filterFactor.Age = filters;
+        setFilterArrFun();
+        // const results=profiles.filter(profile => {
+        //     let filterCheck=true;
             
-            filters.forEach((pref) => {
-                if(pref.id==="18-23"){
-                    if(18>=profile.age||profile.age>=23) filterCheck=false;
-                }
-                else if(pref.id==="24-29"){
-                    if(24>=profile.age||profile.age>=29) filterCheck=false;
-                }
-                else if(pref.id==="30+"){
-                    if(30>=profile.age) filterCheck=false;
-                }
-            });
-            return filterCheck;
-        });
-        setSearchResults(results);
+        //     filters.forEach((pref) => {
+        //         if(pref.id==="18-23"){
+        //             if(18>=profile.age||profile.age>=23) filterCheck=false;
+        //         }
+        //         else if(pref.id==="24-29"){
+        //             if(24>=profile.age||profile.age>=29) filterCheck=false;
+        //         }
+        //         else if(pref.id==="30+"){
+        //             if(30>=profile.age) filterCheck=false;
+        //         }
+        //     });
+        //     return filterCheck;
+        // });
+        // setSearchResults(results);
     };
     
     const handleGenderToggle = (e) => {
         setGenderPref(e);
         const filters=e.filter(pref => pref.value);
+        filterFactor.Gender = filters;
+        setFilterArrFun();
+        // const results=profiles.filter(profile => {
+        //     let filterCheck=true;
 
-        const results=profiles.filter(profile => {
-            let filterCheck=true;
+        //     filters.forEach((pref) => {
+        //         if(profile.gender!==pref.id){
+        //             filterCheck = false;
+        //         }
+        //     });
+        //     return filterCheck;
+        // });
+        // setSearchResults(results);
+    };
 
-            filters.forEach((pref) => {
-                if(profile.gender!==pref.id){
-                    filterCheck = false;
+    const setFilterArrFun = function(){
+        const results = profiles.filter(profile => {
+            let mark = true;
+            Object.keys(filterFactor).forEach(v_key=>{
+                let curFilterItem = filterFactor[v_key];
+                if(v_key == 'key' && curFilterItem && (profile.name.toLowerCase().indexOf(curFilterItem.toLowerCase()) == -1 && profile.city.toLowerCase().indexOf(curFilterItem.toLowerCase()) == -1) ){
+                    mark = false
+                }
+                if(mark){
+                    if(v_key != 'key'){
+                        if(['Lifestyle','Property', 'Gender'].indexOf(v_key) !=-1){
+                            curFilterItem.forEach(v_=>{
+                                if(mark){
+                                    mark = v_key == 'Gender'?  profile.gender == v_.id : !!profile[v_.id];
+                                }
+                            });
+                        }
+                        if(v_key == 'Age'){
+                            curFilterItem.forEach(v_=>{
+                                if(mark){
+                                    if(v_.id==="18-23"){
+                                        if(profile.age > 23 || profile.age<18){
+                                            mark = false;
+                                        }
+                                    } else if(v_.id === "24-29"){
+                                        if(profile.age > 29 || profile.age<24){
+                                            mark = false;
+                                        }
+                                    } else if(v_.id==="30+"){
+                                        if(profile.age < 30 ){
+                                            mark = false;
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
                 }
             });
-            return filterCheck;
+            return mark;
         });
         setSearchResults(results);
-    };
+    }
 
     return <>
         <h1>Profile Explorer</h1>
