@@ -11,6 +11,7 @@ export const RequestList = () => {
 
     const [ receivedRequests, setReceivedRequests ] = useState([]);
     const [ sentRequests, setSentRequests ] = useState([]);
+    const [ toOrFrom, setToOrFrom ] = useState(false);
     const [ sender, setSender ] = useState(undefined);
     const [ recipient, setRecipient ] = useState(undefined);
 
@@ -66,62 +67,102 @@ export const RequestList = () => {
                 <h1>Roommate Requests</h1>
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
-                        <button className="nav-link text-secondary" 
-                                activeclassname="nav-link active"
-                                onChange>
+                        <button className={toOrFrom?"nav-link text-secondary":"nav-link active text-black"}
+                                onClick={()=> {setToOrFrom(false)}}>
                             Received&nbsp;
                             <span>({receivedRequests.length})</span>
                         </button>
                     </li>
                     <li className="nav-item">
-                        <button className="nav-link text-secondary" 
-                                activeclassname="nav-link active text-black"
-                                onChange>
+                        <button className={toOrFrom?"nav-link active text-black":"nav-link text-secondary"}
+                                onClick={()=> {setToOrFrom(true)}}>
                             Sent&nbsp;
                             <span>({sentRequests.length})</span>
                         </button>
                     </li>
                 </ul>
-                {receivedRequests.length === 0 ? (
-                    <p className="bg-light rounded p-3">
-                        Your roommate requests from other users will appear here.
-                    </p>
-                ) : (
-                    <ul className="list-group">
-                        {
-                            receivedRequests && receivedRequests.map((request, index) =>
-                                <div key={index} className="card my-3">
-                                    <div className="card-header fs-4">
-                                        {request.name}&nbsp;
-                                        <span className="fs-5">
-                                            {request.gender === "male"?"(He/Him)":"(She/Her)"}
-                                        </span>
-                                        <Link to={ `/${request.from}/profile` }
-                                            className="btn btn-primary btn-sm float-end">
-                                            View Profile
-                                        </Link>
-                                    </div>
-                                    <div className="card-body">
-                                        <p className="card-text text-secondary float-end">
-                                            {request.city} - {request.age}
-                                        </p>
-                                        <p className="card-text col-10">{request.bio}</p>
-                                        <div className="btn-group">
-                                            <button type="button" className="btn btn-danger"
-                                                onClick= {()=> setSender({sender:request.from,status:0})}>
-                                                Decline
-                                            </button>
-                                            <button type="button" className="btn btn-success"
-                                                onClick= {()=> setSender({sender:request.from,status:1})}>
-                                                Approve
-                                            </button>
+                {!toOrFrom?
+                    (receivedRequests.length === 0 ? (
+                        <p className="bg-light rounded p-3">
+                            Your roommate requests from other users will appear here.
+                        </p>
+                    ) : (
+                        <ul className="list-group">
+                            {
+                                receivedRequests && receivedRequests.map((request, index) =>
+                                    <div key={index} className="card my-3">
+                                        <div className="card-header fs-4">
+                                            {request.name}&nbsp;
+                                            <span className="fs-5">
+                                                {request.gender === "male"?"(He/Him)":"(She/Her)"}
+                                            </span>
+                                            <Link to={ `/${request.from}/profile` }
+                                                className="btn btn-primary btn-sm float-end">
+                                                View Profile
+                                            </Link>
+                                        </div>
+                                        <div className="card-body">
+                                            <p className="card-text text-secondary float-end">
+                                                {request.city} - {request.age}
+                                            </p>
+                                            <p className="card-text col-10">{request.bio}</p>
+                                            <div className="btn-group">
+                                                <button type="button" className="btn btn-danger"
+                                                    onClick= {()=> setSender({sender:request.from,status:0})}>
+                                                    Decline
+                                                </button>
+                                                <button type="button" className="btn btn-success"
+                                                    onClick= {()=> setSender({sender:request.from,status:1})}>
+                                                    Approve
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
+                                )
+                            }
+                        </ul>
+                    )
+                ):(sentRequests.length === 0 ? (
+                        <p className="card my-3 p-3 border-0">
+                            Roommate requests that you send to other users will appear here.
+                        </p>
+                    ) : (
+                    <ul className="list-group">
+                    {
+                        sentRequests && sentRequests.map((request, index) =>
+                            <div key={index} className="card my-3">
+                                <div className="card-header fs-4">
+                                    {request.name}&nbsp;
+                                    <span className="fs-5">
+                                        {request.gender === "male"?"(He/Him)":"(She/Her)"}
+                                    </span>
+                                    <Link to={ `/${request.from}/profile` }
+                                        className="btn btn-primary btn-sm float-end">
+                                        View Profile
+                                    </Link>
                                 </div>
-                            )
-                        }
-                    </ul>
-                )}
+                                <div className="card-body">
+                                    <p className="card-text text-secondary float-end">
+                                        {request.city} - {request.age}
+                                    </p>
+                                    <p className="card-text col-10">{request.bio}</p>
+                                    <div className="btn-group">
+                                        <button type="button" className="btn btn-danger"
+                                            onClick= {()=> setSender({sender:request.from,status:0})}>
+                                            Decline
+                                        </button>
+                                        <button type="button" className="btn btn-success"
+                                            onClick= {()=> setSender({sender:request.from,status:1})}>
+                                            Approve
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
+                </ul>
+                ))
+                }
             </div>
         </div>
     </>
