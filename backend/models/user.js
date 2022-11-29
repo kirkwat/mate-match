@@ -46,6 +46,11 @@ const deleteUser = async (email) => {
     const results = await query;
     return results;
 }
+const deletePref = async (email) => {
+    const query = knex(PREF_TABLE).delete().where({email});
+    const results = await query;
+    return results;
+}
 const authenticateUser = async (email, password) => {
     const users = await findUserByEmail(email);
     console.log('Results of users query', users);
@@ -75,6 +80,7 @@ module.exports = {
     updatePref,
     createUser,
     deleteUser, 
+    deletePref,
     authenticateUser, 
     findPrefByEmail
  }
