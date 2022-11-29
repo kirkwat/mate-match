@@ -1,10 +1,13 @@
 import axios from './Endpoint';
 
-const apiConfig = {
-    headers: {
-        authorization: `token: ${sessionStorage.token}`
-    }
-};
+export const Health = () => new Promise((resolve, reject) => {
+    axios.get(`/user`)
+        .then(x => { resolve(x.data) })
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
 
 export const getProfiles = (auth) => new Promise((resolve, reject) => {
     axios.get(`/user`, { headers: {  authorization: `token: ${auth.accessToken}` } })
@@ -33,15 +36,6 @@ export const getProfileByUsername2 = (email,auth) => new Promise((resolve, rejec
         });
 });
 
-export const Health = () => new Promise((resolve, reject) => {
-    axios.get(`/user`, apiConfig)
-        .then(x => { resolve(x.data) })
-        .catch(x => {
-            alert(x);
-            reject(x);
-        });
-});
-
 export const createProfile = (username, password) => new Promise((resolve, reject) => {
     axios.post(`/register`, {"email": username, "password": password})
         .then(x => resolve(x.data))
@@ -51,8 +45,8 @@ export const createProfile = (username, password) => new Promise((resolve, rejec
         });
 });
 
-export const updateProfile = (profile, auth) => new Promise((resolve, reject) => {
-    axios.put(`/user?email=${profile.email}`, profile, { headers: {  authorization: `token: ${auth.accessToken}` } })
+export const LoginCheck = (username, password) => new Promise((resolve, reject) => {
+    axios.post(`/session`, {"email": username, "password": password})
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);
@@ -60,8 +54,17 @@ export const updateProfile = (profile, auth) => new Promise((resolve, reject) =>
         });
 });
 
-export const LoginCheck = (username, password) => new Promise((resolve, reject) => {
-    axios.post(`/session`, {"email": username, "password": password})
+export const updateProfile = (profile, auth) => new Promise((resolve, reject) => {
+    axios.put(`/user`, profile, { headers: {  authorization: `token: ${auth.accessToken}` } })
+        .then(x => resolve(x.data))
+        .catch(x => {
+            alert(x);
+            reject(x);
+        });
+});
+
+export const updatePreferences = (preferences, auth) => new Promise((resolve, reject) => {
+    axios.put(`/user/preferences`, preferences, { headers: {  authorization: `token: ${auth.accessToken}` } })
         .then(x => resolve(x.data))
         .catch(x => {
             alert(x);

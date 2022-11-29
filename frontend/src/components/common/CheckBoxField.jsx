@@ -5,7 +5,7 @@ export const CheckBoxField = ({ label, checked, setChecked }) => <>
                 name="value"
                 id="value"
                 checked={checked}
-                onChange={() => setChecked(label)}
+                onChange={() => setChecked(!checked)}
                 className="me-2" />
             { label }
         </label>

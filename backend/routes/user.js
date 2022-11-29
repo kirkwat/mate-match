@@ -31,12 +31,14 @@ router.post('/', async (req, res, next) => {
   next();
  });
  router.put('/', async (req, res, next) => {
-    const updateUser = await req.models.user.updateUser(req.body.email, req.body.photoID, req.body.name, req.body.age, req.body.city, req.body.bio, req.body.gender, req.body.desired_gender, req.body.desired_roommates);
+    const updateUser = await req.models.user.updateUser(req.body.email, req.body.photoID, req.body.name, req.body.age, req.body.city, req.body.bio, req.body.gender, req.body.desired_gender, req.body.desired_roommates, req.body.hasResidence);
     res.json(updateUser);
     next();
  });
  router.post('/preferences', async (req, res, next) => {
-    const addPrefstoUser = await req.models.user.addPref(req.body.email, req.body.relationship, req.body.person_type, req.body.bring_over, req.body.shared_space, req.body.environment, req.body.smoker, req.body.cleanliness, req.body.temperature, req.body.sharing, req.body.pet);
+    const addPrefstoUser = await req.models.user.addPref(req.body.email, req.body.apartment, req.body.house, req.body.condo,
+      req.body.nightPerson, req.body.morningPerson, req.body.extrovert, req.body.introvert, req.body.smoker, req.body.bringFriendsOver,
+      req.body.loud, req.body.shareFood, req.body.messy, req.body.pets, req.body.relationship);
     res.json(addPrefstoUser);
     next();
  });
@@ -48,12 +50,15 @@ router.post('/', async (req, res, next) => {
     }
  });
  router.put('/preferences', async (req, res, next) => {
-   const updateUser = await req.models.user.updatePref(req.body.email, req.body.relationship, req.body.person_type, req.body.bring_over, req.body.shared_space, req.body.environment, req.body.smoker, req.body.cleanliness, req.body.temperature, req.body.sharing, req.body.pet);
+   const updateUser = await req.models.user.updatePref(req.body.email, req.body.apartment, req.body.house, req.body.condo,
+      req.body.nightPerson, req.body.morningPerson, req.body.extrovert, req.body.introvert, req.body.smoker, req.body.bringFriendsOver,
+      req.body.loud, req.body.shareFood, req.body.messy, req.body.pets, req.body.relationship);
    res.json(updateUser);
    next();
 });
  router.delete('/', async (req, res, next) => {
     const deleteUser = await req.models.user.deleteUser(req.body.email);
+    const deletePref = await req.models.user.deletePref(req.body.email);
     res.status(204).end();
     next();
  });

@@ -4,32 +4,32 @@ const USERS_TABLE = 'users';
 const PREF_TABLE = 'preferences';
 
    const fetchAllUsers = async () => {
-       const query = knex(USERS_TABLE);
+       const query = knex(USERS_TABLE).crossJoin(PREF_TABLE, 'users.email', 'preferences.email');
        const results = await query;
        return results;
    }
    const fetchUserByName = async (name) => {
-       const query = knex(USERS_TABLE).where({ name });
+       const query = knex(USERS_TABLE).where({ name }).crossJoin(PREF_TABLE, 'users.email', 'preferences.email').where({ 'users.email':email });
        const results = await query;
        return results;
    }
    const findUserByEmail = async (email) => {
-    const query = knex(USERS_TABLE).where({ email });
+    const query = knex(USERS_TABLE).crossJoin(PREF_TABLE, 'users.email', 'preferences.email').where({ 'users.email':email });
     const result = await query;
     return result;
     }
-   const updateUser = async (email, photoID, name, age, city, bio, gender, desired_gender, desired_roommates)  => {
-    const query = knex(USERS_TABLE).update({photoID, name, age, city, bio, gender, desired_gender, desired_roommates}).where({email});
+   const updateUser = async (email, photoID, name, age, city, bio, gender, desired_gender, desired_roommates, hasResidence)  => {
+    const query = knex(USERS_TABLE).update({photoID, name, age, city, bio, gender, desired_gender, desired_roommates, hasResidence}).where({email});
     const results = await query;
     return results;
 }
-const addPref = async (email, relationship, person_type, bring_over, shared_space, environment, smoker, cleanliness, temperature, sharing, pet)  => {
-    const query = knex(PREF_TABLE).insert({email, relationship, person_type, bring_over, shared_space, environment, smoker, cleanliness, temperature, sharing, pet});
+const addPref = async (email, apartment, house, condo, nightPerson, morningPerson, extrovert, introvert, smoker, bringFriendsOver, loud, shareFood, messy, pets, relationship)  => {
+    const query = knex(PREF_TABLE).insert({email, apartment, house, condo, nightPerson, morningPerson, extrovert, introvert, smoker, bringFriendsOver, loud, shareFood, messy, pets, relationship});
     const results = await query;
     return results;
 }
-const updatePref = async (email, relationship, person_type, bring_over, shared_space, environment, smoker, cleanliness, temperature, sharing, pet)  => {
-    const query = knex(PREF_TABLE).update({relationship, person_type, bring_over, shared_space, environment, smoker, cleanliness, temperature, sharing, pet}).where({email});
+const updatePref = async (email, apartment, house, condo, nightPerson, morningPerson, extrovert, introvert, smoker, bringFriendsOver, loud, shareFood, messy, pets, relationship)  => {
+    const query = knex(PREF_TABLE).update({apartment, house, condo, nightPerson, morningPerson, extrovert, introvert, smoker, bringFriendsOver, loud, shareFood, messy, pets, relationship}).where({email});
     const results = await query;
     return results;
 }
@@ -43,6 +43,11 @@ const createUser = async (email, password) => {
  };
 const deleteUser = async (email) => {
     const query = knex(USERS_TABLE).delete().where({email});
+    const results = await query;
+    return results;
+}
+const deletePref = async (email) => {
+    const query = knex(PREF_TABLE).delete().where({email});
     const results = await query;
     return results;
 }
@@ -75,6 +80,7 @@ module.exports = {
     updatePref,
     createUser,
     deleteUser, 
+    deletePref,
     authenticateUser, 
     findPrefByEmail
  }

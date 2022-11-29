@@ -1,5 +1,5 @@
 const knex = require('../database/knex');
-const bcrypt = require('bcrypt');
+const USERS_TABLE = 'users';
 const REQ_TABLE = 'requests';
 
 const fetchAllReq = async () => {
@@ -8,7 +8,12 @@ const fetchAllReq = async () => {
     return results;
 }
 const fetchReqByRecipient = async (to) => {
-    const query = knex(REQ_TABLE).where({ to });
+    const query = knex(REQ_TABLE).where({ to }).crossJoin(USERS_TABLE, 'users.email', 'requests.from');
+    const results = await query;
+    return results;
+}
+const fetchReqBySender = async (from) => {
+    const query = knex(REQ_TABLE).where({ from }).crossJoin(USERS_TABLE, 'users.email', 'requests.to');
     const results = await query;
     return results;
 }
@@ -36,6 +41,7 @@ const createRequest = async (to, from, message) => {
  module.exports = {
     fetchAllReq,
     fetchReqByRecipient,
+    fetchReqBySender,
     fetchReq,
     createRequest,
     acceptRequest,
