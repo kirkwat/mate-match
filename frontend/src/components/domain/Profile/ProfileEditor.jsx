@@ -30,7 +30,6 @@ export const ProfileEditor = () => {
         });
     }, []);
 
-    
    const mergeProfile = delta => {
         setProfile({ ...profile, ...delta });
         if (delta['name'] != undefined) {
