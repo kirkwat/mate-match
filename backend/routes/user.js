@@ -31,8 +31,13 @@ router.post('/', async (req, res, next) => {
   next();
  });
  router.put('/', async (req, res, next) => {
-    const updateUser = await req.models.user.updateUser(req.body.email, req.body.photoID, req.body.name, req.body.age, req.body.city, req.body.bio, req.body.gender, req.body.desired_gender, req.body.desired_roommates, req.body.hasResidence);
-    res.json(updateUser);
+    try {
+      const updateUser = await req.models.user.updateUser(req.body.email, req.body.photoID, req.body.name, req.body.age, req.body.city, req.body.bio, req.body.gender, req.body.desired_gender, req.body.desired_roommates, req.body.hasResidence);
+      res.json(updateUser);
+   } catch (err){
+      console.error('Failed to update user:', err);
+      res.status(500).json({ message: err.toString() });
+   }
     next();
  });
  router.post('/preferences', async (req, res, next) => {
@@ -50,10 +55,15 @@ router.post('/', async (req, res, next) => {
     }
  });
  router.put('/preferences', async (req, res, next) => {
-   const updateUser = await req.models.user.updatePref(req.body.email, req.body.apartment, req.body.house, req.body.condo,
+   try {
+      const updateUser = await req.models.user.updatePref(req.body.email, req.body.apartment, req.body.house, req.body.condo,
       req.body.nightPerson, req.body.morningPerson, req.body.extrovert, req.body.introvert, req.body.smoker, req.body.bringFriendsOver,
       req.body.loud, req.body.shareFood, req.body.messy, req.body.pets, req.body.relationship);
-   res.json(updateUser);
+      res.json(updateUser);
+   } catch (err){
+      console.error('Failed to update user preferences:', err);
+      res.status(500).json({ message: err.toString() });
+   }
    next();
 });
  router.delete('/', async (req, res, next) => {

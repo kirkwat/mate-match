@@ -36,13 +36,23 @@ router.post('/', async (req, res, next) => {
   next();
  });
  router.delete('/', async (req, res, next) => {
-    const deleteReq = await req.models.request.deleteRequest(req.query.to, req.query.from);
-    res.status(204).end();
+    try {
+        const deleteReq = await req.models.request.deleteRequest(req.query.to, req.query.from);
+        res.status(204).end();
+    } catch (err){
+        console.error('Failed to delete request:', err);
+        res.status(500).json({ message: err.toString() });
+    }
     next();
  });
  router.put('/', async (req, res, next) => {
-    const acceptReq = await req.models.request.acceptRequest(req.body.to, req.body.from, req.body.accepted);
-    res.json(acceptReq);
+    try {
+        const acceptReq = await req.models.request.acceptRequest(req.body.to, req.body.from, req.body.accepted);
+        res.json(acceptReq);
+    } catch (err){
+        console.error('Failed to accept request:', err);
+        res.status(500).json({ message: err.toString() });
+    }
     next();
  });
 module.exports = router;
