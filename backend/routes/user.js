@@ -67,8 +67,8 @@ router.post('/', async (req, res, next) => {
    next();
 });
  router.delete('/', async (req, res, next) => {
-    const deleteUser = await req.models.user.deleteUser(req.body.email);
-    const deletePref = await req.models.user.deletePref(req.body.email);
+   const deletePref = await req.models.user.deletePref(req.body.email);
+   const deleteUser = await req.models.user.deleteUser(req.body.email);
     res.status(204).end();
     next();
  });
