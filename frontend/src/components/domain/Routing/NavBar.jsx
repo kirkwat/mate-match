@@ -1,4 +1,3 @@
-//TODO change classnames to "active" for active links
 import { Link, NavLink } from "react-router-dom";
 
 export const NavBar = () => {
@@ -13,17 +12,17 @@ export const NavBar = () => {
                 </button>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <NavLink to={`requests`} className="nav-link" activeclassname="nav-link active">
+                        <NavLink to={`requests`} className="nav-link">
                             Your Requests
                         </NavLink>
-                        <NavLink to={`roommates`} className="nav-link" activeclassname="nav-link active">
+                        <NavLink to={`roommates`} className="nav-link">
                             Your Roommates
                         </NavLink>
                         <div className="nav-item dropdown-center">
-                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <div className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                 Your Account
-                            </a>
-                            <ul className="dropdown-menu">
+                            </div>
+                            <ul className="dropdown-menu m-0">
                                 <li>
                                     <Link to={`profile/edit`} className="dropdown-item py-0 ps-3">
                                         Edit Profile

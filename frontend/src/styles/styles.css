@@ -1,3 +1,29 @@
+/* General */
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;
+}
+
+/* Navbar */
+
+.navbar-nav .nav-link.active {
+    font-weight: 500;
+}
+
+/* Footer */
+
+footer {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 /* ProfileDetails avatar */
 
 .avatar-image {
