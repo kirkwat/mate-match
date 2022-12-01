@@ -48,20 +48,20 @@ export const ProfileDetails = () => {
 
     return <>
         <div className="container pt-4 pb-5">
-            <div className="bg-light rounded p-5 pb-4 mb-4">
-                <div className="avatar-image float-end">
-                    <img src={profile.photoID?profile.photoID:"images/default.jpg"} 
+            <div className="bg-light rounded p-3 p-md-5 pb-md-4 mb-4">
+                <div className="avatar-image float-sm-end mb-2">
+                    <img src={profile.photoID?profile.photoID:"/images/default.jpg"} 
                         alt="avatar" className="img-fluid"/>
                 </div>
-                <h1 className="display-5">
+                <h1 className="display-5 text-center text-sm-start">
                     <span className="fw-bold">{profile.name}</span>
                     <span className="fs-1"> {profile.gender === "male"?"(He/Him)":"(She/Her)"}</span>
                 </h1>
-                <h3 className="display-7">
+                <h3 className="display-7 text-center text-sm-start">
                     <span>{profile.city}</span>
                     <span> - {profile.age}</span>
                 </h3>                        
-                <p className="fs-5 col-8">{profile.bio}</p>
+                <p className="fs-5 col-md-8 text-center text-sm-start">{profile.bio}</p>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item bg-light"></li>
                     <li className="list-group-item bg-light">{profile.hasResidence?"I currently have housing.":"I currently don't have housing."}</li>

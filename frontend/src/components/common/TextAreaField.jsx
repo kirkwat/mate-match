@@ -1,14 +1,16 @@
-export const TextAreaField = ({ label, value, setValue, max, rowNum }) => <>
+export const TextAreaField = ({ label, value, setValue, rowNum }) => <>
     <div className="form-group fw-bold mb-3">
-        <label htmlFor="value">{ label }</label>
+        <label htmlFor="value">
+            { label }&nbsp;
+            {value === null && <span className="fw-normal">{`- Max characters: 0/${255}`}</span>}
+            {value !== null && <span className="fw-normal">{`- Max characters: ${value.length}/${255}`}</span>}
+        </label>
         <textarea name="value"
             id="value"
             rows={rowNum}
             className="form-control"
             value={value}
-            maxLength= {max}
+            maxLength= {255}
             onChange={event => setValue(event.target.value)} />
     </div>
-    {value == null && <p>{`Max characters: 0/${max}`}</p>}
-    {value != null &&  <p>{`Max characters: ${value.length}/${max}`}</p>}
 </>;

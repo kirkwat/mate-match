@@ -15,8 +15,8 @@ export const RoommateList = ({ username=false, standalone=false }) => {
     }, []);
 
     return <> 
-        <div className={standalone?"container pt-4 pb-5":""}>
-            <div className={standalone?"bg-light rounded p-5 pb-4 mb-4":""}>
+        <div className={standalone?"container pt-4 pb-5":"pb-2"}>
+            <div className={standalone?"bg-light rounded p-3 p-md-5 pb-md-4 mb-4":""}>
                 <h1 className={standalone?"fs-1 mb-4":"fs-3"}>Roommates&nbsp;
                     <span className="text-secondary">
                         ({roommates.length === 0?roommates.length:roommates.length-1})
@@ -36,12 +36,10 @@ export const RoommateList = ({ username=false, standalone=false }) => {
                                 <div key={index} className="card mb-3">
                                     <div className="card-header fs-4">
                                         {roommate.name}&nbsp;
-                                        <span className="fs-5">
+                                        <span className="fs-5 d-none d-sm-inline">
                                             {roommate.gender === "male"?"(He/Him)":"(She/Her)"}
                                         </span>
-                                        <Link to={ 
-                                                roommate.email===auth.username?`/profile`:`/${roommate.email}/profile`
-                                            }
+                                        <Link to={roommate.email===auth.username?`/profile`:`/${roommate.email}/profile`}
                                             className="btn btn-primary btn-sm float-end">
                                             View Profile
                                         </Link>

@@ -115,43 +115,47 @@ export const ProfileEditor = () => {
 
     return <>
         <div className="container pt-4 pb-5">
-            <div className="bg-light rounded p-5 pb-4 mb-4">
+            <div className="bg-light rounded p-3 p-md-5 pb-md-4 mb-4">
                 <h1>Create/Edit Your Profile</h1>
                 <h4>Username:&nbsp;({profile.email})</h4>
-                <TextField label="Name"
-                            id="name"
-                            value={profile.name}
-                            required={true}
-                            setValue= {name => {mergeProfile({ name })}}  />
-                <TextAreaField label="Profile Image Link (use Imgur, etc)"
-                            id="photo"
-                            value={profile.photoID}
-                            max = "100"
-                            rows= "0"
-                            setValue={photoID => mergeProfile({ photoID }) } />
-                <TextField label="Location/City"
-                            id="city"
-                            value={profile.city}
-                            required={true}
-                            setValue= {city => {mergeProfile({ city })}}  />
-                <SelectField label="Gender"
-                            value={profile.gender}
-                            setValue={ gender => mergeProfile({ gender }) }
-                            options={genders}
-                            optionValueKey="id"
-                            optionLabelKey="display"/>
-                <div className="col-1">
+                <div className="col-md-4">
+                    <TextField label="Name"
+                                id="name"
+                                value={profile.name}
+                                required={true}
+                                setValue= {name => {mergeProfile({ name })}}  />
+                </div>
+                <div className="col-md-4">
+                    <TextField label="Location/City"
+                                id="city"
+                                value={profile.city}
+                                required={true}
+                                setValue= {city => {mergeProfile({ city })}}  />
+                </div>
+                <div className="col-3 col-sm-2">
+                    <SelectField label="Gender"
+                                value={profile.gender}
+                                setValue={ gender => mergeProfile({ gender }) }
+                                options={genders}
+                                optionValueKey="id"
+                                optionLabelKey="display"/>
+                </div>
+                <div className="col-2 col-md-1">
                     <SelectField label="Age"
                                 value={profile.age}
                                 setValue={ age => mergeProfile({ age }) }
                                 options={[...Array(85 - 18 + 1).keys()].map(x => x + 18)}/>
                 </div>
+                <TextAreaField label="Profile Image Link (use Imgur, etc)"
+                            id="photo"
+                            value={profile.photoID}
+                            rowNum= {1}
+                            setValue={photoID => mergeProfile({ photoID }) } />
                 <TextAreaField label="About me"
                                 value={profile.bio}
                                 setValue={bio => mergeProfile({ bio })}
-                                max="1000"
-                                rows="5" />
-                <div className="col-4">
+                                rowNum={4} />
+                <div className="col-6 col-md-4">
                     <SelectField label="How many roommates do you need?"
                                 value={profile.desired_roommates}
                                 setValue={ desired_roommates => mergeProfile({ desired_roommates }) }

@@ -5,7 +5,7 @@ export const HomePage = () => {
     return <>
         <PlainNavBar/>
         <div className="container pt-4 pb-5">
-            <div className="bg-light rounded p-5 pb-4 mb-4">
+            <div className="bg-light rounded p-3 p-md-5 pb-4 mb-4">
                 <h1 className="display-4 d-flex align-items-center justify-content-center mb-5">Roomate Finder</h1>
                 <p className="lead d-flex align-items-center justify-content-center mb-5 mx-5 fs-4">
                     Looking for roomates(s) and don't know where to start? Roomate Finder allows you to create a profile and be automatically given a list 
