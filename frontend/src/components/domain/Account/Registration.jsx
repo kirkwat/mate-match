@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createProfile, LoginCheck } from "../../../api";
 import { useAuth } from "../../../hooks";
-import { CredentialsField } from "../../common";
+import { CredentialsField, PlainNavBar } from "../../common";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,11}$/;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -58,6 +58,7 @@ export const Registration = () => {
     }
 
     return <> 
+        <PlainNavBar/>
         <div className="container pt-4 pb-5">
             <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
                 <div className={errorMessage ? "alert alert-danger" : "d-none"}>

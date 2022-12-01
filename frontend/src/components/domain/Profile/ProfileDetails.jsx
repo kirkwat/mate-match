@@ -24,7 +24,7 @@ export const ProfileDetails = () => {
             getProfileByUsername(auth).then(x => setProfile(x[0]));
         }
         getRoommates(auth.username,auth).then(x => {
-            setRoommate(x.filter(user => user.email == params.username).length !== 0);
+            setRoommate(x.filter(user => user.email === params.username).length !== 0);
         });
     }, [params]);
 

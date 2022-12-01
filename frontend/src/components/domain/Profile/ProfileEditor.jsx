@@ -32,26 +32,26 @@ export const ProfileEditor = () => {
 
    const mergeProfile = delta => {
         setProfile({ ...profile, ...delta });
-        if (delta['name'] != undefined) {
+        if (delta['name'] !== undefined) {
             checkLength(delta['name'], 'name');
         }
 
-        if (delta['city'] != undefined) {
+        if (delta['city'] !== undefined) {
             checkLength(delta['city'], 'city');
         }
         checkReq();
     };
 
    const checkLength = (delta, type) => {
-        if (delta.length > 0 && type == "name") {
+        if (delta.length > 0 && type === "name") {
             setNameReq(true);
         }
 
-        else if (delta.length == 0 && type == "name") {
+        else if (delta.length === 0 && type === "name") {
             setNameReq(false);
         }
 
-        else if (delta.length > 0 && type == "city") {
+        else if (delta.length > 0 && type === "city") {
             setCityReq(true);
         }
 

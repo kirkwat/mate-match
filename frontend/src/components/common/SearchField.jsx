@@ -1,5 +1,5 @@
 export const SearchField = ({ onChange }) => <>
-    <div className="form-group form-label rounded-pill fw-bold w-50">
+    <div className="form-group form-label rounded-pill fw-bold">
         <input type="text"
             name="value"
             placeholder="Search for Name or City"
