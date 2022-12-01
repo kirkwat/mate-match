@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginCheck} from "../../../api";
 import { useAuth } from "../../../hooks";
-import { CredentialsField } from "../../common";
+import { CredentialsField, PlainNavBar } from "../../common";
 
 export const Login = () => {
     const { setAuth } = useAuth();
@@ -33,7 +33,8 @@ export const Login = () => {
     };
 
     return <> 
-        <div className="container py-4">
+        <PlainNavBar/>
+        <div className="container pt-4 pb-5">
             <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
                 <div className={errorMessage ? "alert alert-danger" : "d-none"}>
                     {errorMessage}

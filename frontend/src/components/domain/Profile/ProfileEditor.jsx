@@ -32,26 +32,26 @@ export const ProfileEditor = () => {
 
    const mergeProfile = delta => {
         setProfile({ ...profile, ...delta });
-        if (delta['name'] != undefined) {
+        if (delta['name'] !== undefined) {
             checkLength(delta['name'], 'name');
         }
 
-        if (delta['city'] != undefined) {
+        if (delta['city'] !== undefined) {
             checkLength(delta['city'], 'city');
         }
         checkReq();
     };
 
    const checkLength = (delta, type) => {
-        if (delta.length > 0 && type == "name") {
+        if (delta.length > 0 && type === "name") {
             setNameReq(true);
         }
 
-        else if (delta.length == 0 && type == "name") {
+        else if (delta.length === 0 && type === "name") {
             setNameReq(false);
         }
 
-        else if (delta.length > 0 && type == "city") {
+        else if (delta.length > 0 && type === "city") {
             setCityReq(true);
         }
 
@@ -102,7 +102,7 @@ export const ProfileEditor = () => {
 
     if(!profile) {
         return <>
-            <div className="container py-4">
+            <div className="container pt-4 pb-5">
                 <div className="bg-light rounded p-5 pb-4 mb-4">
                     <div className="spinner-border" role="status">
                         <span className="visually-hidden">Loading Profile...</span>
@@ -114,7 +114,7 @@ export const ProfileEditor = () => {
     };
 
     return <>
-        <div className="container py-4">
+        <div className="container pt-4 pb-5">
             <div className="bg-light rounded p-5 pb-4 mb-4">
                 <h1>Create/Edit Your Profile</h1>
                 <h4>Username:&nbsp;({profile.email})</h4>

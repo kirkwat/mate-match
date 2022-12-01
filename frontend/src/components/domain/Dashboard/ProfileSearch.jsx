@@ -140,19 +140,19 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
             let mark = true;
             Object.keys(filterFactor).forEach(v_key=>{
                 let curFilterItem = filterFactor[v_key];
-                if(v_key == 'key' && curFilterItem && (profile.name.toLowerCase().indexOf(curFilterItem.toLowerCase()) == -1 && profile.city.toLowerCase().indexOf(curFilterItem.toLowerCase()) == -1) ){
+                if(v_key === 'key' && curFilterItem && (profile.name.toLowerCase().indexOf(curFilterItem.toLowerCase()) === -1 && profile.city.toLowerCase().indexOf(curFilterItem.toLowerCase()) === -1) ){
                     mark = false
                 }
                 if(mark){
-                    if(v_key != 'key'){
-                        if(['Lifestyle','Property', 'Gender'].indexOf(v_key) !=-1){
+                    if(v_key !== 'key'){
+                        if(['Lifestyle','Property', 'Gender'].indexOf(v_key) !==-1){
                             curFilterItem.forEach(v_=>{
                                 if(mark){
-                                    mark = v_key == 'Gender'?  profile.gender == v_.id : !!profile[v_.id];
+                                    mark = v_key === 'Gender'?  profile.gender === v_.id : !!profile[v_.id];
                                 }
                             });
                         }
-                        if(v_key == 'Age'){
+                        if(v_key === 'Age'){
                             curFilterItem.forEach(v_=>{
                                 if(mark){
                                     if(v_.id==="18-23"){
@@ -181,27 +181,33 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
 
     return <>
         <h1>Profile Explorer</h1>
-        <div className="d-flex flex g-3">
-            <SearchField onChange={handleSearchChange}/>
-            <div className="ms-3">
-                <CheckBoxDropdown dd_label="Lifestyle " 
-                        options={lifestylePref} 
-                        setValues={handleLifestyleToggle}/>
+        <div class="row justify-content-start g-3">
+            <div class="col-xs-12 col-md-6 col-lg-4">
+                <SearchField onChange={handleSearchChange}/>
             </div>
-            <div className="ms-3">
-                <CheckBoxDropdown dd_label="Property " 
-                        options={propertyPref} 
-                        setValues={handlePropertyToggle}/>
-            </div>
-            <div className="ms-3">
-                <CheckBoxDropdown dd_label="Age " 
-                        options={agePref} 
-                        setValues={handleAgeToggle}/>
-            </div>
-            <div className="ms-3">
-                <CheckBoxDropdown dd_label="Gender " 
-                        options={genderPref} 
-                        setValues={handleGenderToggle}/>
+            <div class="col-xs-12 col-md-6 col-lg-8">
+                <div class="row justify-content-evenly gx-5 gy-2">
+                    <div class="col-xs-4 col-sm-3 col-md-6 col-lg-2">
+                        <CheckBoxDropdown dd_label="Lifestyle " 
+                                options={lifestylePref} 
+                                setValues={handleLifestyleToggle}/>
+                    </div>
+                    <div class="col-xs-4 col-sm-3 col-md-6 col-lg-2">
+                        <CheckBoxDropdown dd_label="Property " 
+                                options={propertyPref} 
+                                setValues={handlePropertyToggle}/>
+                                </div>
+                    <div class="col-xs-4 col-sm-3 col-md-6 col-lg-2">
+                        <CheckBoxDropdown dd_label="Gender " 
+                                options={genderPref} 
+                                setValues={handleGenderToggle}/>
+                    </div>
+                    <div class="col-xs-4 col-sm-3 col-md-6 col-lg-2">
+                        <CheckBoxDropdown dd_label="Age " 
+                                options={agePref} 
+                                setValues={handleAgeToggle}/>
+                    </div>
+                </div>
             </div>
         </div>
         <hr/>

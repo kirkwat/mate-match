@@ -42,7 +42,7 @@ export const RequestList = () => {
     }, [recipient]);
 
     return <>
-        <div className="container py-4">
+        <div className="container pt-4 pb-5">
             <div className="bg-light rounded p-5 pb-4 mb-4">
                 <h1>Roommate Requests</h1>
                 <ul className="nav nav-tabs mb-3">

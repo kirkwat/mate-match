@@ -5,3 +5,5 @@ export * from './TextField';
 export * from './SearchField';
 export * from './CheckBoxDropdown';
 export * from './CredentialsField';
+export * from './Footer';
+export * from './PlainNavBar';
