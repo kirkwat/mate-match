@@ -60,7 +60,7 @@ export const Registration = () => {
     return <> 
         <PlainNavBar/>
         <div className="container pt-4 pb-5">
-            <div className="bg-light rounded mx-auto col-xl-6 p-3 p-md-5 pb-4 mb-4">
+            <div className="bg-light rounded mx-auto col-xl-6 p-3 p-md-5 pb-md-3 mb-4">
                 <div className={errorMessage ? "alert alert-danger" : "d-none"}>
                     {errorMessage}
                 </div>
