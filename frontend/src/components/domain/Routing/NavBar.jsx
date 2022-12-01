@@ -2,10 +2,10 @@ import { Link, NavLink } from "react-router-dom";
 
 export const NavBar = () => {
     return <> 
-        <nav className="navbar navbar-expand-md sticky-top bg-light">
+        <nav className="navbar navbar-expand-md sticky-top navbar-dark bg-dark">
             <div className="container-fluid">
                 <Link to={`dashboard`} className=" navbar-brand fw-bold">
-                        Roommate Finder
+                    <img src="/images/branding.png" alt="Mate Match" id="nav-image"/>
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
                     <span className="navbar-toggler-icon"></span>

@@ -35,7 +35,7 @@ export const ProfileDetails = () => {
 
     if(!profile) {
         return <>
-        <div className="container py-4">
+        <div className="container pt-4 pb-5">
             <div className="bg-light rounded p-5 pb-4 mb-4">
                 <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading Profile...</span>
@@ -47,7 +47,7 @@ export const ProfileDetails = () => {
     }
 
     return <>
-        <div className="container py-4">
+        <div className="container pt-4 pb-5">
             <div className="bg-light rounded p-5 pb-4 mb-4">
                 <div className="avatar-image float-end">
                     <img src={profile.photoID?profile.photoID:"images/default.jpg"} 

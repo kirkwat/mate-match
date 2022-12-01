@@ -58,7 +58,7 @@ export const Registration = () => {
     }
 
     return <> 
-        <div className="container py-4">
+        <div className="container pt-4 pb-5">
             <div className="bg-light rounded mx-auto col-xl-6 p-5 pb-1">
                 <div className={errorMessage ? "alert alert-danger" : "d-none"}>
                     {errorMessage}

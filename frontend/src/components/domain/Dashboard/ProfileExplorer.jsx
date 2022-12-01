@@ -17,7 +17,7 @@ export const ProfileExplorer = () => {
     }, []);
 
     return <>
-        <div className="container py-4">
+        <div className="container pt-4 pb-5">
             <div className="bg-light rounded p-5 pb-4 mb-4">
                 <ProfileSearch profiles={profiles} setSearchResults={setSearchResults}/>
                 <ResultList results={searchResults}/>

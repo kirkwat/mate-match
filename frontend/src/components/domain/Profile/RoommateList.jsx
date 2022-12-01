@@ -15,7 +15,7 @@ export const RoommateList = ({ username=false, standalone=false }) => {
     }, []);
 
     return <> 
-        <div className={standalone?"container py-4":""}>
+        <div className={standalone?"container pt-4 pb-5":""}>
             <div className={standalone?"bg-light rounded p-5 pb-4 mb-4":""}>
                 <h1 className={standalone?"fs-1 mb-4":"fs-3"}>Roommates&nbsp;
                     <span className="text-secondary">
