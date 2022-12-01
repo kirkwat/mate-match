@@ -34,10 +34,11 @@ footer {
 
 .avatar-image {
     position: relative;
-    width: 250px;
-    height: 250px;
+    width: 12rem;
+    height: 12rem;
     overflow: hidden;
     border-radius: 50%; 
+    margin: 0 auto;
 }
 
 .avatar-image img {
@@ -57,3 +58,20 @@ footer {
     width: 100%;
     object-fit: cover;
 }
+
+/* Responsive Changes */
+
+@media (min-width: 576px) {  }
+
+@media (min-width: 768px) { 
+    .avatar-image {
+        width: 16rem;
+        height: 16rem;
+    }
+}
+
+@media (min-width: 992px) {  }
+
+@media (min-width: 1200px) {  }
+
+@media (min-width: 1400px) {  }

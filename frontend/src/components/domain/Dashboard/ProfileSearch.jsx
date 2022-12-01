@@ -181,28 +181,28 @@ export const ProfileSearch = ({ profiles, setSearchResults}) => {
 
     return <>
         <h1>Profile Explorer</h1>
-        <div class="row justify-content-start g-3">
-            <div class="col-xs-12 col-md-6 col-lg-4">
+        <div className="row justify-content-start g-3">
+            <div className="col-xs-12 col-md-6 col-lg-4">
                 <SearchField onChange={handleSearchChange}/>
             </div>
-            <div class="col-xs-12 col-md-6 col-lg-8">
-                <div class="row justify-content-evenly gx-5 gy-2">
-                    <div class="col-xs-4 col-sm-3 col-md-6 col-lg-2">
+            <div className="col-xs-12 col-md-6 col-lg-8">
+                <div className="row justify-content-evenly gx-5 gy-2">
+                    <div className="col-xs-4 col-sm-3 col-md-6 col-lg-2">
                         <CheckBoxDropdown dd_label="Lifestyle " 
                                 options={lifestylePref} 
                                 setValues={handleLifestyleToggle}/>
                     </div>
-                    <div class="col-xs-4 col-sm-3 col-md-6 col-lg-2">
+                    <div className="col-xs-4 col-sm-3 col-md-6 col-lg-2">
                         <CheckBoxDropdown dd_label="Property " 
                                 options={propertyPref} 
                                 setValues={handlePropertyToggle}/>
                                 </div>
-                    <div class="col-xs-4 col-sm-3 col-md-6 col-lg-2">
+                    <div className="col-xs-4 col-sm-3 col-md-6 col-lg-2">
                         <CheckBoxDropdown dd_label="Gender " 
                                 options={genderPref} 
                                 setValues={handleGenderToggle}/>
                     </div>
-                    <div class="col-xs-4 col-sm-3 col-md-6 col-lg-2">
+                    <div className="col-xs-4 col-sm-3 col-md-6 col-lg-2">
                         <CheckBoxDropdown dd_label="Age " 
                                 options={agePref} 
                                 setValues={handleAgeToggle}/>

@@ -14,7 +14,7 @@ export const ResultList = ({ results }) => {
                         <div key={index} className="col-md-6 col-xl-4">
                             <div className="card">
                                 <div className="card-image">
-                                    <img src={result.photoID?result.photoID:"images/default.jpg"}
+                                    <img src={result.photoID?result.photoID:"/images/default.jpg"}
                                         alt="avatar" className="card-img-top"/>
                                 </div>
                                 <div className="card-body">

@@ -43,7 +43,7 @@ export const RequestList = () => {
 
     return <>
         <div className="container pt-4 pb-5">
-            <div className="bg-light rounded p-5 pb-4 mb-4">
+            <div className="bg-light rounded p-3 p-md-5 pb-4 mb-4">
                 <h1>Roommate Requests</h1>
                 <ul className="nav nav-tabs mb-3">
                     <li className="nav-item">
@@ -76,7 +76,7 @@ export const RequestList = () => {
                                             {request.gender === "male"?"(He/Him)":"(She/Her)"}
                                         </span>
                                         <Link to={ `/${request.from}/profile` }
-                                            className="btn btn-primary btn-sm float-end">
+                                            className="btn btn-primary btn-sm float-sm-end">
                                             View Profile
                                         </Link>
                                     </div>
@@ -115,7 +115,7 @@ export const RequestList = () => {
                                         {request.gender === "male"?"(He/Him)":"(She/Her)"}
                                     </span>
                                     <Link to={ `/${request.to}/profile` }
-                                        className="btn btn-primary btn-sm float-end">
+                                        className="btn btn-primary btn-sm float-sm-end">
                                         View Profile
                                     </Link>
                                 </div>
