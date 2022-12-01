@@ -39,7 +39,7 @@ services:
       - backend-api
     # ports to map, YOU CANNOT RUN ANYTHING ELSE ON PORT 3000
     ports:
-      - 3000:3000
+      - 80:3000
     # shared network
     networks:
       - api
