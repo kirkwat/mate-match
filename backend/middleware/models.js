@@ -2,7 +2,7 @@ const User = require('../models/user');
 const Request = require('../models/request');
 const Algorithm = require('../models/algorithm');
 const Roommate = require('../models/roommate');
-const createModelsMiddleware = async (req, res, next) => {
+const createModels = async (req, res, next) => {
    req.models = {
       user: User,
       request: Request,
@@ -13,5 +13,5 @@ const createModelsMiddleware = async (req, res, next) => {
   next();
 }
 module.exports = {
-  createModelsMiddleware
+  createModels
 }

@@ -1,4 +1,4 @@
-import axios from './Endpoint';
+import axios from './axios';
 
 export const Health = () => new Promise((resolve, reject) => {
     axios.get(`/user`)

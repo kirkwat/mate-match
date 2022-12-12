@@ -1,4 +1,4 @@
-import axios from './Endpoint';
+import axios from './axios';
 
 export const getRequestsForRecipient = (auth) => new Promise((resolve, reject) => {
     axios.get(`/request/?to=${auth.username}`,{ headers: {  authorization: `token: ${auth.accessToken}` } })
