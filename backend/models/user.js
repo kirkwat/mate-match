@@ -12,6 +12,7 @@ const fetchAllUsers = async () => {
   const results = await query;
   return results;
 };
+
 const fetchUserByName = async (name) => {
   const query = knex(USERS_TABLE)
     .where({ name })
@@ -20,6 +21,7 @@ const fetchUserByName = async (name) => {
   const results = await query;
   return results;
 };
+
 const findUserByEmail = async (email) => {
   const query = knex(USERS_TABLE)
     .crossJoin(PREF_TABLE, "users.email", "preferences.email")
@@ -27,6 +29,7 @@ const findUserByEmail = async (email) => {
   const result = await query;
   return result;
 };
+
 const updateUser = async (
   email,
   photoID,
@@ -55,6 +58,7 @@ const updateUser = async (
   const results = await query;
   return results;
 };
+
 const addPref = async (
   email,
   apartment,
@@ -92,6 +96,7 @@ const addPref = async (
   const results = await query;
   return results;
 };
+
 const updatePref = async (
   email,
   apartment,
@@ -130,6 +135,7 @@ const updatePref = async (
   const results = await query;
   return results;
 };
+
 const createUser = async (email, password) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
@@ -138,16 +144,19 @@ const createUser = async (email, password) => {
   const result = await query;
   return result;
 };
+
 const deleteUser = async (email) => {
   const query = knex(USERS_TABLE).delete().where({ email });
   const results = await query;
   return results;
 };
+
 const deletePref = async (email) => {
   const query = knex(PREF_TABLE).delete().where({ email });
   const results = await query;
   return results;
 };
+
 const authenticateUser = async (email, password) => {
   const users = await findUserByEmail(email);
   console.log("Results of users query", users);
@@ -163,11 +172,13 @@ const authenticateUser = async (email, password) => {
   }
   return null;
 };
+
 const findPrefByEmail = async (email) => {
   const query = knex(PREF_TABLE).where({ email });
   const result = await query;
   return result;
 };
+
 module.exports = {
   fetchAllUsers,
   fetchUserByName,

@@ -6,8 +6,7 @@ router.get("/", async (req, res, next) => {
     const UserByName = await req.models.user.fetchUserByName(req.query.name);
     res.json(UserByName);
     next();
-  }
-  if (req.query.email) {
+  } else if (req.query.email) {
     const UserByEmail = await req.models.user.findUserByEmail(req.query.email);
     res.json(UserByEmail);
     next();
@@ -17,6 +16,7 @@ router.get("/", async (req, res, next) => {
     next();
   }
 });
+
 router.post("/", async (req, res, next) => {
   try {
     const body = req.body;
@@ -33,6 +33,7 @@ router.post("/", async (req, res, next) => {
   }
   next();
 });
+
 router.put("/", async (req, res, next) => {
   try {
     const updateUser = await req.models.user.updateUser(
@@ -75,6 +76,7 @@ router.post("/preferences", async (req, res, next) => {
   res.json(addPrefstoUser);
   next();
 });
+
 router.get("/preferences", async (req, res, next) => {
   if (req.query.email) {
     const PrefByEmail = await req.models.user.findPrefByEmail(req.query.email);
@@ -82,6 +84,7 @@ router.get("/preferences", async (req, res, next) => {
     next();
   }
 });
+
 router.put("/preferences", async (req, res, next) => {
   try {
     const updateUser = await req.models.user.updatePref(
@@ -108,10 +111,12 @@ router.put("/preferences", async (req, res, next) => {
   }
   next();
 });
+
 router.delete("/", async (req, res, next) => {
   const deletePref = await req.models.user.deletePref(req.body.email);
   const deleteUser = await req.models.user.deleteUser(req.body.email);
   res.status(204).end();
   next();
 });
+
 module.exports = router;

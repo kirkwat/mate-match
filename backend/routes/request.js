@@ -24,6 +24,7 @@ router.get("/", async (req, res, next) => {
     res.json(allReq);
   }
 });
+
 router.post("/", async (req, res, next) => {
   try {
     const body = req.body;
@@ -41,6 +42,7 @@ router.post("/", async (req, res, next) => {
   }
   next();
 });
+
 router.delete("/", async (req, res, next) => {
   try {
     const deleteReq = await req.models.request.deleteRequest(
@@ -54,6 +56,7 @@ router.delete("/", async (req, res, next) => {
   }
   next();
 });
+
 router.put("/", async (req, res, next) => {
   try {
     const acceptReq = await req.models.request.acceptRequest(
@@ -68,4 +71,5 @@ router.put("/", async (req, res, next) => {
   }
   next();
 });
+
 module.exports = router;

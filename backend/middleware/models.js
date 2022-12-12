@@ -11,4 +11,5 @@ const createModels = async (req, res, next) => {
 
   next();
 };
+
 module.exports = createModels;

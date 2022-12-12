@@ -20,19 +20,6 @@ exports.up = function (knex) {
     table.boolean("messy");
     table.boolean("pets");
     table.boolean("relationship");
-
-    /*
-        table.string('relationship');
-        table.string('person_type');
-        table.string('bring_over');
-        table.string('shared_space');
-        table.string('environment');
-        table.string('smoker');
-        table.string('cleanliness');
-        table.string('temperature');
-        table.string('sharing');
-        table.string('pet');
-        */
   });
 };
 exports.down = function (knex) {
