@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import { useAuth } from "../../../hooks";
 
 export const Logout = () => {
-    const { setAuth } = useAuth();
-    const nav = useNavigate();
-    
-    useEffect(() => {
-        setAuth({});
-        nav("/");
-    }, []);
+  const { setAuth } = useAuth();
+  const nav = useNavigate();
+
+  useEffect(() => {
+    setAuth({});
+    nav("/");
+  }, []);
 };

@@ -19,8 +19,7 @@ const addRoommate = async (person1, person2) => {
   if (user1[0].length) {
     house = user1[0][0];
     //test case 5: if house is full of roommates
-    if(house.email10)
-      return "Unable, house is full"; 
+    if (house.email10) return "Unable, house is full";
     //add user2 to house
     if (!house.email2)
       await knex.raw(
@@ -65,8 +64,7 @@ const addRoommate = async (person1, person2) => {
   if (user2[0].length) {
     house = user2[0][0];
     //test case 5: if house is full of roommates
-    if(house.email10)
-      return "Unable, house is full";
+    if (house.email10) return "Unable, house is full";
     //add user1 to house
     if (!house.email2)
       await knex.raw(
@@ -119,18 +117,25 @@ const getRoommates = async (email) => {
     `select * from house where "${email}" in (email1,email2,email3,email4,email5,email6,email7,email8,email9,email10)`
   );
 
-  if(house[0].length === 0){
-    return []
+  if (house[0].length === 0) {
+    return [];
   }
 
-  const result =await knex(USERS_TABLE).where({email:house[0][0].email1}).orWhere({email:house[0][0].email2})
-    .orWhere({email:house[0][0].email3}).orWhere({email:house[0][0].email4}).orWhere({email:house[0][0].email5})
-    .orWhere({email:house[0][0].email6}).orWhere({email:house[0][0].email7}).orWhere({email:house[0][0].email8})
-    .orWhere({email:house[0][0].email9}).orWhere({email:house[0][0].email10});
+  const result = await knex(USERS_TABLE)
+    .where({ email: house[0][0].email1 })
+    .orWhere({ email: house[0][0].email2 })
+    .orWhere({ email: house[0][0].email3 })
+    .orWhere({ email: house[0][0].email4 })
+    .orWhere({ email: house[0][0].email5 })
+    .orWhere({ email: house[0][0].email6 })
+    .orWhere({ email: house[0][0].email7 })
+    .orWhere({ email: house[0][0].email8 })
+    .orWhere({ email: house[0][0].email9 })
+    .orWhere({ email: house[0][0].email10 });
   return result;
 };
 
 module.exports = {
   addRoommate,
-  getRoommates
+  getRoommates,
 };
