@@ -1,4 +1,4 @@
-const knex = require("../database/knex");
+const knex = require("../config/knex");
 const USERS_TABLE = "users";
 const HOUSE_TABLE = "house";
 

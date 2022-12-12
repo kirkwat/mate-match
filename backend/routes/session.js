@@ -1,6 +1,7 @@
 const express = require('express');
-const UserController = require('../controllers/user');
 const router = express.Router();
+const UserController = require('../controllers/user');
+
 router.post('/', async (req, res, next) => {
    try {
        const body = req.body;

@@ -1,4 +1,4 @@
-const knex = require('../database/knex');
+const knex = require('../config/knex');
 const bcrypt = require('bcrypt');
 const USERS_TABLE = 'users';
 const PREF_TABLE = 'preferences';
