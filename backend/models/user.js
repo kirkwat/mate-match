@@ -145,6 +145,18 @@ const createUser = async (email, password) => {
   return result;
 };
 
+const createRefreshToken = async (email, refreshToken) => {
+  const query = knex(USERS_TABLE).update({refreshToken}).where({ email });
+  const result = await query;
+  return result;
+};
+
+const findUserByRT = async (refreshToken) => {
+  const query = knex(USERS_TABLE).where({ refreshToken });
+  const result = await query;
+  return result;
+};
+
 const deleteUser = async (email) => {
   const query = knex(USERS_TABLE).delete().where({ email });
   const results = await query;
@@ -187,6 +199,8 @@ module.exports = {
   addPref,
   updatePref,
   createUser,
+  createRefreshToken,
+  findUserByRT,
   deleteUser,
   deletePref,
   authenticateUser,

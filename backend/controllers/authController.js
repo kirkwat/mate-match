@@ -3,22 +3,22 @@ const User = require("../models/user");
 
 const handleLogin = async (email, password) => {
   const user = await User.authenticateUser(email, password);
-  if (user === null) {
-    return user;
+  if (!user) {
+    return {"accessToken":null, "refreshToken":null};
   }
   const users = await User.findUserByEmail(email);
 
   const accessToken = jwt.sign(
-    { ...users[0], claims: ["user"] },
+    { "email": users[0].email },
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: '15m'}
   );
   const refreshToken = jwt.sign(
-    { ...users[0], claims: ["user"] },
+    { "email": users[0].email },
     process.env.REFRESH_TOKEN_SECRET,
     { expiresIn: '2d'}
   );
-  //TODO save refreshToken to database
+  await User.createRefreshToken(email, refreshToken);
   
   return {accessToken, refreshToken};
 };

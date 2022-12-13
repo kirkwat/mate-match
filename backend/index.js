@@ -13,6 +13,8 @@ const createModels = require("./middleware/createModels");
 const { logger } = require("./middleware/logEvents");
 const errorHandler = require("./middleware/errorHandler");
 const verifyJWT = require("./middleware/verifyJWT");
+const credentials = require("./middleware/credentials");
+
 
 const app = express();
 const PORT = 8000;
@@ -21,13 +23,8 @@ app.use(createModels);
 app.use(logger);
 app.use(express.json());
 app.use(cookieParser());
+app.use(credentials);
 app.use(cors(corsOptions));
-
-app.get("/health", (request, response, next) => {
-  const responseBody = { status: "up", PORT };
-  response.json(responseBody);
-  next();
-});
 
 app.use("/session", sessionRoutes);
 app.use("/register", registerRoutes);
