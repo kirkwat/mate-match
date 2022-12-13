@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const corsOptions = require("./config/corsOptions");
 
 const userRoutes = require("./routes/user");
@@ -8,10 +9,10 @@ const registerRoutes = require("./routes/register");
 const requestRoutes = require("./routes/request");
 const roommateRoutes = require("./routes/roommate");
 
-const createModels = require("./middleware/models");
+const createModels = require("./middleware/createModels");
 const { logger } = require("./middleware/logEvents");
 const errorHandler = require("./middleware/errorHandler");
-const authenticateJWT = require("./middleware/auth");
+const verifyJWT = require("./middleware/verifyJWT");
 
 const app = express();
 const PORT = 8000;
@@ -19,6 +20,7 @@ const PORT = 8000;
 app.use(createModels);
 app.use(logger);
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors(corsOptions));
 
 app.get("/health", (request, response, next) => {
@@ -28,10 +30,10 @@ app.get("/health", (request, response, next) => {
 });
 
 app.use("/session", sessionRoutes);
-app.use("/user", authenticateJWT, userRoutes);
-app.use("/request", authenticateJWT, requestRoutes);
 app.use("/register", registerRoutes);
-app.use("/roommate", authenticateJWT, roommateRoutes);
+app.use("/user", verifyJWT, userRoutes);
+app.use("/request", verifyJWT, requestRoutes);
+app.use("/roommate", verifyJWT, roommateRoutes);
 
 app.use(errorHandler);
 
