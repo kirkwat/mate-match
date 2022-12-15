@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import {
-  getProfileByUsername,
-  updateProfile,
-  updatePreferences,
-} from "../../../api";
-import { useAuth } from "../../../hooks";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth, useAxiosPrivate } from "../../../hooks";
 import {
   CheckBoxField,
   SelectField,
@@ -16,6 +11,9 @@ import { Gender } from "../../../models";
 
 export const ProfileEditor = () => {
   const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [profile, setProfile] = useState(undefined);
 
@@ -25,14 +23,19 @@ export const ProfileEditor = () => {
   const genders = [new Gender("male", "Man"), new Gender("female", "Woman")];
 
   useEffect(() => {
-    getProfileByUsername(auth).then((x) => {
-      setProfile(x[0]);
-      if (x[0].name) {
-        setNameReq(true);
+    const getProfile = async () => {
+      try {
+          const response = await axiosPrivate.get(`/user?email=${auth.username}`);
+          setProfile(response.data[0]);
+          return response.data[0];
+      } catch (err) {
+          console.error(err);
+          navigate('/login', { state: { from: location }, replace: true });
       }
-      if (x[0].city) {
-        setCityReq(true);
-      }
+    }
+    getProfile().then((x) => {
+      if (x?.name) setNameReq(true);
+      if (x?.city) setCityReq(true);
     });
   }, []);
 
@@ -64,11 +67,26 @@ export const ProfileEditor = () => {
     if (!nameReq || !cityReq) {
       return false;
     }
-
     return true;
   };
 
   const handleSaveClick = () => {
+    const updateProfile = async (profile) => {
+      try {
+          await axiosPrivate.put(`/user`, profile);
+      } catch (err) {
+          console.error(err);
+          navigate('/login', { state: { from: location }, replace: true });
+      }
+    }
+    const updatePreferences = async (preferences) => {
+      try {
+          await axiosPrivate.put(`/user/preferences`, preferences);
+      } catch (err) {
+          console.error(err);
+          navigate('/login', { state: { from: location }, replace: true });
+      }
+    }
     updateProfile(
       {
         email: profile.email,
@@ -80,10 +98,8 @@ export const ProfileEditor = () => {
         gender: profile.gender,
         hasResidence: profile.hasResidence,
         desired_roommates: profile.desired_roommates,
-      },
-      auth
+      }
     );
-
     updatePreferences(
       {
         email: profile.email,
@@ -101,8 +117,7 @@ export const ProfileEditor = () => {
         messy: profile.messy,
         pets: profile.pets,
         relationship: profile.relationship,
-      },
-      auth
+      }
     );
   };
 
