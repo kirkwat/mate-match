@@ -1,6 +1,15 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useLogout } from "../../../hooks";
 
 export const NavBar = () => {
+  const navigate = useNavigate();
+  const logout = useLogout();
+
+  const handleLogout = async () => {
+      await logout();
+      navigate('/');
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-md sticky-top navbar-dark bg-dark">
@@ -57,9 +66,9 @@ export const NavBar = () => {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <Link to={`logout`} className="dropdown-item py-0 ps-3">
+                    <button className="dropdown-item py-0 ps-3" onClick={handleLogout}>
                       Sign Out
-                    </Link>
+                    </button>
                   </li>
                 </ul>
               </div>

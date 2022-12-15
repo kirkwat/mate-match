@@ -24,7 +24,7 @@ const handleRefreshToken = async (cookies) => {
             return { accessToken };
         }
     );
-    return result.accessToken;
+    return {username: users[0].email, accessToken: result.accessToken};
 }
 
 module.exports = { handleRefreshToken }

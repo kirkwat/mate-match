@@ -4,13 +4,13 @@ import {
   RequireAuth,
   Registration,
   Login,
-  Logout,
   Missing,
   ProfileExplorer,
   ProfileDetails,
   ProfileEditor,
   RoommateList,
   RequestList,
+  PersistentLogin,
 } from "..";
 
 export const Router = () => {
@@ -21,22 +21,23 @@ export const Router = () => {
         <Route path="/" element={<HomePage />} exact />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
-        <Route path="/logout" element={<Logout />} />
 
         {/* user routes */}
-        <Route element={<RequireAuth />}>
-          <Route path="/dashboard" element={<ProfileExplorer />} />
-          <Route path="/requests" element={<RequestList />} />
-          <Route
-            path="/roommates"
-            element={<RoommateList standalone={true} />}
-          />
-          <Route path="/profile" element={<ProfileDetails />} />
-          <Route path="/profile/edit" element={<ProfileEditor />} />
-          <Route path="/:username/profile" element={<ProfileDetails />} />
+        <Route element={<PersistentLogin />}>
+          <Route element={<RequireAuth />}>
+            <Route path="/dashboard" element={<ProfileExplorer />} />
+            <Route path="/requests" element={<RequestList />} />
+            <Route
+              path="/roommates"
+              element={<RoommateList standalone={true} />}
+            />
+            <Route path="/profile" element={<ProfileDetails />} />
+            <Route path="/profile/edit" element={<ProfileEditor />} />
+            <Route path="/:username/profile" element={<ProfileDetails />} />
+          </Route>
+          {/* catchall */}
+          <Route path="*" element={<Missing />} />
         </Route>
-
-        <Route path="*" element={<Missing />} />
       </Route>
     </Routes>
   );

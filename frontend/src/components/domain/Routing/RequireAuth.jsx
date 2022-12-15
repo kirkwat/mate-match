@@ -6,7 +6,7 @@ export const RequireAuth = () => {
   const { auth } = useAuth();
   const location = useLocation();
 
-  return auth?.username ? (
+  return auth?.accessToken ? (
     <>
       <NavBar />
       <Outlet />

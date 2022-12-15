@@ -14,20 +14,6 @@ export const handleLogin = (username, password) =>
       });
   });
 
-export const handleLogout = () =>
-  new Promise((resolve, reject) => {
-    axios
-      .get(`/session/logout`, {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true
-      })
-      .then((x) => resolve(x.data))
-      .catch((x) => {
-        alert(x);
-        reject(x);
-      });
-  });
-
 export const registerAccount = (username, password) =>
   new Promise((resolve, reject) => {
     axios
