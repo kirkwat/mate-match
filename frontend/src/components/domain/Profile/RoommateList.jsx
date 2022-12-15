@@ -1,17 +1,26 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "../../../hooks";
-import { getRoommates } from "../../../api";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth, useAxiosPrivate } from "../../../hooks";
 
 export const RoommateList = ({ username = false, standalone = false }) => {
   const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [roommates, setRoommates] = useState([]);
 
   useEffect(() => {
-    getRoommates(username ? username : auth.username, auth).then((x) => {
-      setRoommates(x);
-    });
+    const getRoommates = async () => {
+      try {
+          const response = await axiosPrivate.get(`/roommate?email=${username ? username : auth.username}`);
+          setRoommates(response.data);
+      } catch (err) {
+          console.error(err);
+          navigate('/login', { state: { from: location }, replace: true });
+      }
+    }
+    getRoommates();
   }, []);
 
   return (

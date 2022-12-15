@@ -28,6 +28,17 @@ export const handleLogout = () =>
       });
   });
 
+export const registerAccount = (username, password) =>
+  new Promise((resolve, reject) => {
+    axios
+      .post(`/register`, { email: username, password: password })
+      .then((x) => resolve(x.data))
+      .catch((x) => {
+        alert(x);
+        reject(x);
+      });
+  });
+
 
 
 
@@ -54,17 +65,6 @@ export const getProfileByUsername2 = (email, auth) =>
       .get(`/user?email=${email}`, {
         headers: { authorization: `token: ${auth.accessToken}` },
       })
-      .then((x) => resolve(x.data))
-      .catch((x) => {
-        alert(x);
-        reject(x);
-      });
-  });
-
-export const createProfile = (username, password) =>
-  new Promise((resolve, reject) => {
-    axios
-      .post(`/register`, { email: username, password: password })
       .then((x) => resolve(x.data))
       .catch((x) => {
         alert(x);

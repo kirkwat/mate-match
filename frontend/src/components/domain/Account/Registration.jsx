@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { createProfile, handleLogin } from "../../../api";
+import { registerAccount, handleLogin } from "../../../api";
 import { useAuth } from "../../../hooks";
 import { CredentialsField, PlainNavBar } from "../../common";
 
@@ -42,7 +42,7 @@ export const Registration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    createProfile(username, password).then((x) => {
+    registerAccount(username, password).then((x) => {
       if (!x["message"]) {
         handleLogin(username, password).then((accessToken) => {
           setAuth({ username, accessToken });

@@ -1,20 +1,14 @@
-import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import {
-  getProfileByUsername,
-  getProfileByUsername2,
-  sendRequest,
-  checkRequests,
-  getRoommates,
-} from "../../../api";
-import { useAuth } from "../../../hooks";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
+import { useAuth, useAxiosPrivate } from "../../../hooks";
 import { RoommateList } from "./RoommateList";
-import { useParams } from "react-router-dom";
 
 export const ProfileDetails = () => {
   const { auth } = useAuth();
   const params = useParams();
+  const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [profile, setProfile] = useState(undefined);
   const [roommate, setRoommate] = useState(false);
@@ -22,28 +16,52 @@ export const ProfileDetails = () => {
   const [receivedRequest, setReceivedRequest] = useState(undefined);
 
   useEffect(() => {
-    if (params.username) {
-      getProfileByUsername2(params.username, auth).then((x) =>
-        setProfile(x[0])
-      );
-      checkRequests(params.username, auth.username, auth).then((x) =>
-        setSentRequest(x[0])
-      );
-      checkRequests(auth.username, params.username, auth).then((x) =>
-        setReceivedRequest(x[0])
-      );
-    } else {
-      getProfileByUsername(auth).then((x) => setProfile(x[0]));
+    const getProfile = async () => {
+      try {
+          const response = await axiosPrivate.get(`/user?email=${params.username ? params.username : auth.username}`);
+          setProfile(response.data[0]);
+      } catch (err) {
+          console.error(err);
+          navigate('/login', { state: { from: location }, replace: true });
+      }
     }
-    getRoommates(auth.username, auth).then((x) => {
-      setRoommate(
-        x.filter((user) => user.email === params.username).length !== 0
-      );
-    });
+    const checkRequest = async (to, from) => {
+      try {
+          const response = await axiosPrivate.get(`/request/?to=${to}&from=${from}`);
+          return response.data;
+      } catch (err) {
+          console.error(err);
+          navigate('/login', { state: { from: location }, replace: true });
+      }
+    }
+    const getRoommates = async () => {
+      try {
+          const response = await axiosPrivate.get(`/roommate?email=${auth.username}`);
+          return response.data;
+      } catch (err) {
+          console.error(err);
+          navigate('/login', { state: { from: location }, replace: true });
+      }
+    }
+    getProfile();
+    if (params.username) {
+      getRoommates().then((x) => setRoommate(x.filter((user) => user.email === params.username).length !== 0));
+      checkRequest(params.username, auth.username).then((x) => setSentRequest(x[0]));
+      checkRequest(auth.username, params.username).then((x) => setReceivedRequest(x[0]));
+    }
   }, [params]);
 
   const handleSendRequest = () => {
-    sendRequest({ to: params.username, from: auth.username }, auth);
+    const sendRequest = async () => {
+      try {
+          const response = await axiosPrivate.post(`/request`, { to: params.username, from: auth.username });
+          return response.data;
+      } catch (err) {
+          console.error(err);
+          navigate('/login', { state: { from: location }, replace: true });
+      }
+    }
+    sendRequest();
     navigate(`/requests`);
   };
 
@@ -75,8 +93,7 @@ export const ProfileDetails = () => {
           </div>
           <h1 className="display-5 text-center text-sm-start">
             <span className="fw-bold">{profile.name}</span>
-            <span className="fs-1">
-              {" "}
+            <span className="fs-1">&nbsp;
               {profile.gender === "male" ? "(He/Him)" : "(She/Her)"}
             </span>
           </h1>
