@@ -17,12 +17,12 @@ router.post("/", async (req, res, next) => {
   next();
 });
 
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   if (req.query.email) {
-      const House = await req.models.roommate.getRoommates(req.query.email);
-      res.json(House);
-      next();
-  } 
+    const House = await req.models.roommate.getRoommates(req.query.email);
+    res.json(House);
+    next();
+  }
 });
 
 module.exports = router;
