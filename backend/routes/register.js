@@ -4,8 +4,6 @@ const router = express.Router();
 router.post("/", async (req, res, next) => {
   try {
     const body = req.body;
-    console.log(body);
-    console.log(req.models);
     const result = await req.models.user.createUser(body.email, body.password);
     const pref = await req.models.user.addPref(
       body.email,

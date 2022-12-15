@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { handleLogout } from "../../../api";
 import { useAuth } from "../../../hooks";
 
 export const Logout = () => {
@@ -8,6 +9,7 @@ export const Logout = () => {
 
   useEffect(() => {
     setAuth({});
+    handleLogout();
     nav("/");
   }, []);
 };

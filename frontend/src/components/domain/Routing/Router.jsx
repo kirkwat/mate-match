@@ -6,8 +6,6 @@ import {
   Login,
   Logout,
   Missing,
-} from "..";
-import {
   ProfileExplorer,
   ProfileDetails,
   ProfileEditor,
@@ -25,7 +23,7 @@ export const Router = () => {
         <Route path="/register" element={<Registration />} />
         <Route path="/logout" element={<Logout />} />
 
-        {/* account routes */}
+        {/* user routes */}
         <Route element={<RequireAuth />}>
           <Route path="/dashboard" element={<ProfileExplorer />} />
           <Route path="/requests" element={<RequestList />} />

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { createProfile, LoginCheck } from "../../../api";
+import { createProfile, handleLogin } from "../../../api";
 import { useAuth } from "../../../hooks";
 import { CredentialsField, PlainNavBar } from "../../common";
 
@@ -44,7 +44,7 @@ export const Registration = () => {
 
     createProfile(username, password).then((x) => {
       if (!x["message"]) {
-        LoginCheck(username, password).then((accessToken) => {
+        handleLogin(username, password).then((accessToken) => {
           setAuth({ username, accessToken });
           setUserName("");
           setPassword("");

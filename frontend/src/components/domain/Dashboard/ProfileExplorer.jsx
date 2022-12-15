@@ -1,16 +1,28 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../../../hooks";
-import { getProfiles } from "../../../api";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth, useAxiosPrivate } from "../../../hooks";
 import { ProfileSearch, ResultList } from "../Dashboard";
 
 export const ProfileExplorer = () => {
   const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [profiles, setProfiles] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    getProfiles(auth).then((x) => {
+    const getUsers = async () => {
+        try {
+            const response = await axiosPrivate.get('/user');
+            return response.data;
+        } catch (err) {
+            console.error(err);
+            navigate('/login', { state: { from: location }, replace: true });
+        }
+    }
+    getUsers().then((x) => {
       setProfiles(
         x.filter((y) => y.email !== auth.username && y.name !== null)
       );

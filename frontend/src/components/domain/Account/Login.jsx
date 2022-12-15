@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginCheck } from "../../../api";
+import { handleLogin } from "../../../api";
 import { useAuth } from "../../../hooks";
 import { CredentialsField, PlainNavBar } from "../../common";
 
@@ -19,7 +19,7 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    LoginCheck(username, password).then((accessToken) => {
+    handleLogin(username, password).then((accessToken) => {
       if (accessToken != null) {
         setAuth({ username, accessToken });
         setUserName("");

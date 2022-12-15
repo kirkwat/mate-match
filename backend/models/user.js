@@ -140,7 +140,6 @@ const createUser = async (email, password) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
   const query = knex(USERS_TABLE).insert({ email, password: hashedPassword });
-  console.log("Raw query for createNewUser:", query.toString());
   const result = await query;
   return result;
 };
@@ -171,7 +170,6 @@ const deletePref = async (email) => {
 
 const authenticateUser = async (email, password) => {
   const users = await findUserByEmail(email);
-  console.log("Results of users query", users);
   if (users.length === 0) {
     console.error(`No users matched the email: ${email}`);
     return null;
