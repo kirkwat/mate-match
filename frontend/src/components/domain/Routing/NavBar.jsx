@@ -12,7 +12,7 @@ export const NavBar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-md sticky-top navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-md sticky-top navbar-dark bg-dark shadow">
         <div className="container-fluid">
           <Link to={`dashboard`} className=" navbar-brand fw-bold">
             <img src="/images/branding.png" alt="Mate Match" id="nav-image" />
@@ -39,34 +39,33 @@ export const NavBar = () => {
               <div className="nav-item dropdown-center">
                 <div
                   className="nav-link dropdown-toggle"
-                  href="#"
                   role="button"
                   data-bs-toggle="dropdown"
                 >
                   Your Account
                 </div>
-                <ul className="dropdown-menu m-0">
-                  <li>
+                <ul className="dropdown-menu">
+                  <li className="ps-3 pe-4">
                     <Link
                       to={`profile/edit`}
-                      className="dropdown-item py-0 ps-3"
+                      className="dropdown-item py-0 px-0"
                     >
                       Edit Profile
                     </Link>
                   </li>
                   <li>
-                    <hr className="dropdown-divider" />
+                    <hr className="dropdown-divider"/>
                   </li>
-                  <li>
-                    <Link to={`profile`} className="dropdown-item py-0 ps-3">
+                  <li className="ps-3 pe-4">
+                    <Link to={`profile`} className="dropdown-item py-0 px-0">
                       View Profile
                     </Link>
                   </li>
                   <li>
-                    <hr className="dropdown-divider" />
+                    <hr className="dropdown-divider"/>
                   </li>
-                  <li>
-                    <button className="dropdown-item py-0 ps-3" onClick={handleLogout}>
+                  <li className="ps-3 pe-4">
+                    <button className="dropdown-item py-0 px-0" onClick={handleLogout}>
                       Sign Out
                     </button>
                   </li>

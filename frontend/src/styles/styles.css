@@ -145,6 +145,9 @@ header.masthead .h1 {
   .showcase .showcase-text {
     padding: 7rem;
   }
+  .dropdown-menu {
+    min-width: 90px;
+  }
 }
 
 @media (min-width: 992px) {

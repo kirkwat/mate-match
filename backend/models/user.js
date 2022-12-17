@@ -38,7 +38,6 @@ const updateUser = async (
   city,
   bio,
   gender,
-  desired_gender,
   desired_roommates,
   hasResidence
 ) => {
@@ -50,7 +49,6 @@ const updateUser = async (
       city,
       bio,
       gender,
-      desired_gender,
       desired_roommates,
       hasResidence,
     })

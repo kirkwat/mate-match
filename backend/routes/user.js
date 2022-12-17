@@ -42,7 +42,6 @@ router.put("/", async (req, res, next) => {
       req.body.city,
       req.body.bio,
       req.body.gender,
-      req.body.desired_gender,
       req.body.desired_roommates,
       req.body.hasResidence
     );
