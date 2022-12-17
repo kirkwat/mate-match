@@ -6,7 +6,7 @@
 }
 
 #content-wrap {
-  padding-bottom: 2.5rem;
+  padding-bottom: 3.5rem;
 }
 
 /* Navbar */
@@ -28,6 +28,10 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+footer i {
+  font-size: 1.75rem;
 }
 
 /* ProfileDetails avatar */
@@ -79,7 +83,8 @@ header.masthead:before {
   left: 0;
   opacity: 0.5;
 }
-header.masthead h1, header.masthead .h1 {
+header.masthead h1,
+header.masthead .h1 {
   font-size: 2rem;
 }
 
@@ -97,6 +102,28 @@ header.masthead h1, header.masthead .h1 {
   font-size: 4.5rem;
 }
 
+.showcase .showcase-text {
+  padding: 3rem;
+}
+.showcase .showcase-img1 {
+  min-height: 30rem;
+  background-size: cover;
+  background-position: 45% 10%;
+  background-image: url("../assets/roommates.jpg");
+}
+.showcase .showcase-img2 {
+  min-height: 30rem;
+  background-size: cover;
+  background-position: 75% 10%;
+  background-image: url("../assets/map.jpg");
+}
+.showcase .showcase-img3 {
+  min-height: 30rem;
+  background-size: cover;
+  background-position: 55% 75%;
+  background-image: url("../assets/moving_out.jpg");
+}
+
 /* Responsive Changes */
 
 @media (min-width: 576px) {
@@ -111,8 +138,12 @@ header.masthead h1, header.masthead .h1 {
     padding-top: 12rem;
     padding-bottom: 12rem;
   }
-  header.masthead h1, header.masthead .h1 {
+  header.masthead h1,
+  header.masthead .h1 {
     font-size: 3rem;
+  }
+  .showcase .showcase-text {
+    padding: 7rem;
   }
 }
 
