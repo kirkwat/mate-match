@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import {
-  HomePage,
+  LandingPage,
   RequireAuth,
   Registration,
   Login,
@@ -18,7 +18,7 @@ export const Router = () => {
     <Routes>
       <Route path="/">
         {/* public routes */}
-        <Route path="/" element={<HomePage />} exact />
+        <Route path="/" element={<LandingPage />} exact />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
 

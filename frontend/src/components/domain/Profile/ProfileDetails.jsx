@@ -68,7 +68,7 @@ export const ProfileDetails = () => {
   if (!profile) {
     return (
       <>
-        <div className="container pt-4 pb-5">
+        <div className="container pt-4 pb-5 mb-4">
           <div className="bg-light rounded p-3 p-md-5 pb-md-4 mb-4">
             <div className="spinner-border" role="status">
               <span className="visually-hidden">Loading Profile...</span>
@@ -82,8 +82,8 @@ export const ProfileDetails = () => {
 
   return (
     <>
-      <div className="container pt-4 pb-5">
-        <div className="bg-light rounded p-3 p-md-5 pb-md-4 mb-4">
+      <div className="container pt-4 pb-5 mb-4">
+        <div className="bg-light rounded p-3 p-md-5 pb-md-4 mb-3">
           <div className="avatar-image float-sm-end mb-2">
             <img
               src={profile.photoID ? profile.photoID : "/images/default.jpg"}
@@ -274,9 +274,7 @@ export const ProfileDetails = () => {
             </button>
           )}
         </div>
-        <div>
-          <RoommateList username={params.username ? params.username : false} />
-        </div>
+        <RoommateList username={params.username ? params.username : false} />
       </div>
     </>
   );

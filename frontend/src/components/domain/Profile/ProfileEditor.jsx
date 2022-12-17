@@ -124,7 +124,7 @@ export const ProfileEditor = () => {
   if (!profile) {
     return (
       <>
-        <div className="container pt-4 pb-5">
+        <div className="container pt-4 pb-5 mb-4">
           <div className="bg-light rounded p-5 pb-4 mb-4">
             <div className="spinner-border" role="status">
               <span className="visually-hidden">Loading Profile...</span>
@@ -138,7 +138,7 @@ export const ProfileEditor = () => {
 
   return (
     <>
-      <div className="container pt-4 pb-5">
+      <div className="container pt-4 pb-5 mb-4">
         <div className="bg-light rounded p-3 p-md-5 pb-md-4 mb-4">
           <h1>Create/Edit Your Profile</h1>
           <h4>Username:&nbsp;({profile.email})</h4>

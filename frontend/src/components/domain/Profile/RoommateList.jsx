@@ -25,7 +25,7 @@ export const RoommateList = ({ username = false, standalone = false }) => {
 
   return (
     <>
-      <div className={standalone ? "container pt-4 pb-5" : "pb-2"}>
+      <div className={standalone ? "container pt-4 pb-5 mb-4" : "pb-2"}>
         <div
           className={
             standalone ? "bg-light rounded p-3 p-md-5 pb-md-4 mb-4" : ""

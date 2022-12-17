@@ -32,13 +32,13 @@ export const PersistentLogin = () => {
                 isLoading
                     ?   <>
                             <PlainNavBar/>
-                            <div className="container pt-4 pb-5">
-                            <div className="bg-light rounded p-3 p-md-5 pb-md-4 mb-4">
-                                <div className="spinner-border" role="status">
-                                <span className="visually-hidden">Loading...</span>
+                            <div className="container pt-4 pb-5 mb-4">
+                                <div className="bg-light rounded p-3 p-md-5 pb-md-4 mb-4">
+                                    <div className="spinner-border" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                    </div>
+                                    <span className="fs-2 fw-bold">&nbsp;Loading...</span>
                                 </div>
-                                <span className="fs-2 fw-bold">&nbsp;Loading...</span>
-                            </div>
                             </div>
                         </>
                     : <Outlet />

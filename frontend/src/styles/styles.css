@@ -59,6 +59,44 @@ footer {
   object-fit: cover;
 }
 
+/* Landing page */
+
+header.masthead {
+  position: relative;
+  background-color: #343a40;
+  background: url("../assets/dallas_skyline.jpg") no-repeat center center;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+header.masthead:before {
+  content: "";
+  position: absolute;
+  background-color: #1c375e;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+header.masthead h1, header.masthead .h1 {
+  font-size: 2rem;
+}
+
+.features-icons {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+.features-icons .features-icons-item {
+  max-width: 20rem;
+}
+.features-icons .features-icons-item .features-icons-icon {
+  height: 7rem;
+}
+.features-icons .features-icons-item .features-icons-icon i {
+  font-size: 4.5rem;
+}
+
 /* Responsive Changes */
 
 @media (min-width: 576px) {
@@ -68,6 +106,13 @@ footer {
   .avatar-image {
     width: 16rem;
     height: 16rem;
+  }
+  header.masthead {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+  }
+  header.masthead h1, header.masthead .h1 {
+    font-size: 3rem;
   }
 }
 
