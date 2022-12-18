@@ -13,13 +13,15 @@ export const RoommateList = ({ username = false, standalone = false }) => {
   useEffect(() => {
     const getRoommates = async () => {
       try {
-          const response = await axiosPrivate.get(`/roommate?email=${username ? username : auth.username}`);
-          setRoommates(response.data);
+        const response = await axiosPrivate.get(
+          `/roommate?email=${username ? username : auth.username}`
+        );
+        setRoommates(response.data);
       } catch (err) {
-          console.error(err);
-          navigate('/login', { state: { from: location }, replace: true });
+        console.error(err);
+        navigate("/login", { state: { from: location }, replace: true });
       }
-    }
+    };
     getRoommates();
   }, []);
 

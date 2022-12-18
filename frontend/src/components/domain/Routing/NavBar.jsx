@@ -6,9 +6,9 @@ export const NavBar = () => {
   const logout = useLogout();
 
   const handleLogout = async () => {
-      await logout();
-      navigate('/');
-  }
+    await logout();
+    navigate("/");
+  };
 
   return (
     <>
@@ -54,7 +54,7 @@ export const NavBar = () => {
                     </Link>
                   </li>
                   <li>
-                    <hr className="dropdown-divider"/>
+                    <hr className="dropdown-divider" />
                   </li>
                   <li className="ps-3 pe-4">
                     <Link to={`profile`} className="dropdown-item py-0 px-0">
@@ -62,10 +62,13 @@ export const NavBar = () => {
                     </Link>
                   </li>
                   <li>
-                    <hr className="dropdown-divider"/>
+                    <hr className="dropdown-divider" />
                   </li>
                   <li className="ps-3 pe-4">
-                    <button className="dropdown-item py-0 px-0" onClick={handleLogout}>
+                    <button
+                      className="dropdown-item py-0 px-0"
+                      onClick={handleLogout}
+                    >
                       Sign Out
                     </button>
                   </li>

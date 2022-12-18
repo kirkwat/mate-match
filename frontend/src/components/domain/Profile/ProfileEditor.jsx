@@ -25,14 +25,14 @@ export const ProfileEditor = () => {
   useEffect(() => {
     const getProfile = async () => {
       try {
-          const response = await axiosPrivate.get(`/user?email=${auth.username}`);
-          setProfile(response.data[0]);
-          return response.data[0];
+        const response = await axiosPrivate.get(`/user?email=${auth.username}`);
+        setProfile(response.data[0]);
+        return response.data[0];
       } catch (err) {
-          console.error(err);
-          navigate('/login', { state: { from: location }, replace: true });
+        console.error(err);
+        navigate("/login", { state: { from: location }, replace: true });
       }
-    }
+    };
     getProfile().then((x) => {
       if (x?.name) setNameReq(true);
       if (x?.city) setCityReq(true);
@@ -73,52 +73,48 @@ export const ProfileEditor = () => {
   const handleSaveClick = () => {
     const updateProfile = async (profile) => {
       try {
-          await axiosPrivate.put(`/user`, profile);
+        await axiosPrivate.put(`/user`, profile);
       } catch (err) {
-          console.error(err);
-          navigate('/login', { state: { from: location }, replace: true });
+        console.error(err);
+        navigate("/login", { state: { from: location }, replace: true });
       }
-    }
+    };
     const updatePreferences = async (preferences) => {
       try {
-          await axiosPrivate.put(`/user/preferences`, preferences);
+        await axiosPrivate.put(`/user/preferences`, preferences);
       } catch (err) {
-          console.error(err);
-          navigate('/login', { state: { from: location }, replace: true });
+        console.error(err);
+        navigate("/login", { state: { from: location }, replace: true });
       }
-    }
-    updateProfile(
-      {
-        email: profile.email,
-        photoID: profile.photoID,
-        name: profile.name,
-        age: profile.age,
-        city: profile.city,
-        bio: profile.bio,
-        gender: profile.gender,
-        hasResidence: profile.hasResidence,
-        desired_roommates: profile.desired_roommates,
-      }
-    );
-    updatePreferences(
-      {
-        email: profile.email,
-        apartment: profile.apartment,
-        house: profile.house,
-        condo: profile.condo,
-        nightPerson: profile.nightPerson,
-        morningPerson: profile.morningPerson,
-        extrovert: profile.extrovert,
-        introvert: profile.introvert,
-        smoker: profile.smoker,
-        bringFriendsOver: profile.bringFriendsOver,
-        loud: profile.loud,
-        shareFood: profile.shareFood,
-        messy: profile.messy,
-        pets: profile.pets,
-        relationship: profile.relationship,
-      }
-    );
+    };
+    updateProfile({
+      email: profile.email,
+      photoID: profile.photoID,
+      name: profile.name,
+      age: profile.age,
+      city: profile.city,
+      bio: profile.bio,
+      gender: profile.gender,
+      hasResidence: profile.hasResidence,
+      desired_roommates: profile.desired_roommates,
+    });
+    updatePreferences({
+      email: profile.email,
+      apartment: profile.apartment,
+      house: profile.house,
+      condo: profile.condo,
+      nightPerson: profile.nightPerson,
+      morningPerson: profile.morningPerson,
+      extrovert: profile.extrovert,
+      introvert: profile.introvert,
+      smoker: profile.smoker,
+      bringFriendsOver: profile.bringFriendsOver,
+      loud: profile.loud,
+      shareFood: profile.shareFood,
+      messy: profile.messy,
+      pets: profile.pets,
+      relationship: profile.relationship,
+    });
   };
 
   if (!profile) {

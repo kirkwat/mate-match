@@ -14,14 +14,14 @@ export const ProfileExplorer = () => {
 
   useEffect(() => {
     const getUsers = async () => {
-        try {
-            const response = await axiosPrivate.get('/user');
-            return response.data;
-        } catch (err) {
-            console.error(err);
-            navigate('/login', { state: { from: location }, replace: true });
-        }
-    }
+      try {
+        const response = await axiosPrivate.get("/user");
+        return response.data;
+      } catch (err) {
+        console.error(err);
+        navigate("/login", { state: { from: location }, replace: true });
+      }
+    };
     getUsers().then((x) => {
       setProfiles(
         x.filter((y) => y.email !== auth.username && y.name !== null)

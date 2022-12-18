@@ -15,7 +15,6 @@ const errorHandler = require("./middleware/errorHandler");
 const verifyJWT = require("./middleware/verifyJWT");
 const credentials = require("./middleware/credentials");
 
-
 const app = express();
 
 app.use(createModels);

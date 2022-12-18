@@ -17,57 +17,66 @@ export const RequestList = () => {
   useEffect(() => {
     const getRequestsForRecipient = async () => {
       try {
-          const response = await axiosPrivate.get(`/request/?to=${auth.username}`);
-          setReceivedRequests(response.data);
+        const response = await axiosPrivate.get(
+          `/request/?to=${auth.username}`
+        );
+        setReceivedRequests(response.data);
       } catch (err) {
-          console.error(err);
-          navigate('/login', { state: { from: location }, replace: true });
+        console.error(err);
+        navigate("/login", { state: { from: location }, replace: true });
       }
-    }
+    };
     const getRequestsForSender = async () => {
       try {
-          const response = await axiosPrivate.get(`/request/?from=${auth.username}`);
-          setSentRequests(response.data);
+        const response = await axiosPrivate.get(
+          `/request/?from=${auth.username}`
+        );
+        setSentRequests(response.data);
       } catch (err) {
-          console.error(err);
-          navigate('/login', { state: { from: location }, replace: true });
+        console.error(err);
+        navigate("/login", { state: { from: location }, replace: true });
       }
-    }
+    };
     getRequestsForRecipient();
     getRequestsForSender();
   }, []);
 
   const deleteRequest = async (to, from) => {
     try {
-        await axiosPrivate.delete(`/request/?to=${to}&from=${from}`);
+      await axiosPrivate.delete(`/request/?to=${to}&from=${from}`);
     } catch (err) {
-        console.error(err);
-        navigate('/login', { state: { from: location }, replace: true });
+      console.error(err);
+      navigate("/login", { state: { from: location }, replace: true });
     }
-  }
+  };
 
   useEffect(() => {
     const addRoommate = async () => {
       try {
-          const response = await axiosPrivate.post(`/roommate`,{ person1: sender.sender, person2: auth.username });
-          return response.data;
+        const response = await axiosPrivate.post(`/roommate`, {
+          person1: sender.sender,
+          person2: auth.username,
+        });
+        return response.data;
       } catch (err) {
-          console.error(err);
-          navigate('/login', { state: { from: location }, replace: true });
+        console.error(err);
+        navigate("/login", { state: { from: location }, replace: true });
       }
-    }
+    };
 
     if (sender) {
       if (sender.status === 0) {
         deleteRequest(auth.username, sender.sender).then(
           setReceivedRequests(
             receivedRequests.filter((x) => x.from !== sender.sender)
-          ));
+          )
+        );
       } else if (sender.status === 1) {
         deleteRequest(auth.username, sender.sender).then(
           setReceivedRequests(
             receivedRequests.filter((x) => x.from !== sender.sender)
-          ));
+          )
+        );
         addRoommate();
       }
     }

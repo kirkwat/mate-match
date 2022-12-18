@@ -143,7 +143,7 @@ const createUser = async (email, password) => {
 };
 
 const createRefreshToken = async (email, refreshToken) => {
-  const query = knex(USERS_TABLE).update({refreshToken}).where({ email });
+  const query = knex(USERS_TABLE).update({ refreshToken }).where({ email });
   const result = await query;
   return result;
 };

@@ -3,10 +3,14 @@ import axios from "./axios";
 export const handleLogin = (username, password) =>
   new Promise((resolve, reject) => {
     axios
-      .post(`/session`, { email: username, password: password }, {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true
-      })
+      .post(
+        `/session`,
+        { email: username, password: password },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
       .then((x) => resolve(x.data))
       .catch((x) => {
         alert(x);

@@ -8,16 +8,17 @@ router.post("/", async (req, res, next) => {
   try {
     const body = req.body;
 
-    const result = await authController.handleLogin(
-      body.email,
-      body.password
-    );
-    if (result.refreshToken){
-      res.cookie('jwt', result.refreshToken, {httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 2000});
+    const result = await authController.handleLogin(body.email, body.password);
+    if (result.refreshToken) {
+      res.cookie("jwt", result.refreshToken, {
+        httpOnly: true,
+        sameSite: "None",
+        secure: true,
+        maxAge: 24 * 60 * 60 * 2000,
+      });
     }
     res.status(201).json(result.accessToken);
-  }
-  catch (err) {
+  } catch (err) {
     console.error("Failed to authenticate user:", err);
     res.status(500).json({ message: err.toString() });
   }
@@ -30,11 +31,10 @@ router.get("/refresh", async (req, res, next) => {
 
     const result = await refreshTokenController.handleRefreshToken(req.cookies);
 
-    if(!result) return res.sendStatus(403);
+    if (!result) return res.sendStatus(403);
 
     res.status(201).json(result);
-  }
-  catch (err) {
+  } catch (err) {
     console.error("Failed to refresh session:", err);
     res.status(500).json({ message: err.toString() });
   }
@@ -47,10 +47,9 @@ router.get("/logout", async (req, res, next) => {
 
     const result = await logoutController.handleLogout(req.cookies);
 
-    res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
+    res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true });
     res.status(204).json(result);
-  }
-  catch (err) {
+  } catch (err) {
     console.error("Failed to logout:", err);
     res.status(500).json({ message: err.toString() });
   }
