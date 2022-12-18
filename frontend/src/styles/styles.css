@@ -145,7 +145,7 @@ header.masthead .h1 {
   .showcase .showcase-text {
     padding: 7rem;
   }
-  .dropdown-menu {
+  #navbar-dropdown {
     min-width: 90px;
   }
 }

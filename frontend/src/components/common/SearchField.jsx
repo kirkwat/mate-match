@@ -1,4 +1,4 @@
-export const SearchField = ({ onChange }) => (
+export const SearchField = ({ value, setValue }) => (
   <>
     <div className="form-group form-label rounded-pill fw-bold">
       <input
@@ -9,7 +9,8 @@ export const SearchField = ({ onChange }) => (
         className="form-control"
         autoComplete="off"
         required
-        onChange={onChange}
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
       />
     </div>
   </>

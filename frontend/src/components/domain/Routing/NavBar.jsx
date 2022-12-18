@@ -44,7 +44,7 @@ export const NavBar = () => {
                 >
                   Your Account
                 </div>
-                <ul className="dropdown-menu">
+                <ul id="navbar-dropdown" className="dropdown-menu m-0">
                   <li className="ps-3 pe-4">
                     <Link
                       to={`profile/edit`}
