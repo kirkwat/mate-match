@@ -1,38 +1,36 @@
-//docker start mysql-container
-//docker exec -it mysql-container bash
-//mysql --user=root --password
-
-const cors = require("cors");
 const express = require("express");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const corsOptions = require("./config/corsOptions");
+
 const userRoutes = require("./routes/user");
 const sessionRoutes = require("./routes/session");
 const registerRoutes = require("./routes/register");
 const requestRoutes = require("./routes/request");
-const algorithmRoutes = require("./routes/algorithm");
 const roommateRoutes = require("./routes/roommate");
-const { createModelsMiddleware } = require("./middleware/model-middleware");
-const { authenticateJWT } = require("./middleware/auth");
+
+const createModels = require("./middleware/createModels");
+const { logger } = require("./middleware/logEvents");
+const errorHandler = require("./middleware/errorHandler");
+const verifyJWT = require("./middleware/verifyJWT");
+const credentials = require("./middleware/credentials");
+
 const app = express();
-const port = 8000;
-app.use(createModelsMiddleware);
+
+app.use(createModels);
+app.use(logger);
 app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-  })
-);
-app.get("/health", (request, response, next) => {
-  const responseBody = { status: "up", port };
-  response.json(responseBody);
-  // next() is how we tell express to continue through the middleware chain
-  next();
-});
+app.use(cookieParser());
+app.use(credentials);
+app.use(cors(corsOptions));
+
 app.use("/session", sessionRoutes);
-app.use("/user", authenticateJWT, userRoutes);
-app.use("/request", authenticateJWT, requestRoutes);
 app.use("/register", registerRoutes);
-app.use("/algorithm", algorithmRoutes);
-app.use("/roommate", authenticateJWT,roommateRoutes);
-app.listen(port, () => {
-  console.log(`This app is listening on port  ${port}`);
-});
+app.use("/user", verifyJWT, userRoutes);
+app.use("/request", verifyJWT, requestRoutes);
+app.use("/roommate", verifyJWT, roommateRoutes);
+
+app.use(errorHandler);
+
+const PORT = 8000;
+app.listen(PORT, () => console.log(`This app is listening on port  ${PORT}`));

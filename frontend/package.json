@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.0.0",
     "bootstrap": "^5.2.2",
+    "bootstrap-icons": "^1.10.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
@@ -18,7 +19,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "npx prettier --config .prettierrc \"**/*.{js,jsx,css}\" --write",
+    "format-check": "npx prettier --config .prettierrc \"**/*.{js,jsx,css}\" --check"
   },
   "eslintConfig": {
     "extends": "react-app"

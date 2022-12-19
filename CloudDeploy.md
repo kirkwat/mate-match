@@ -1,6 +1,6 @@
 # Instructions to deploy to an EC2 instance
 
-When you first deploy your EC2 instance, make sure to configure the security group to allow inbound connections on TCP port `3000` and `8000` or whatever the ports your API and React.JS dev server run on.
+When you first deploy your EC2 instance, make sure to configure the security group to allow inbound connections on TCP port `3000` and `8000` or whatever the ports your API and React.js dev server run on.
 
 Also make sure that your public IP/URL is added to your frontend and that you are using that URL to make requests to. `localhost` will not work for connecting to the backend API when the website is hosted on the cloud.
 

@@ -1,77 +1,160 @@
 /* General */
 
 #page-container {
-    position: relative;
-    min-height: 100vh;
+  position: relative;
+  min-height: 100vh;
 }
 
 #content-wrap {
-    padding-bottom: 2.5rem;
+  padding-bottom: 3.5rem;
 }
 
 /* Navbar */
 
 .navbar-nav .nav-link.active {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 #nav-image {
-    position: relative;
-    height: 2.2rem;
-    overflow: hidden;
+  position: relative;
+  height: 2.2rem;
+  overflow: hidden;
 }
 
 /* Footer */
 
 footer {
-    text-align: center;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+footer i {
+  font-size: 1.75rem;
 }
 
 /* ProfileDetails avatar */
 
 .avatar-image {
-    position: relative;
-    width: 12rem;
-    height: 12rem;
-    overflow: hidden;
-    border-radius: 50%; 
-    margin: 0 auto;
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto;
 }
 
 .avatar-image img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 /* ProfileExplorer cards */
 
 .card-image {
-    position: relative;
-    height: 300px;
-    overflow: hidden;
+  position: relative;
+  height: 300px;
+  overflow: hidden;
 }
 
 .card-image img {
-    width: 100%;
-    object-fit: cover;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Landing page */
+
+header.masthead {
+  position: relative;
+  background-color: #343a40;
+  background: url("../assets/dallas_skyline.jpg") no-repeat center center;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+header.masthead:before {
+  content: "";
+  position: absolute;
+  background-color: #1c375e;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+header.masthead h1,
+header.masthead .h1 {
+  font-size: 2rem;
+}
+
+.features-icons {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+.features-icons .features-icons-item {
+  max-width: 20rem;
+}
+.features-icons .features-icons-item .features-icons-icon {
+  height: 7rem;
+}
+.features-icons .features-icons-item .features-icons-icon i {
+  font-size: 4.5rem;
+}
+
+.showcase .showcase-text {
+  padding: 3rem;
+}
+.showcase .showcase-img1 {
+  min-height: 30rem;
+  background-size: cover;
+  background-position: 45% 10%;
+  background-image: url("../assets/roommates.jpg");
+}
+.showcase .showcase-img2 {
+  min-height: 30rem;
+  background-size: cover;
+  background-position: 75% 10%;
+  background-image: url("../assets/map.jpg");
+}
+.showcase .showcase-img3 {
+  min-height: 30rem;
+  background-size: cover;
+  background-position: 55% 75%;
+  background-image: url("../assets/moving_out.jpg");
 }
 
 /* Responsive Changes */
 
-@media (min-width: 576px) {  }
-
-@media (min-width: 768px) { 
-    .avatar-image {
-        width: 16rem;
-        height: 16rem;
-    }
+@media (min-width: 576px) {
 }
 
-@media (min-width: 992px) {  }
+@media (min-width: 768px) {
+  .avatar-image {
+    width: 16rem;
+    height: 16rem;
+  }
+  header.masthead {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+  }
+  header.masthead h1,
+  header.masthead .h1 {
+    font-size: 3rem;
+  }
+  .showcase .showcase-text {
+    padding: 7rem;
+  }
+  #navbar-dropdown {
+    min-width: 90px;
+  }
+}
 
-@media (min-width: 1200px) {  }
+@media (min-width: 992px) {
+}
 
-@media (min-width: 1400px) {  }
+@media (min-width: 1200px) {
+}
+
+@media (min-width: 1400px) {
+}
