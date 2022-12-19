@@ -1,5 +1,14 @@
-# Mate Match
-#### A site connecting potiental roommates using docker-compose with Node and React.js containers.
+<a href="http://matematching.com/">
+  <img src="https://github.com/kirkwat/mate-match/blob/main/frontend/public/images/branding.png?raw=true" 
+       alt="Mate Match"
+       width="400rem">
+</a>
+
+#### This application allows users to find new roommates tailored to their preferences.
+
+<hr/>
+
+#### A project using docker-compose with Node and React.js containers.
 #### Also uses a MySQL DBaaS like AWS RDS or GCloud CloudSQL.
 
 - **Backend:** Express Server, Knex.js
