@@ -1,3 +1,3 @@
-const allowedOrigins = ["http://matematching.com"];
+const allowedOrigins = ["https://matematching.com"];
 
 module.exports = allowedOrigins;
