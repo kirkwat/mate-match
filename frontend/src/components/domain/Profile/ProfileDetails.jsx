@@ -79,7 +79,7 @@ export const ProfileDetails = () => {
       }
     };
     sendRequest();
-    navigate(`/requests`);
+    setSentRequest(true);
   };
 
   if (!profile) {

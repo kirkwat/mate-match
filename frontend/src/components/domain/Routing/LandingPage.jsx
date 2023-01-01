@@ -45,7 +45,7 @@ export const LandingPage = () => {
                 <div className="features-icons-icon d-flex">
                   <i className="bi-people-fill m-auto text-primary"></i>
                 </div>
-                <h3 className="fw-bold">Explore Potiental Roommates</h3>
+                <h3 className="fw-bold">Explore Potential Roommates</h3>
                 <p className="lead mb-0">
                   Find people that match your lifestyle and needs.
                 </p>
