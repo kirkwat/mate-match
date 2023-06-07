@@ -70,7 +70,7 @@ export const ProfileEditor = () => {
     return true;
   };
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
     const updateProfile = async (profile) => {
       try {
         await axiosPrivate.put(`/user`, profile);
@@ -87,7 +87,7 @@ export const ProfileEditor = () => {
         navigate("/login", { state: { from: location }, replace: true });
       }
     };
-    updateProfile({
+    await updateProfile({
       email: profile.email,
       photoID: profile.photoID,
       name: profile.name,
@@ -98,7 +98,7 @@ export const ProfileEditor = () => {
       hasResidence: profile.hasResidence,
       desired_roommates: profile.desired_roommates,
     });
-    updatePreferences({
+    await updatePreferences({
       email: profile.email,
       apartment: profile.apartment,
       house: profile.house,
@@ -115,6 +115,7 @@ export const ProfileEditor = () => {
       pets: profile.pets,
       relationship: profile.relationship,
     });
+    navigate("/profile", { state: { from: location }, replace: true });
   };
 
   if (!profile) {
@@ -299,13 +300,12 @@ export const ProfileEditor = () => {
             />
           </div>
           {checkReq() && (
-            <Link
-              to={`/profile`}
+            <button
               className="btn btn-primary btn-lg col-12 mt-3"
               onClick={handleSaveClick}
             >
               Save Changes
-            </Link>
+            </button>
           )}
           {!checkReq() && (
             <div className="card text-center text-bg-primary opacity-50 fs-5 col-12 mt-3 p-2">

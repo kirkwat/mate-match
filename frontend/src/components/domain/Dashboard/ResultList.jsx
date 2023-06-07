@@ -32,7 +32,7 @@ export const ResultList = ({ results }) => {
                   </div>
                   <Link
                     to={`/${result.email}/profile`}
-                    className="btn btn-primary"
+                    className="btn btn-primary btn-lg col-12"
                   >
                     View Profile
                   </Link>
