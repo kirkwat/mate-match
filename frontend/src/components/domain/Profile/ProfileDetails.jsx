@@ -284,25 +284,21 @@ export const ProfileDetails = () => {
               You have a request from this user!
             </button>
           ) : (
-            <>
-              <div>
-                <TextAreaField
-                  label="Send a message with your request!"
-                  value={message}
-                  setValue={(message) => setMessage(message)}
-                  rowNum={3}
-                />
-              </div>
+            <div className={roommate ? "d-none" : ""}>
+              <TextAreaField
+                label="Send a message with your request!"
+                value={message}
+                setValue={(message) => setMessage(message)}
+                rowNum={3}
+              />
               <button
                 type="button"
-                className={
-                  roommate ? "d-none" : "btn btn-primary btn-lg col-12"
-                }
+                className="btn btn-primary btn-lg col-12"
                 onClick={handleSendRequest}
               >
                 Send Roommate Request
               </button>
-            </>
+            </div>
           )}
         </div>
         <RoommateList username={params.username ? params.username : false} />
