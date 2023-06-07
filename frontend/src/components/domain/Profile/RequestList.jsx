@@ -153,8 +153,13 @@ export const RequestList = () => {
                         <p className="card-text text-secondary float-end">
                           {request.city} - {request.age}
                         </p>
-                        <p className="card-text col-10">{request.bio}</p>
-                        <div className="btn-group">
+                        <p className="card-text col-10">
+                          <span className="fw-bold">
+                            Request Message:&nbsp;
+                          </span>
+                          {request.message ? request.message : "No message."}
+                        </p>
+                        <div className="btn-group col-12 col-sm-auto">
                           <button
                             type="button"
                             className="btn btn-danger"
@@ -204,10 +209,15 @@ export const RequestList = () => {
                       <p className="card-text text-secondary float-end">
                         {request.city} - {request.age}
                       </p>
-                      <p className="card-text col-10">{request.bio}</p>
+                      <p className="card-text col-10">
+                        <span className="fw-bold">Request Message:&nbsp;</span>
+                        {request.message
+                          ? request.message
+                          : "No message with this request."}
+                      </p>
                       <button
                         type="button"
-                        className="btn btn-outline-danger"
+                        className="btn btn-outline-danger col-12 col-sm-auto"
                         onClick={() => setRecipient(request.to)}
                       >
                         Delete Request

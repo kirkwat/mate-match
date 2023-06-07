@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import { useAuth, useAxiosPrivate } from "../../../hooks";
 import { RoommateList } from "./RoommateList";
+import { TextAreaField } from "../../common";
 
 export const ProfileDetails = () => {
   const { auth } = useAuth();
@@ -14,6 +15,7 @@ export const ProfileDetails = () => {
   const [roommate, setRoommate] = useState(false);
   const [sentRequest, setSentRequest] = useState(undefined);
   const [receivedRequest, setReceivedRequest] = useState(undefined);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const getProfile = async () => {
@@ -71,6 +73,7 @@ export const ProfileDetails = () => {
         const response = await axiosPrivate.post(`/request`, {
           to: params.username,
           from: auth.username,
+          message: message,
         });
         return response.data;
       } catch (err) {
@@ -281,15 +284,25 @@ export const ProfileDetails = () => {
               You have a request from this user!
             </button>
           ) : (
-            <button
-              type="button"
-              className={
-                roommate ? "d-none" : "btn btn-primary btn-lg col-12 mt-3"
-              }
-              onClick={handleSendRequest}
-            >
-              Send Roommate Request
-            </button>
+            <>
+              <div>
+                <TextAreaField
+                  label="Send a message with your request!"
+                  value={message}
+                  setValue={(message) => setMessage(message)}
+                  rowNum={3}
+                />
+              </div>
+              <button
+                type="button"
+                className={
+                  roommate ? "d-none" : "btn btn-primary btn-lg col-12"
+                }
+                onClick={handleSendRequest}
+              >
+                Send Roommate Request
+              </button>
+            </>
           )}
         </div>
         <RoommateList username={params.username ? params.username : false} />
