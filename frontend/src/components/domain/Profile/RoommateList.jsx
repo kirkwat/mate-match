@@ -85,7 +85,10 @@ export const RoommateList = ({ username = false, standalone = false }) => {
                         <p className="card-text text-secondary float-end">
                           {roommate.city} - {roommate.age}
                         </p>
-                        <p className="card-text col-10">{roommate.bio}</p>
+                        <p className="card-text col-10">
+                          <span className="fw-bold">About:&nbsp;</span>
+                          {roommate.bio}
+                        </p>
                       </div>
                     </div>
                   ))}
