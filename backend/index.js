@@ -16,6 +16,10 @@ const verifyJWT = require("./middleware/verifyJWT");
 const credentials = require("./middleware/credentials");
 
 const app = express();
+const PORT = 8000;
+const server = app.listen(PORT, () => {
+  console.log(`This app is listening on port ${PORT}`);
+});
 
 app.use(createModels);
 app.use(logger);
@@ -32,5 +36,4 @@ app.use("/roommate", verifyJWT, roommateRoutes);
 
 app.use(errorHandler);
 
-const PORT = 8000;
-app.listen(PORT, () => console.log(`This app is listening on port  ${PORT}`));
+module.exports = server;

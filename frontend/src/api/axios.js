@@ -1,14 +1,11 @@
 import axios from "axios";
 
-// ENTER EC2 PUBLIC IP/URL HERE
-const ec2_url = "https://matematching.com/api";
-
 export default axios.create({
-  baseURL: ec2_url ? ec2_url : "http://localhost:8000",
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 export const axiosPrivate = axios.create({
-  baseURL: ec2_url ? ec2_url : "http://localhost:8000",
+  baseURL: process.env.REACT_APP_API_URL,
   headers: { "Content-Type": "application/json" },
   withCredentials: true,
 });
