@@ -52,6 +52,7 @@ router.put("/", async (req, res, next) => {
   }
   next();
 });
+
 router.post("/preferences", async (req, res, next) => {
   const addPrefstoUser = await req.models.user.addPref(
     req.body.email,

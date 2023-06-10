@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "format": "npx prettier --config .prettierrc \"**/*.{js,jsx,css}\" --write",
-    "format-check": "npx prettier --config .prettierrc \"**/*.{js,jsx,css}\" --check"
+    "test": "cross-env NODE_ENV=test jest --testTimeout=5000",
+    "format": "prettier \"**/*.{js,jsx,css}\" --write"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +26,10 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "cross-env": "^7.0.3",
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.15",
+    "prettier": "2.8.8",
+    "supertest": "^6.3.3"
   }
 }
