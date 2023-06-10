@@ -1,4 +1,4 @@
-name: Build
+name: Build and Test
 
 on:
   pull_request:
@@ -17,12 +17,23 @@ jobs:
         working-directory: ./frontend
         run: |
           npm ci
-          npm run build
-        env: 
-          CI: false
+          npm run test
+        env:
+          REACT_APP_API_URL: ${{secrets.REACT_APP_API_URL}}
 
       - name: Install and Build Express Server
         working-directory: ./backend
         run: |
           npm ci
-          npm run start
+          npm run test
+        env:
+          CLIENT_URL: ${{secrets.CLIENT_URL}}
+          MYSQL_DB: ${{secrets.MYSQL_DB}}
+          MYSQL_PORT: ${{secrets.MYSQL_PORT}}
+          MYSQL_CLOUD_USER: ${{secrets.MYSQL_CLOUD_USER}}
+          MYSQL_CLOUD_PASS: ${{secrets.MYSQL_CLOUD_PASS}}
+          MYSQL_CLOUD_HOST: ${{secrets.MYSQL_CLOUD_HOST}}
+          ACCESS_TOKEN_SECRET: ${{secrets.ACCESS_TOKEN_SECRET}}
+          REFRESH_TOKEN_SECRET: ${{secrets.REFRESH_TOKEN_SECRET}}
+          TEST_USERNAME: ${{secrets.TEST_USERNAME}}
+          TEST_PASSWORD: ${{secrets.TEST_PASSWORD}}

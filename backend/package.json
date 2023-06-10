@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "cross-env NODE_ENV=test jest --testTimeout=5000",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=5000 --detectOpenHandles --forceExit",
     "format": "prettier \"**/*.{js,jsx,css}\" --write"
   },
   "author": "",
