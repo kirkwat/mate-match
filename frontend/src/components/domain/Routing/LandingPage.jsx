@@ -17,6 +17,7 @@ export const LandingPage = () => {
                     className="btn btn-success btn-lg"
                     id="submitButton"
                     type="submit"
+                    data-testid="create-account-button"
                   >
                     Create your Account
                   </Link>

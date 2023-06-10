@@ -20,8 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "npx prettier --config .prettierrc \"**/*.{js,jsx,css}\" --write",
-    "format-check": "npx prettier --config .prettierrc \"**/*.{js,jsx,css}\" --check"
+    "format": "prettier \"**/*.{js,jsx,css}\" --write"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,5 +36,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "2.8.8"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   }
 }
