@@ -20,7 +20,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier \"**/*.{js,jsx,css}\" --write"
+    "format": "prettier \"**/*.{js,jsx,css}\" --write",
+    "sync": "aws s3 sync ./build/* 's3://matematching.com/'",
+    "invalidate": "aws cloudfront create-invalidation --distribution-id EGZ28CI0X0FI2 --paths '/*'",
+    "deploy": "npm run build && npm run sync && npm run invalidate"
   },
   "eslintConfig": {
     "extends": "react-app"
