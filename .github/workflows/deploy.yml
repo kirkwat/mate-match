@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: "*"
+    branches: [main]
 
 jobs:
   deploy-frontend:
@@ -27,6 +27,7 @@ jobs:
           npm run deploy
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          CI: false
 
   deploy-backend:
     runs-on: ubuntu-latest
