@@ -34,6 +34,10 @@ app.use("/user", verifyJWT, userRoutes);
 app.use("/request", verifyJWT, requestRoutes);
 app.use("/roommate", verifyJWT, roommateRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Healthy");
+});
+
 app.use(errorHandler);
 
 module.exports = server;
