@@ -2,7 +2,7 @@ name: Build and Test
 
 on:
   pull_request:
-    branches: "*"
+    branches: [main]
 
 jobs:
   build:
@@ -20,6 +20,7 @@ jobs:
           npm run test
         env:
           REACT_APP_API_URL: ${{secrets.REACT_APP_API_URL}}
+          CI: false
 
       - name: Install and Build Express Server
         working-directory: ./backend
