@@ -138,6 +138,16 @@ export const RequestList = () => {
                   receivedRequests.map((request, index) => (
                     <div key={index} className="card mb-3">
                       <div className="card-header fs-4">
+                        <img
+                          src={
+                            request.signedUrl
+                              ? request.signedUrl
+                              : "/images/default.jpg"
+                          }
+                          alt="Avatar"
+                          className="rounded-circle me-2"
+                          style={{ width: "32px", height: "32px" }}
+                        />
                         {request.name}&nbsp;
                         <span className="fs-5 d-none d-sm-inline">
                           {request.gender === "male" ? "(He/Him)" : "(She/Her)"}
@@ -194,6 +204,16 @@ export const RequestList = () => {
                 sentRequests.map((request, index) => (
                   <div key={index} className="card mb-3">
                     <div className="card-header fs-4">
+                      <img
+                        src={
+                          request.signedUrl
+                            ? request.signedUrl
+                            : "/images/default.jpg"
+                        }
+                        alt="Avatar"
+                        className="rounded-circle me-2"
+                        style={{ width: "32px", height: "32px" }}
+                      />
                       {request.name}&nbsp;
                       <span className="fs-5 d-none d-sm-inline">
                         {request.gender === "male" ? "(He/Him)" : "(She/Her)"}

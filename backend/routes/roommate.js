@@ -19,8 +19,12 @@ router.post("/", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
   if (req.query.email) {
-    const House = await req.models.roommate.getRoommates(req.query.email);
-    res.json(House);
+    const roommates = await req.models.roommate.getRoommates(req.query.email);
+    const roommatesWithAvatars = await req.models.avatar.getAvatarImages(
+      roommates
+    );
+
+    res.json(roommatesWithAvatars);
     next();
   }
 });

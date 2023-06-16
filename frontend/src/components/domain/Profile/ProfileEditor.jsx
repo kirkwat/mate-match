@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth, useAxiosPrivate } from "../../../hooks";
 import {
   CheckBoxField,
@@ -7,6 +7,7 @@ import {
   TextField,
   TextAreaField,
 } from "../../common";
+import AvatarUpload from "./AvatarUpload";
 import { Gender } from "../../../models";
 
 export const ProfileEditor = () => {
@@ -89,7 +90,6 @@ export const ProfileEditor = () => {
     };
     await updateProfile({
       email: profile.email,
-      photoID: profile.photoID,
       name: profile.name,
       age: profile.age,
       city: profile.city,
@@ -137,8 +137,29 @@ export const ProfileEditor = () => {
     <>
       <div className="container pt-4 pb-5 mb-4">
         <div className="bg-light rounded p-3 p-md-5 pb-md-4 mb-4">
-          <h1>Create/Edit Your Profile</h1>
-          <h4>Username:&nbsp;({profile.email})</h4>
+          <div className="avatar-image float-sm-end mb-2">
+            <div className="image-wrapper">
+              <img
+                src={
+                  profile.signedUrl ? profile.signedUrl : "/images/default.jpg"
+                }
+                alt="avatar"
+                className="img-fluid"
+              />
+              <div className="overlay">
+                <AvatarUpload
+                  username={profile.email}
+                  photoID={profile.photoID}
+                  setProfile={setProfile}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center text-sm-start">
+            <h1>Create/Edit Your Profile</h1>
+            <h4>Username:&nbsp;({profile.email})</h4>
+          </div>
           <div className="col-md-4">
             <TextField
               label="Name"
@@ -179,13 +200,6 @@ export const ProfileEditor = () => {
               options={[...Array(85 - 18 + 1).keys()].map((x) => x + 18)}
             />
           </div>
-          <TextAreaField
-            label="Profile Image Link (use Imgur, etc)"
-            id="photo"
-            value={profile.photoID}
-            rowNum={1}
-            setValue={(photoID) => mergeProfile({ photoID })}
-          />
           <TextAreaField
             label="About me"
             value={profile.bio}

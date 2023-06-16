@@ -64,6 +64,16 @@ export const RoommateList = ({ username = false, standalone = false }) => {
                   .map((roommate, index) => (
                     <div key={index} className="card mb-3">
                       <div className="card-header fs-4">
+                        <img
+                          src={
+                            roommate.signedUrl
+                              ? roommate.signedUrl
+                              : "/images/default.jpg"
+                          }
+                          alt="Avatar"
+                          className="rounded-circle me-2"
+                          style={{ width: "32px", height: "32px" }}
+                        />
                         {roommate.name}&nbsp;
                         <span className="fs-5 d-none d-sm-inline">
                           {roommate.gender === "male"

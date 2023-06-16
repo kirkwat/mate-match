@@ -105,11 +105,15 @@ export const ProfileDetails = () => {
       <div className="container pt-4 pb-5 mb-4">
         <div className="bg-light rounded p-3 p-md-5 pb-md-4 mb-3">
           <div className="avatar-image float-sm-end mb-2">
-            <img
-              src={profile.photoID ? profile.photoID : "/images/default.jpg"}
-              alt="avatar"
-              className="img-fluid"
-            />
+            <div className="image-wrapper">
+              <img
+                src={
+                  profile.signedUrl ? profile.signedUrl : "/images/default.jpg"
+                }
+                alt="avatar"
+                className="img-fluid"
+              />
+            </div>
           </div>
           <h1 className="display-5 text-center text-sm-start">
             <span className="fw-bold">{profile.name}</span>

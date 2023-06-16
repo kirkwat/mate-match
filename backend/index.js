@@ -8,6 +8,7 @@ const sessionRoutes = require("./routes/session");
 const registerRoutes = require("./routes/register");
 const requestRoutes = require("./routes/request");
 const roommateRoutes = require("./routes/roommate");
+const avatarRoutes = require("./routes/avatar");
 
 const createModels = require("./middleware/createModels");
 const { logger } = require("./middleware/logEvents");
@@ -33,6 +34,7 @@ app.use("/register", registerRoutes);
 app.use("/user", verifyJWT, userRoutes);
 app.use("/request", verifyJWT, requestRoutes);
 app.use("/roommate", verifyJWT, roommateRoutes);
+app.use("/avatar", verifyJWT, avatarRoutes);
 
 app.get("/", (req, res) => {
   res.send("Healthy");
