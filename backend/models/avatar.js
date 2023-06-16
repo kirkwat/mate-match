@@ -63,6 +63,8 @@ const addAvatarImage = async (email, photoID, fileName, buffer, mimetype) => {
 
 const getAvatarImages = async (users) => {
   for (const user of users) {
+    if (user.photoID === null) continue;
+
     user.signedUrl = getSignedUrl({
       url: "https://d2qm0iuktiryxq.cloudfront.net/" + user.photoID,
       keyPairId: cloudfrontKeyPairId,

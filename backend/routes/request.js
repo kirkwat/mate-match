@@ -2,27 +2,20 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
+  let requests;
   if (req.query.to && req.query.from) {
-    const ReqByName = await req.models.request.fetchReq(
-      req.query.to,
-      req.query.from
-    );
-    res.json(ReqByName);
-    next();
+    requests = await req.models.request.fetchReq(req.query.to, req.query.from);
   } else if (req.query.to) {
-    const ReqByName = await req.models.request.fetchReqByRecipient(
-      req.query.to
-    );
-    res.json(ReqByName);
-    next();
+    requests = await req.models.request.fetchReqByRecipient(req.query.to);
+    requests = await req.models.avatar.getAvatarImages(requests);
   } else if (req.query.from) {
-    const ReqByName = await req.models.request.fetchReqBySender(req.query.from);
-    res.json(ReqByName);
-    next();
+    requests = await req.models.request.fetchReqBySender(req.query.from);
+    requests = await req.models.avatar.getAvatarImages(requests);
   } else {
-    const allReq = await req.models.request.fetchAllReq();
-    res.json(allReq);
+    requests = await req.models.request.fetchAllReq();
   }
+  res.json(requests);
+  next();
 });
 
 router.post("/", async (req, res, next) => {

@@ -17,7 +17,9 @@ export const ResultList = ({ results }) => {
                 <div className="card-image">
                   <img
                     src={
-                      result.photoID ? result.photoID : "/images/default.jpg"
+                      result.signedUrl
+                        ? result.signedUrl
+                        : "/images/default.jpg"
                     }
                     alt="avatar"
                     className="card-img-top"
