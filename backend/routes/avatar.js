@@ -20,6 +20,7 @@ router.post("/", upload.single("image"), async (req, res, next) => {
 
     const avatar = await req.models.avatar.addAvatarImage(
       req.query.email,
+      req.query.photoID,
       fileName,
       buffer,
       file.mimetype

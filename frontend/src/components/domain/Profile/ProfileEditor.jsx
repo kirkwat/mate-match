@@ -90,7 +90,6 @@ export const ProfileEditor = () => {
     };
     await updateProfile({
       email: profile.email,
-      photoID: profile.photoID,
       name: profile.name,
       age: profile.age,
       city: profile.city,
@@ -148,7 +147,11 @@ export const ProfileEditor = () => {
                 className="img-fluid"
               />
               <div className="overlay">
-                <span className="edit-text">Edit me!</span>
+                <AvatarUpload
+                  username={profile.email}
+                  photoID={profile.photoID}
+                  setProfile={setProfile}
+                />
               </div>
             </div>
           </div>
@@ -157,7 +160,6 @@ export const ProfileEditor = () => {
             <h1>Create/Edit Your Profile</h1>
             <h4>Username:&nbsp;({profile.email})</h4>
           </div>
-          <AvatarUpload username={profile.email} />
           <div className="col-md-4">
             <TextField
               label="Name"
@@ -198,13 +200,6 @@ export const ProfileEditor = () => {
               options={[...Array(85 - 18 + 1).keys()].map((x) => x + 18)}
             />
           </div>
-          <TextAreaField
-            label="Profile Image Link (use Imgur, etc)"
-            id="photo"
-            value={profile.photoID}
-            rowNum={1}
-            setValue={(photoID) => mergeProfile({ photoID })}
-          />
           <TextAreaField
             label="About me"
             value={profile.bio}

@@ -4,6 +4,7 @@ const {
   S3Client,
   PutObjectCommand,
   GetObjectCommand,
+  DeleteObjectCommand,
 } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 
@@ -22,7 +23,11 @@ const s3 = new S3Client({
   region: bucketRegion,
 });
 
-const addAvatarImage = async (email, fileName, buffer, mimetype) => {
+const addAvatarImage = async (email, photoID, fileName, buffer, mimetype) => {
+  if (photoID) {
+    await removeAvatarImage(photoID);
+  }
+
   const params = {
     Bucket: bucketName,
     Key: fileName,
@@ -34,11 +39,12 @@ const addAvatarImage = async (email, fileName, buffer, mimetype) => {
 
   await s3.send(command);
 
-  const query = knex(USERS_TABLE)
-    .update({ photoID: fileName })
-    .where({ email });
+  await knex(USERS_TABLE).update({ photoID: fileName }).where({ email });
 
-  const result = await query;
+  const users = await knex(USERS_TABLE).select().where({ email });
+
+  const result = await getAvatarImages(users);
+
   return result;
 };
 
@@ -56,6 +62,19 @@ const getAvatarImages = async (users) => {
     user.signedUrl = signedUrl;
   }
   return users;
+};
+
+const removeAvatarImage = async (photoID) => {
+  const params = {
+    Bucket: bucketName,
+    Key: photoID,
+  };
+
+  const command = new DeleteObjectCommand(params);
+  await s3.send(command);
+
+  const query = knex(USERS_TABLE).update({ photoID: null }).where({ photoID });
+  return await query;
 };
 
 module.exports = {
