@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth, useAxiosPrivate } from "../../../hooks";
 import {
   CheckBoxField,
@@ -7,6 +7,7 @@ import {
   TextField,
   TextAreaField,
 } from "../../common";
+import AvatarUpload from "./AvatarUpload";
 import { Gender } from "../../../models";
 
 export const ProfileEditor = () => {
@@ -139,6 +140,7 @@ export const ProfileEditor = () => {
         <div className="bg-light rounded p-3 p-md-5 pb-md-4 mb-4">
           <h1>Create/Edit Your Profile</h1>
           <h4>Username:&nbsp;({profile.email})</h4>
+          <AvatarUpload />
           <div className="col-md-4">
             <TextField
               label="Name"
