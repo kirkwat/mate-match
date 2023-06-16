@@ -36,5 +36,11 @@ jobs:
           MYSQL_CLOUD_HOST: ${{secrets.MYSQL_CLOUD_HOST}}
           ACCESS_TOKEN_SECRET: ${{secrets.ACCESS_TOKEN_SECRET}}
           REFRESH_TOKEN_SECRET: ${{secrets.REFRESH_TOKEN_SECRET}}
+          BUCKET_NAME: ${{secrets.BUCKET_NAME}}
+          BUCKET_REGION: ${{secrets.BUCKET_REGION}}
+          BUCKET_ACCESS_KEY: ${{secrets.BUCKET_ACCESS_KEY}}
+          BUCKET_SECRET_ACCESS_KEY: ${{secrets.BUCKET_SECRET_ACCESS_KEY}}
+          CLOUDFRONT_PRIVATE_KEY: ${{secrets.CLOUDFRONT_PRIVATE_KEY}}
+          CLOUDFRONT_KEY_PAIR_ID: ${{secrets.CLOUDFRONT_KEY_PAIR_ID}}
           TEST_USERNAME: ${{secrets.TEST_USERNAME}}
           TEST_PASSWORD: ${{secrets.TEST_PASSWORD}}
