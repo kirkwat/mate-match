@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { App } from "./components/App";
+import { App } from "../components/App";
 
 describe("App", () => {
   it("landing page should have create account button", () => {
