@@ -1,20 +1,18 @@
 const express = require("express");
 const router = express.Router();
-//get all or ?name=... or ?email=...
+
 router.get("/", async (req, res, next) => {
+  let users;
   if (req.query.name) {
-    const UserByName = await req.models.user.fetchUserByName(req.query.name);
-    res.json(UserByName);
-    next();
+    users = await req.models.user.fetchUserByName(req.query.name);
   } else if (req.query.email) {
-    const UserByEmail = await req.models.user.findUserByEmail(req.query.email);
-    res.json(UserByEmail);
-    next();
+    users = await req.models.user.findUserByEmail(req.query.email);
   } else {
-    const allUsers = await req.models.user.fetchAllUsers();
-    res.json(allUsers);
-    next();
+    users = await req.models.user.fetchAllUsers();
   }
+  usersWithAvatars = await req.models.avatar.getAvatarImages(users);
+  res.json(usersWithAvatars);
+  next();
 });
 
 router.post("/", async (req, res, next) => {

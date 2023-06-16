@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAxiosPrivate } from "../../../hooks";
 
-export default function AvatarUpload() {
+export default function AvatarUpload({ username }) {
   const axiosPrivate = useAxiosPrivate();
 
   const [file, setFile] = useState();
@@ -13,7 +13,7 @@ export default function AvatarUpload() {
     const formData = new FormData();
     formData.append("image", file);
     formData.append("caption", caption);
-    await axiosPrivate.post("/avatar", formData, {
+    await axiosPrivate.post(`/avatar?email=${username}`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
   };

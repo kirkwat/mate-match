@@ -138,9 +138,26 @@ export const ProfileEditor = () => {
     <>
       <div className="container pt-4 pb-5 mb-4">
         <div className="bg-light rounded p-3 p-md-5 pb-md-4 mb-4">
-          <h1>Create/Edit Your Profile</h1>
-          <h4>Username:&nbsp;({profile.email})</h4>
-          <AvatarUpload />
+          <div className="avatar-image float-sm-end mb-2">
+            <div className="image-wrapper">
+              <img
+                src={
+                  profile.signedUrl ? profile.signedUrl : "/images/default.jpg"
+                }
+                alt="avatar"
+                className="img-fluid"
+              />
+              <div className="overlay">
+                <span className="edit-text">Edit me!</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center text-sm-start">
+            <h1>Create/Edit Your Profile</h1>
+            <h4>Username:&nbsp;({profile.email})</h4>
+          </div>
+          <AvatarUpload username={profile.email} />
           <div className="col-md-4">
             <TextField
               label="Name"
