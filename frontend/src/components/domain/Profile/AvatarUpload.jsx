@@ -1,6 +1,6 @@
 import { useAxiosPrivate } from "../../../hooks";
 
-export default function AvatarUpload({ username, photoID, setProfile }) {
+export default function AvatarUpload({ username, photoID, onChange }) {
   const axiosPrivate = useAxiosPrivate();
 
   const uploadAvatar = async (event) => {
@@ -15,7 +15,7 @@ export default function AvatarUpload({ username, photoID, setProfile }) {
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
-    setProfile(photo.data[0]);
+    onChange(photo.data[0].photoID, photo.data[0].signedUrl);
   };
 
   return (

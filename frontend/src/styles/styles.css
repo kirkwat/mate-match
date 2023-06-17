@@ -95,6 +95,10 @@ footer i {
   object-fit: cover;
 }
 
+.card-height {
+  min-height: 100%;
+}
+
 /* Landing page */
 
 header.masthead {
