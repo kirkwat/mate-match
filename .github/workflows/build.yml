@@ -45,5 +45,7 @@ jobs:
           CLOUDFRONT_URL: ${{secrets.CLOUDFRONT_URL}}
           SECRET_REGION: ${{secrets.SECRET_REGION}}
           SECRET_SIGNING_KEY: ${{secrets.SECRET_SIGNING_KEY}}
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           TEST_USERNAME: ${{secrets.TEST_USERNAME}}
           TEST_PASSWORD: ${{secrets.TEST_PASSWORD}}
