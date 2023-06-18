@@ -1,75 +1,118 @@
 <a href="https://matematching.com/">
-  <img src="https://github.com/kirkwat/mate-match/blob/main/frontend/public/images/branding.png?raw=true" 
+  <img src="https://raw.githubusercontent.com/kirkwat/mate-match/main/frontend/public/images/branding.png" 
        alt="Mate Match"
-       width="400rem">
+       width="400rem"/>
 </a>
 
-#### This web application allows users to find new roommates tailored to their preferences. [Click here](https://matematching.com/) to visit the site.
+#### This is a full-stack web application that allows users to find new roommates tailored to their preferences. [Click here](https://matematching.com/) to visit the site. [Click here](https://matematching.com/) to view the demo.
 
 <hr/>
 
-#### A project using docker-compose with Node and React.js containers.
+## Table of Contents
 
-#### Also uses a MySQL DBaaS like AWS RDS or GCloud CloudSQL.
+- [Features](#features)
+  - [Frontend](#frontend)
+  - [Backend](#backend)
+- [Cloud Architecture](#cloud-architecture)
+- [CI/CD](#cicd)
+  - [Unit Testing](#unit-testing)
+  - [Deployment](#deployment)
+- [Configuration](#configuration)
+  - [Development](#development)
+  - [Production](#production)
+- [Next Steps](#next-steps)
 
-- **Backend:** Express Server, Knex.js
+## Features
 
-- **Frontend:** React.js Client, Axios, Bootstrap
+- Create a personal account that provides secure authentication.
+- Create and edit personal profile with an avatar image, description, and personal details such as lifestyle preferences.
+- Search across other users on the platform and filter results based on user traits.
+- View user profiles with ability to send roommate requests with custom messages.
+- View sent and received roommate requests with ability rescind sent requests and approve/decline received requests.
+- View list of personal roommates as well as roommates of other users.
 
-# SETUP
+### Frontend
 
-## Initial setup
+#### Technologies: React.js Client, Axios, Bootstrap
 
-First make sure to open a terminal window to `./backend` and `./frontend` and from there run `yarn` or `npm install` in both directories to install the necessary packages.
+- Integrated API calls using Axios to communicate with the backend server.
+- Applied theming and styling to the user interface using the Bootstrap framework for a consistent and visually appealing design.
+- Enforced Login Authentication using JWT (JSON Web Tokens) for secure and authenticated user sessions.
+- Implemented the use of Access and Refresh Tokens to manage persistent login sessions and ensure authorized access to protected routes.
+- Developed a user-friendly form for creating and updating user profiles, allowing users to input and save their personal information.
+- Utilized profile search functionality with advanced filter options to help users find desired profiles based on specific criteria.
+- Enabled users to view and interact with other users, including sending and managing roommate requests, approving or declining received requests, and managing existing roommates.
 
-Create a file in the `./frontend` folder called `.env` and add the the following to it (if it is not already there):
+### Backend
 
-```
-CHOKIDAR_USEPOLLING=true
-```
+#### Technologies: Express Server, Knex.js, AWS SDK
 
-Create a file in the `./backend` folder called `.env` and add the the following to it:
+- Implemented MVC (Model-View-Controller) pattern to provide a structured and organized codebase, separating concerns for better maintainability and scalability.
+- Utilized Knex.js to interact with the database by performing queries and modifications necessary for editing profiles, sending roommate requests, and adding roommates.
+- Applied CORS (Cross-Origin Resource Sharing) to only allow requests from whitelisted origins, ensuring a secure and controlled API access.
+- Established authentication using JWT (JSON Web Tokens) with access tokens and refresh tokens, enabling persistent authentication and secure user sessions.
+- Leveraged the AWS SDK to add and delete images from the S3 bucket, providing efficient management of avatar images.
+- Used the AWS SDK to generate signed URLs with CloudFront and a private key retrieved from Secrets Manager, ensuring secure access to avatar images.
+- Configured logging midddleware to record API requests and errors, facilitating debugging and monitoring of the application.
+- Utilized Knex database schema migrations to manage and version the database schema, allowing seamless updates and deployments.
 
-**NOTE:** It is not recommended you push this file to your GitHub repo as it may expose your secrets to the world!
+## Cloud Architecture
 
-```
-# POPULATE WITH YOUR OWN VALUES SPECIFIED IN DATABASE CREATION!
-# mysql database name
-MYSQL_DB=
-# mysql port (usually 3306)
-MYSQL_PORT=
-# mysql cloud database login user
-MYSQL_CLOUD_USER=
-# mysql cloud database login password
-MYSQL_CLOUD_PASS=
-# mysql cloud database host URL
-MYSQL_CLOUD_HOST=
-# jwt secret keys
-ACCESS_TOKEN_SECRET=
-REFRESH_TOKEN_SECRET=
+<img src="https://raw.githubusercontent.com/kirkwat/mate-match/main/artifacts/cloud_architecture.jpg" 
+     alt="High Level Cloud Architecture Diagram"/>
 
-```
+The application was deployed on the AWS Cloud, following an architecture that adheres to the AWS Well-Architected Framework. Various AWS services were utilized to ensure alignment with recommended cloud architecture practices.
 
-To ensure the backend API can connect to the React client, update the CORS-allowed origins to include the frontend URL in the `backend\config\allowedOrigins.js` file and update the API endpoint in the `frontend\src\api\axios.js` file.
+The front-end React app client was deployed using a combination of AWS services, including CloudFront for content delivery, Amazon S3 for storage, ACM (AWS Certificate Manager) for SSL certificates, and Route 53 for DNS management.
 
-## MySQL setup
+The back-end Node.js Express API was containerized using ECS (Elastic Container Service) and stored in ECR (Elastic Container Registry). It was deployed using Fargate, a serverless compute engine for containers, and integrated with an ALB (Application Load Balancer) for traffic distribution.
 
-Once you have set up your MySQL database on a DBaaS provider like AWS RDS or GCloud CloudSQL, ensure that the database is publicly accessible on the port you used in setup (usually 3306).
+For the database, RDS (Relational Database Service) was utilized with MySQL to store application data.
 
-In `./backend/.env` add all the values that you were provided specifically the host, user, pass, and port of the database. For the JWT secret keys, you can open `node` in the terminal and create random strings using the following command: `require('crypto').randomBytes(64).toString('hex')`.
+Avatar images were stored and served using CloudFront and S3, providing scalable and high-performance image delivery.
 
-Using a tool such as MySQL Workbech, connect to the MySQL database and create a database for the project using the command: `create database db;`. Return to the `./backend` directory, and in the terminal, enter `knex migrate:latest` to create the database schema.
+To securely retrieve private keys for generating CloudFront signed URLs, the Express API utilized Secrets Manager to securely retrieve and manage sensitive information.
 
-## Running the project
+## CI/CD
 
-After installing the packages and entering your cloud DBaaS connection details, all you need to do is run `docker-compose up` from the root directory of the project to have the `docker-compose` file automatically spin the containers up for you.
+### Unit Testing
 
-If you want to run a terminal in detached mode (so you can close the window and it wont stop the containers) then type `docker-compose up -d` for a headless start instead.
+The development process followed test-driven methodology, where emphasis was placed on writing unit tests for both backend Express API calls and frontend React elements. Unit tests were required to pass successfully as part of the quality assurance process before merging any pull requests into the main branch. This approach ensured the reliability and stability of the codebase by verifying the functionality of individual components and their interactions.
 
-## Stopping the project
+### Deployment
 
-As always make sure to type `docker-compose down` to shut the containers down and close everything up.
+GitHub Actions is utilized to automate the deployment process for changes pushed to the main branch. The deployment workflow involves compiling the React client and sending the bundle to an S3 bucket. Subsequently, the CloudFront cache is invalidated to ensure the delivery of the updated content. For the Express API, a new version of the Docker image is uploaded to the ECR (Elastic Container Registry), which is then used within the ECS cluster to deploy the latest changes. This streamlined approach ensures efficient and consistent deployment of the application.
 
-## [Running the project on an EC2 server](CloudDeploy.md)
+## Configuration
 
-[Click here](CloudDeploy.md) to read the directions on how to deploy the project to the cloud on an EC2 instance for all to visit!
+### Development
+
+- Frontend:
+  - Configure the `.env` file in the frontend directory by setting the `REACT_APP_API_URL` variable to "http://localhost:8000" in order to establish a connection with the Express API.
+  - Install dependencies and run the command `npm run start` to launch the React app in developer mode, enabling real-time code changes and automatic reloading.
+- Backend:
+  - Configure the `.env` file in the backend directory by setting the `CLIENT_URL` variable to "http://localhost:3000" in order to establish a connection with the React client.
+  - Ensure that the `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET` environment variables are properly set for user authentication.
+  - Set up a local MySQL database using Docker or deploy an RDS instance on AWS. Configure the necessary MySQL environment variables to establish a connection with the database.
+  - To use the avatar image feature, set up and configure the required AWS services: S3, CloudFront, and Secrets Manager. Utilize Secrets Manager to securely store the private key required to generate signed CloudFront URLs for avatar images.
+  - Install dependencies and run the command `npm run dev` to launch the Express server in developer mode, enabling real-time code changes and automatic reloading.
+
+### Production
+
+- Frontend:
+  - Configure the `.env` file in the frontend directory by setting the `REACT_APP_API_URL` variable to "https://api.matematching.com" in order to establish a connection with the Express API.
+  - Configure a S3 bucket to store the static content of the React app, CloudFront as the CDN to distribute the content globally, Route 53 for DNS management, and ACM to handle SSL/TLS certificates for secure communication.
+  - Install dependencies and run the command `npm run deploy` to compile the React app, upload content to S3 bucket, and invalidate the CloudFront cache.
+- Backend:
+  - Configure the `.env` file in the backend directory by setting the `CLIENT_URL` variable to "https://matematching.com" in order to establish a connection with the React client.
+  - Ensure that the `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET` environment variables are properly set for user authentication.
+  - Deploy an MySQL RDS instance on AWS and configure the necessary MySQL environment variables to establish a connection with the database.
+  - Configure ECR to store the Docker image of the backend Node.js Express server, ECS to manage the containerized deployment, Fargate for serverless compute capacity, and ALB to distribute incoming traffic.
+  - To use the avatar image feature, set up and configure the required AWS services: S3, CloudFront, and Secrets Manager. Utilize Secrets Manager to securely store the private key required to generate signed CloudFront URLs for avatar images.
+
+## Next Steps
+
+If I were to continue working on this project, this is where I would start next.
+
+- Develop a CloudFormation or Terraform configuration file to streamline the setup of the cloud architecture, enabling simple replication and deployment.
+- Implement an instant messaging feature within the application, empowering users to engage in real-time conversations before initiating roommate requests, fostering better communication and connection.
