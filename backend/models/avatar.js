@@ -10,6 +10,10 @@ const {
   CreateInvalidationCommand,
 } = require("@aws-sdk/client-cloudfront");
 const { getSignedUrl } = require("@aws-sdk/cloudfront-signer");
+const {
+  SecretsManagerClient,
+  GetSecretValueCommand,
+} = require("@aws-sdk/client-secrets-manager");
 
 const USERS_TABLE = "users";
 
@@ -17,9 +21,13 @@ const bucketName = process.env.BUCKET_NAME;
 const bucketRegion = process.env.BUCKET_REGION;
 const bucketAccessKey = process.env.BUCKET_ACCESS_KEY;
 const bucketSecretAccessKey = process.env.BUCKET_SECRET_ACCESS_KEY;
+
 const cloudfrontDistributionId = process.env.CLOUDFRONT_DISTRIBUTION_ID;
+const cloudfrontUrl = process.env.CLOUDFRONT_URL;
 const cloudfrontKeyPairId = process.env.CLOUDFRONT_KEY_PAIR_ID;
-const cloudfrontPrivateKey = process.env.CLOUDFRONT_PRIVATE_KEY;
+
+const secretRegion = process.env.SECRET_REGION;
+const secretSigningKey = process.env.SECRET_SIGNING_KEY;
 
 const s3 = new S3Client({
   credentials: {
@@ -34,6 +42,10 @@ const cloudfront = new CloudFrontClient({
     accessKeyId: bucketAccessKey,
     secretAccessKey: bucketSecretAccessKey,
   },
+});
+
+const secretsManager = new SecretsManagerClient({
+  region: secretRegion,
 });
 
 const addAvatarImage = async (email, photoID, fileName, buffer, mimetype) => {
@@ -62,14 +74,20 @@ const addAvatarImage = async (email, photoID, fileName, buffer, mimetype) => {
 };
 
 const getAvatarImages = async (users) => {
+  const command = new GetSecretValueCommand({
+    SecretId: secretSigningKey,
+  });
+
+  const secret = await secretsManager.send(command);
+
   for (const user of users) {
     if (user.photoID === null) continue;
 
     user.signedUrl = getSignedUrl({
-      url: "https://d2qm0iuktiryxq.cloudfront.net/" + user.photoID,
+      url: cloudfrontUrl + user.photoID,
       keyPairId: cloudfrontKeyPairId,
       dateLessThan: new Date(Date.now() + 60 * 60 * 1000),
-      privateKey: cloudfrontPrivateKey,
+      privateKey: secret.SecretString,
     });
   }
   return users;

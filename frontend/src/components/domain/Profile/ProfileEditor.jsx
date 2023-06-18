@@ -150,7 +150,9 @@ export const ProfileEditor = () => {
                 <AvatarUpload
                   username={profile.email}
                   photoID={profile.photoID}
-                  setProfile={setProfile}
+                  onChange={(photoID, signedUrl) => {
+                    mergeProfile({ photoID, signedUrl });
+                  }}
                 />
               </div>
             </div>

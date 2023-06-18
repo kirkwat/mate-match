@@ -13,7 +13,7 @@ export const ResultList = ({ results }) => {
         <div className="row g-3">
           {results.map((result, index) => (
             <div key={index} className="col-md-6 col-xl-4">
-              <div className="card">
+              <div className="card card-height">
                 <div className="card-image">
                   <img
                     src={
@@ -25,19 +25,29 @@ export const ResultList = ({ results }) => {
                     className="card-img-top"
                   />
                 </div>
-                <div className="card-body">
-                  <div className="card-title fw-bold fs-4">
-                    {result.name}
-                    <span className="mt-1 fs-5 fw-light text-muted float-end">
-                      {result.city} - {result.age}
-                    </span>
+                <div className="card-body d-flex flex-column justify-content-between">
+                  <div>
+                    <div className="row">
+                      <div className="col pe-0">
+                        <div className="card-title fw-bold fs-4">
+                          {result.name}
+                        </div>
+                      </div>
+                      <div className="col ps-0">
+                        <div className="my-1 fs-5 fw-light text-muted text-end">
+                          {result.city} - {result.age}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <Link
-                    to={`/${result.email}/profile`}
-                    className="btn btn-primary btn-lg col-12"
-                  >
-                    View Profile
-                  </Link>
+                  <div className="mt-auto">
+                    <Link
+                      to={`/${result.email}/profile`}
+                      className="btn btn-primary btn-lg col-12"
+                    >
+                      View Profile
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
