@@ -4,7 +4,7 @@
        width="400rem"/>
 </a>
 
-#### This is a full-stack web application that allows users to find new roommates tailored to their preferences. [Click here](https://matematching.com/) to visit the site. [Click here](https://matematching.com/) to view the demo.
+#### This is a full-stack web application that allows users to find new roommates tailored to their preferences. [Click here](https://matematching.com/) to visit the site. [Click here](https://www.youtube.com/watch?v=c0ZcLqA5QlE) to view the demo.
 
 <hr/>
 
