@@ -1,10 +1,8 @@
-<a href="https://matematching.com/">
-  <img src="https://raw.githubusercontent.com/kirkwat/mate-match/main/frontend/public/images/branding.png" 
-       alt="Mate Match"
-       width="400rem"/>
-</a>
+<img src="https://github.com/kirkwat/mate-match/assets/60279003/54c7fbfa-91e0-40bc-877b-7957075f6481" 
+     alt="Mate Match"
+     width="400rem"/>
 
-#### This is a full-stack web application that allows users to find new roommates tailored to their preferences. [Click here](https://matematching.com/) to visit the site. [Click here](https://www.youtube.com/watch?v=c0ZcLqA5QlE) to view the demo.
+#### This is a full-stack web application that allows users to find new roommates tailored to their preferences. [Click here](https://www.youtube.com/watch?v=c0ZcLqA5QlE) to view the demo.
 
 <hr/>
 
@@ -58,8 +56,8 @@
 
 ## Cloud Architecture
 
-<img src="https://raw.githubusercontent.com/kirkwat/mate-match/main/artifacts/cloud_architecture.jpg" 
-     alt="High Level Cloud Architecture Diagram"/>
+![High Level Cloud Architecture Diagram](https://github.com/kirkwat/mate-match/assets/60279003/024714eb-f4df-4145-b9b5-b2e504253ad9)
+
 
 The application was deployed on the AWS Cloud, following an architecture that adheres to the AWS Well-Architected Framework. Various AWS services were utilized to ensure alignment with recommended cloud architecture practices.
 
@@ -88,10 +86,10 @@ GitHub Actions is utilized to automate the deployment process for changes pushed
 ### Development
 
 - Frontend:
-  - Configure the `.env` file in the frontend directory by setting the `REACT_APP_API_URL` variable to "http://localhost:8000" in order to establish a connection with the Express API.
+  - Configure the `.env` file in the frontend directory by setting the `REACT_APP_API_URL` variable to http://localhost:8000 in order to establish a connection with the Express API.
   - Install dependencies and run the command `npm run start` to launch the React app in developer mode, enabling real-time code changes and automatic reloading.
 - Backend:
-  - Configure the `.env` file in the backend directory by setting the `CLIENT_URL` variable to "http://localhost:3000" in order to establish a connection with the React client.
+  - Configure the `.env` file in the backend directory by setting the `CLIENT_URL` variable to http://localhost:3000 in order to establish a connection with the React client.
   - Ensure that the `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET` environment variables are properly set for user authentication.
   - Set up a local MySQL database using Docker or deploy an RDS instance on AWS. Configure the necessary MySQL environment variables to establish a connection with the database.
   - To use the avatar image feature, set up and configure the required AWS services: S3, CloudFront, and Secrets Manager. Utilize Secrets Manager to securely store the private key required to generate signed CloudFront URLs for avatar images.
@@ -100,11 +98,11 @@ GitHub Actions is utilized to automate the deployment process for changes pushed
 ### Production
 
 - Frontend:
-  - Configure the `.env` file in the frontend directory by setting the `REACT_APP_API_URL` variable to "https://api.matematching.com" in order to establish a connection with the Express API.
+  - Configure the `.env` file in the frontend directory by setting the `REACT_APP_API_URL` variable to https://api.matematching.com in order to establish a connection with the Express API.
   - Configure a S3 bucket to store the static content of the React app, CloudFront as the CDN to distribute the content globally, Route 53 for DNS management, and ACM to handle SSL/TLS certificates for secure communication.
   - Install dependencies and run the command `npm run deploy` to compile the React app, upload content to S3 bucket, and invalidate the CloudFront cache.
 - Backend:
-  - Configure the `.env` file in the backend directory by setting the `CLIENT_URL` variable to "https://matematching.com" in order to establish a connection with the React client.
+  - Configure the `.env` file in the backend directory by setting the `CLIENT_URL` variable to https://matematching.com in order to establish a connection with the React client.
   - Ensure that the `ACCESS_TOKEN_SECRET` and `REFRESH_TOKEN_SECRET` environment variables are properly set for user authentication.
   - Deploy an MySQL RDS instance on AWS and configure the necessary MySQL environment variables to establish a connection with the database.
   - Configure ECR to store the Docker image of the backend Node.js Express server, ECS to manage the containerized deployment, Fargate for serverless compute capacity, and ALB to distribute incoming traffic.
